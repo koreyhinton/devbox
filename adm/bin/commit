@@ -1,0 +1,12 @@
+#!/bin/bash
+
+nl=$'\n'
+msg="$(date +%y%m%d)${nl}${nl}"
+cd /k
+for f in `find . -name "$(date +%y%m%d).org"`;
+do
+	git add "$f"
+	msg="${msg}${f}${nl}$(cat $f)"
+done
+echo "$msg" | git commit -F -
+

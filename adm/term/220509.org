@@ -1,0 +1,21 @@
+# create repo folder
+sudo mkdir /k
+sudo chown korey:korey /k
+sudo chmod 750 /k
+mkdir /k/adm
+mkdir /k/adm/term
+mkdir /k/adm/bin
+
+# install git
+sudo apt-get update -y
+sudo apt-get install git -y
+
+# install repo
+cd /k
+git init
+git remote add origin https://github.com/koreyhinton/devbox.git
+git pull origin main
+git add adm/term/220509.org
+git config --global user.email "2801399+koreyhinton@users.noreply.github.com"
+git config --global user.name "Korey Hinton"
+
