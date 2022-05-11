@@ -1,0 +1,16 @@
+
+
+chmod +x /k/adm/bin/upgrade
+/k/adm/bin/upgrade
+
+# ffmpeg
+sudo apt-get update
+sudo apt-get install firefox -y
+sudo add-apt-repository universe
+sudo apt-get update
+sudo apt-get install ffmpeg -y
+
+# emacs
+apt show emacs
+sudo apt-get install emacs -y
+
