@@ -1,0 +1,13 @@
+* /k/pub/res/res.tex
+- copied in old res (todo: needs update)
+- changed from DOS to unix line endings
+- C-c C-c in Emacs to build pdf
+- requires single line tex files (that contain text only)
+  + /k/pub/res/phone.tex
+  + /k/pub/res/address.tex
+  + /k/pub/res/email.tex
+- added tempora font to remove error:
+  Font shape `OMS/cmr/m/n' in size <10> not available
+- shortened content to remove extra blank page
+  + comment out Microsoft Teams
+  + make skill section name font size smaller (subsection -> subsubsection)

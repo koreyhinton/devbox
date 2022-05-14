@@ -1,0 +1,8 @@
+*.pdf
+*~
+*#*
+pub/res/phone.tex
+pub/res/address.tex
+pub/res/email.tex
+pub/res/*.log
+pub/res/*.aux

@@ -1,0 +1,107 @@
+\documentclass[letterpaper]{article}
+\usepackage{tempora}%\usepackage{libertinus}%\usepackage{lmodern}
+\usepackage{multicol}
+\pagestyle{plain}
+\usepackage{microtype}
+\usepackage[breakable]{tcolorbox}
+\usepackage{fullpage}
+\usepackage{fullwidth}
+\usepackage{color}
+%\usepackage{titlesec}
+
+%\titlespacing\subsection{0pt}{12pt plus 4pt minus 2pt}{2pt plus 2pt minus 2pt}
+
+\DisableLigatures{encoding = *, family = *}
+\pagenumbering{gobble}
+
+\newenvironment{location}{\color{gray}}  %{\ignorespacesafterend}
+
+\begin{document}
+\begin{fullwidth}[width=\linewidth+2cm]%[width=\linewidth+2cm]
+\begin{center}
+\subsection*{Korey Hinton}
+\input{phone.tex}\\*
+\input{address.tex}\\*
+\input{email.tex}\\*
+\end{center}
+\noindent
+\begin{minipage}[t]{0.65\linewidth}
+  \subsection*{Experience}
+  \subsubsection*{Software Engineer-Staff}
+  \begin{location}\textbf{SelectHealth} \textbar \, Murray, UT \textbar \, 8/17-Present
+  \end{location}
+  \vspace{3pt}
+  I design, implement, and support relational data integration batch jobs that track insured-member wellness activities. I participate in Python R\&D for an upcoming ETL tool migration.
+
+
+\begin{itemize}
+\item Delivered a 1/1/19 business requirement to track rewards for members with prediabetic risk using ETL integration with many clinical sources
+\item Designed a metric framework in Python (pandas) to produce graphable JSON of health events over time
+\item Upgraded 11 .NET batch jobs to use greater security practices
+\end{itemize}
+
+\subsubsection*{Software Engineer}
+  \begin{location}\textbf{DirectScale} \textbar \, Lindon, UT \textbar \, 5/17-8/17
+  \end{location}
+  \vspace{3pt}
+I helped launch a new network marketing website by fixing product bugs and implementing payment processor api integrations in the .NET/T-SQL code base.
+
+\subsubsection*{Software Engineer}
+  \begin{location}\textbf{InnovaSystems} \textbar \, Draper, UT \textbar \, 8/15-5/17
+  \end{location}
+  \vspace{3pt}
+I worked on the Company Solutions team to support .NET web development efforts of the company's employee performance tracking solution.
+
+\begin{itemize}
+\item Implemented 360-feedback reviews
+\end{itemize}
+
+\subsubsection*{Software Engineer Intern}
+  \begin{location}\textbf{InnovaSystems} \textbar \, Draper, UT \textbar \, 12/12-5/13, 10/13-8/15
+  \end{location}
+  \vspace{3pt}
+  I contributed to the development efforts of the company mobile apps: ImageQuiz, ImageQuiz Pro, and Inspire!.
+
+\begin{itemize}
+\item Nominated employee of the quarter by PM for excellent mobile app development contributions
+\item Designed and implemented 1.0 ImageQuiz Pro release
+\end{itemize}
+
+
+\subsection*{Education}
+  \subsubsection*{Bachelor of Science, Computer Science}
+  \begin{location}\textbf{University of Utah} \textbar \, Salt Lake City, UT \textbar \, 12/16
+  \end{location}
+%\begin{itemize}
+%\item Certificate for Completion of the Web \& Mobile Track within the School of Computing
+%\item Sr Capstone Project: field technician augmented reality app to locate pipe anomalies
+%\end{itemize}
+
+
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.25\linewidth}
+\begin{tcolorbox}[breakable, capture=minipage, title=Skills]
+%    \section*{Skills}
+  \subsubsection*{Languages}
+  \begin{itemize}
+    \item Python \item C\# \item T-SQL \item PL/SQL \item Bash \item PowerShell
+  \end{itemize}
+    \subsubsection*{Libraries}
+    \begin{itemize} \item pandas \item pyodbc \end{itemize}
+    \subsubsection*{Frameworks}
+    \begin{itemize} \item .NET \item ADO.NET \item LINQ \item Flask \end{itemize}
+    \subsubsection*{Tools}
+    \begin{itemize} \item DataStage \item Git \item Docker \item Jenkins \item Jira \item BitBucket %\item Microsoft Teams
+    \item Confluence \item ServiceNow \end{itemize} %\item Confluence \item ServiceNow \item Microsoft Teams \item Office 365 
+    %DataStage, Git, Docker,\\*
+    %Jenkins, Jira, GitHub,
+    %Confluence, ServiceNow,\\*
+    %Microsoft Teams,\\*
+    %Office 365, SharePoint\\*
+  \end{tcolorbox}
+\end{minipage}
+
+
+\end{fullwidth}
+\end{document}

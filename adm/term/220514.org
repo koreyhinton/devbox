@@ -1,0 +1,40 @@
+mkdir /k/pub
+mkdir /k/pub/res
+mkdir /k/pub/log
+
+sudo apt-get update
+
+# To fix emacs control-space not functioning in gui
+# change the keyboard shortcut to not clash with
+# the emacs keybinding.
+ibus-setup
+# Gui Steps:
+# General
+#   > Keyboard Shortcuts
+#     > Next input method:
+#       Action = Delete <Control>space
+#       Action = Add <Super>space
+
+# Setup emacs config
+mkdir /k/emacs
+echo '(load-file "/k/emacs/init.el")' >> ~/.emacs.d/init.el
+
+# emacs .tex C-c C-c suggested install
+
+#     Command 'pdflatex' not found, but can be installed with:
+sudo apt-get install texlive-latex-base -y
+
+# New error without suggested install, attempt normal texlive install
+#     ! LaTeX Error: File `microtype.sty' not found.
+sudo apt-get install texlive
+
+# New error without suggested install, attempt additional install
+#     ! LaTeX Error: File `tcolorbox.sty' not found.
+sudo apt-get install texlive-extra-utils -y
+
+# Same error without suggested install, attempt full install
+#     ! LaTeX Error: File `tcolorbox.sty' not found.
+sudo apt-get install texlive-full -y
+
+# C-c C-c in emacs w/ .tex file now works to produce a PDF!
+
