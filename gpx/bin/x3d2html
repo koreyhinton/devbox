@@ -1,0 +1,9 @@
+#!/bin/bash
+
+x3dfile="$1"
+htmlfile="$2"
+
+xsltproc /k/gpx/x3d/2html.xsl "$x3dfile" > "$htmlfile"
+
+# example:
+# /k/gpx/bin/x3d2html /k/gpx/x3d/blender-default-export.x3d /k/gpx/x3d/default-x3d.html

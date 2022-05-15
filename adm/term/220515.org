@@ -1,0 +1,5 @@
+sudo apt-get install blender -y
+sudo apt-get install xsltproc -y
+mkdir /k/gpx  # graphics
+mkdir /k/gpx/x3d
+mkdir /k/gpx/bin
