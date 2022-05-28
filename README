@@ -1,0 +1,7 @@
+; -*- mode: wik -*-
+
+DEV MONOREPO
+This is a monorepo that will host all my just-for-fun coding.
+
+This README was created in wik-mode,
+see emacs/wik-mode/WIK-MODE-DOCUMENTATION.wik

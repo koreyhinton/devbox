@@ -1,0 +1,202 @@
+WIK
+MODE
+OVERVIEW
+
+Wik mode is an emacs mode for plain text wiki notes/documentation that are not
+meant to be formatted/exported, but provides some of the useful features,
+similar to what features exist in outline mode or org mode.
+
+WIK EDITING SHORTCUTS
+
+M-S-o (wik-outline-entry-toggle)
+    Toggles visibility for the current heading's content.
+
+M-S-LEFT (wik-move-to-file)
+    Moves content out of the current WIK file and into a prompted file name
+    and leaves behind a reference to the file name or path that is entered
+    into the prompt. To send blank/empty content to the file, do not mark a
+    region before running the command.
+
+M-S-RIGHT (wik-move-from-file)
+    Moves content out of the file name at point. The file name text will be
+    replaced with the actual file content and the before-referenced file is
+    deleted.
+
+M-S-UP (wik-close-file)
+    Closes a wik file and when there are multiple windows will also close
+    the window. Despite that WIK can open non-WIK files, this keybinding will
+    only work if the opened file is a WIK file. To close a non-WIK file either
+    use the common emacs shortcuts C-x k (kill-buffer) followed by
+    C-x 0 (delete-window) or call this function directly M-x wik-close-file
+
+M-S-DOWN (wik-open-file-at-point)
+    Visits a file in another window for the file name or path at the cursor
+    point, except for paths with spaces which require region marking
+    any of the spaces in the path.
+
+M-S-RET (wik-repeat-heading)
+    Creates a new heading at point by copying in the previous heading. This
+    assists when using repitious/hierarchically-delimited headings (ie:
+    REPORT X * ARTICLE Y * SECTION Z).
+
+M-S-n (wik-next-heading)
+    Moves to the next heading regardless of each heading's
+    visibility state. When all headings are collapsed, it is a bit easier
+    to just use emacs' C-n (next-line) to navigate between headlines.
+
+M-S-p (wik-previous-heading)
+    Moves to the previous heading regardless of each heading's
+    visibility state. When all headings are collapsed, it is a bit easier
+    to just use emacs' C-p (previous-line) to navigate between headlines.
+
+M-* (wik-all-heading-collapse)
+    Collapses all headings.
+
+M-S-a (wik-all-heading-expand)
+    Expands all headings.
+
+ORG-MODE COMPARISON
+
+This project is aimed at enabling an editing experience similar to org-mode
+but without any publishing or formatting features.
+Unformatted plain text can provide a more painless text file management system.
+This means less time converting between formats, less time
+deciding which format to use for publishing, less time deciding which markup
+formats belong in version control, and less time trying to remember org-mode
+markup syntax amongst the many other markup languages.
+
+The advantages of wik mode are those similar to those of old README-like files,
+for content that is brief or is just a simple quickstart tutorial.
+These types of files are not lengthy and have a track record of their
+usefulness. These advantages might not look so favorable for extensive reading
+material and that type of content might benefit more from the nice formatting
+that comes from writing in org-mode or TeX and then exporting with styling to
+html or pdf.
+
+Org-mode headlines are a very powerful feature but the hierarchical headlines
+also add complexity, with extra time hunting down (collapsing and expanding)
+various sections of text and extra time trying to figure out how to organize
+the hierarchy. Wik mode gives the ability to have visibility-toggled headlines
+but in a more flattened structure than org-mode and does not allow nesting
+headings within headings. The syntax of a heading line is simply to uppercase
+it which allows for no additional syntax and also allows multiple-line headings.
+A more org-mode-like way is to use * as a delimiter and to fully specify
+heading hierarchy for each setion
+(example heading: `DEV JOURNAL * 2022 * MAY * 28`).
+
+ORG-MODE COMPARISON * TABLES
+
+Wik mode does not have a built-in table editor. (Side note: Originally wik mode
+was going to be built on top of org-mode to make use of org-mode's table editor,
+but unfortunately org-mode was too tied to the concept of having headlines
+start with an *, so instead I built it on top of outline-mode and while
+org-mode derives from outline-mode, outline mode does not have the editor)
+
+An org-mode table can still be brought into wik mode as unformatted text
+by taking a few keyboard shortcuts to get a temporary org-mode file created
+and then content moved back* to the Wik file (*content moved back to the Wik
+file will delete the newly created org-mode file).
+
+Here are the steps (to edit the example table follow step ?0):
+(1) Type M-S-left in the place you want the table and when prompted
+    uniquely name the file with .org extension and no spaces (ie: temp.org).
+(2) Create the table in the other/org-mode window.
+(3) Type M-x wik-close-file and when prompted type yes to save.
+(4) Type M-S-right with the cursor positioned on the filepath
+    to bring in the content (and deletes the new file).
+?0) To send it back for editing mark the whole region of the table and follow
+the same 4 steps above.
+
+|--------------+--------------+-------------------|
+| MODE         | PARENT MODE  | GRAND PARENT MODE |
+|--------------+--------------+-------------------|
+| wik-mode     | outline-mode | text-mode         |
+|--------------+--------------+-------------------|
+| org-mode     | outline-mode | text-mode         |
+|--------------+--------------+-------------------|
+| outline-mode | text-mode    | N/A               |
+|--------------+--------------+-------------------|
+| text-mode    | N/A          | N/A               |
+|--------------+--------------+-------------------|
+
+ORG-MODE COMPARISON * SOURCE FILES
+
+Similarly as was done in the TABLES example above, any other file including
+programming language files can be edited temporarily with syntax highlighting
+but then brought back in as unformatted plain text.
+
+Org-mode enables literate programming with a lot of features, but requires a
+strict wrapper syntax for every code example
+(ie: #+BEGIN_SRC sql\n..\n#+END_SRC).
+Wik mode does not have these features and uses a simpler approach where source
+code files can be referenced by file name or if it is example/usage code it can
+be placed directly in the file without need for labels for every code block.
+Sql code and other typical uppercase languages will have to have at least
+the leading characters (1st or 2nd position) be lowercase or just let them be
+recognized as headings instead of content.
+
+sELECT *
+fROM MY_TABLE
+wHERE NAME='ABC'
+
+ORG-MODE COMPARISON * VISIBILITY CYCLING
+
+In org-mode usually the TAB character is used to toggle visibility on and off,
+and while easy to use that shortcut, it prevents the normal tab insert behavior;
+so wik mode does not use the TAB unless the user defines their own key
+definition.
+The parent outline-mode shortcuts may work
+(C-c C-c to [c]ollapse and C-C C-e to [e]xpand), however the Meta (Alt) Shift
+combination of commands should be preferred and will work more reliably since
+wik-mode handles multi-line headings properly.
+
+* To toggle just one entry use M-S o.
+* To make [a]ll entries visible use M-S-a.
+* To see just the headings for the whole file use M-S *. 
+
+ORG-MODE COMPARISON * KEYBINDING EDITING SHORTCUTS
+
+Wik mode uses similar keybindings as org-mode's M-S-{arrow or return key},
+to similarly provide ease-of-editing shortcuts, however in Wik these commands
+have been repurposed to provide new behavior.
+
+M-S-{left or right arrow key} deals with moving content in or out of the file.
+        (It might help to think of it as promoting/demoting content in/out of
+        the parent file)
+M-S-{up or down} deals with opening and closing a referenced file
+        (down to open [drill down into] a file; up to close a file and will 
+        only work if the file is a .wik file and/or has wik-mode enabled)
+M-S-{return} repeats the most-immediately previous headline detected
+
+ORG-MODE COMPARISON * HIERARCHY
+
+Here is the hierarchy as might be present in an org-mode file.
+
+  * Java code organization
+    - overview..
+  ** packages
+     - valid/invalid package examples..
+  *** classes
+  **** methods
+  *** interfaces
+
+Wik mode's content hierarchy only goes 1 deep and only nests regular paragraph
+content under the headlines, and does not nest headlines within a headline.
+
+By repeating the inherited hierarchy in each headline (which is possible since
+Wik headlines can span multiple lines), it is given a more strict
+and repetitive structure. This comes as a trade-off, with the cost of
+duplicating content, but allows each section to stand on its own without needing
+to look elsewhere in the document.
+
+Here is what it would be structured like in wik mode.
+Remove the leading 2 spaces to see heading recognition in emacs
+..or just type Control-x e after this expression: (replace-string "  " "")
+
+  JAVA CODE ORGANIZATION
+  - overview..
+  JAVA CODE ORGANIZATION * PACKAGES
+  - valid/invalid package examples..
+  JAVA CODE ORGANIZATION * PACKAGES * CLASSES
+  JAVA CODE ORGANIZATION * PACKAGES * CLASSES * METHODS
+  JAVA CODE ORGANIZATION * PACKAGES * INTERFACES
