@@ -1,0 +1,9 @@
+DIRECTORIES FOR
+GIT FILES
+
+mkdir /k/git
+mkdir /k/git/bin
+
+LOGIN BASH SOURCE FILE
+
+echo '. /k/adm/.profile' >>~/.bashrc

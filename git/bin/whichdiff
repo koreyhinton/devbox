@@ -1,0 +1,79 @@
+#!/bin/bash
+
+oldv="$1"
+newv="$2"
+
+function echo_cmd_with_args {
+    if [[ $(echo "$1" | grep ":" | wc -c) -gt 0 || $(echo "$1" | grep "/./" | wc -c) -gt 0 ]]; then
+	if [[ $(echo "$2" | grep ":" | wc -c) -gt 0 || $(echo "$2" | grep "/./" | wc -c) -gt 0 ]]; then	    
+	    echo "    git diff ${1} ${2}"
+	    return 0;
+	fi
+	echo "    whichdiff ${1} $(dirname ${2})/./$(basename ${2})"
+	return 0;
+    fi
+    if [[ $(echo "$2" | grep ":" | wc -c) -gt 0 || $(echo "$2" | grep "/./" | wc -c) -gt 0 ]]; then	    
+	echo "    whichdiff $(dirname ${1})/./$(basename ${1}) ${2}"
+	return 0;
+    fi
+    echo "    whichdiff $(dirname ${1})/./$(basename ${1}) $(dirname ${2})/./$(basename ${2})"
+}
+
+# echo "< old file version ARG1 ${oldv}"
+# echo "> new file version ARG2 ${newv}"
+
+if [[ -z "$oldv" ]]; then
+    echo "requires old version file name (or hash:filename) as ARG1" 1>&2
+    exit 1
+elif [[ -z "$oldv" ]]; then
+    echo "requires new version file name (or hash:filename) as ARG2" 1>&2
+    exit 1
+fi
+
+# git diff hash:file hash:file2
+arg1text=""
+arg2text=""
+oldHasHash=$(echo "$oldv" | grep ":" | wc -c)
+oldHasDot=$(echo "$oldv" | grep "/./" | wc -c)
+newHasHash=$(echo "$newv" | grep ":" | wc -c)
+newHasDot=$(echo "$newv" | grep "/./" | wc -c)
+# oldHist=0
+# newHist=0
+echo "diff-command(as-specified) ARG1(old-version) ARG2(new-version)"
+echo_cmd_with_args "$oldv" "$newv"
+if [[ $oldHasHash -eq 0 && $oldHasDot -eq 0 ]]; then
+    hashes=$(git log --pretty=format:"%h" --follow -- "$oldv")
+    # dirnm=$(dirname "$oldv")
+    # basenm=$(basename "$oldv")
+    # echo "${dirnm}/./${basenm} ${newv}"
+    # fh=""  #  first hash
+    for h in `echo "$hashes"`
+    do
+	# echo "${h}:${oldv}"
+	# if [[ -z "$fh" ]]; then
+	#     fh="${h}:"
+	# fi
+	# oldHist=1
+	echo "diff-command(hist) ARG1(hist-old-version) ARG2(spec-new-version)"
+	echo_cmd_with_args "${h}:${oldv}" "$newv"
+    done
+    # arg1text="${fh}${oldv}"
+fi
+
+if [[ $newHasHash -eq 0 && $newHasDot -eq 0 ]]; then
+    hashes=$(git log --pretty=format:"%h" --follow -- "$newv")
+    dirnm=$(dirname "$newv")
+    basenm=$(basename "$newv")
+    # echo "${dirnm}/./${basenm}"
+    # lh=""  # last hash
+    for h in `echo "$hashes"`
+    do
+	# echo "${h}:${oldv}"
+	# lh="${h}:"
+	# newHist=1
+	echo "diff-command(hist) ARG1(hist-old-version) ARG2(spec-new-version)"
+	echo_cmd_with_args "$oldv" "${h}:${newv}"
+    done
+    # arg2text="${lh}${oldv}"
+fi
+
