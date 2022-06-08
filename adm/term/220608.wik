@@ -1,0 +1,17 @@
+SCRATCH V1.4 -- INSTALL SCRATCH
+sudo apt-get install -y scratch
+
+SCRATCH V1.4 -- CHECK SCRATCH VERSION
+scratch
+# Help -> About Scratch > Scratch 1.4 (Linux)
+
+SCRATCH V3 (scratux 1.4.1) -- INSTALL LATER SCRATCH (3) VERSION VIA SNAP
+sudo snap install scratux
+
+SCRATCH V3 (scratux 1.4.1) -- CHECK SCRATCH VERSION
+scratux
+# Scratux button freezes, instead make sure the UI looks just like the
+# website: https://scratch.mit.edu/projects/editor/
+
+SCRATCH V3 (scratux 1.4.1) -- HOW TO CLOSE
+Control-c Control-c # in terminal
