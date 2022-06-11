@@ -1,0 +1,40 @@
+#!/bin/bash
+
+dry_run=0
+if [[ "$1" = "--dry-run" ]]; then
+    # use --dry-run to not stage files,
+    # filesystem will still be affected though
+    # but the extracted files should be treated as replaceable anyways
+    dry_run=1
+    shift;
+fi
+
+if [[ -z "$1" ]]; then
+    echo "Error: requires sb3 file argument" 1>&2
+    exit 1;
+fi
+
+sb3fnm="${1%%.*}"  # removes last extension
+rm "${sb3fnm}.zip" 2>>/dev/null  # ignores first extract's 'not exist' error
+cp "${sb3fnm}.sb3" "${sb3fnm}.zip"
+rm -r "${sb3fnm}_sb3" 2>>/dev/null  # ignores first extract's 'not exist' error
+unzip "${sb3fnm}.zip" -d "${sb3fnm}_sb3"
+rm "${sb3fnm}.zip"
+
+mv "${sb3fnm}_sb3/project.json" "${sb3fnm}_sb3/project.temp.json"
+cat "${sb3fnm}_sb3/project.temp.json" | python3 -m json.tool >"${sb3fnm}_sb3/project.json"
+rm "${sb3fnm}_sb3/project.temp.json"
+
+if [[ $dry_run -eq 0 ]]; then
+    git add "${sb3fnm}_sb3"
+fi
+
+# REASSEMBLING SB3 FILE FROM SOURCE
+# REQUIRES COPYING IN ANY BINARY MULTIMEDIA FILES
+#     cd "${sb3fnm}_sb3"
+#     bname=$(basename "${sb3fnm}_sb3")
+#     zip "../${bname}.zip" ./*
+# COPY IN ANY BINARY MULTIMEDIA (.WAV,.PNG) FILES
+#     cd -
+#     mv "${sb3fnm}"_sb3.zip "${sb3fnm}"_sb3.sb3
+

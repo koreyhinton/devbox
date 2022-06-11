@@ -1,0 +1,78 @@
+SCRATCH BOOKS - BOOK ABBREVIATIONS
+|---------------+-----------+------------------------------------+-------------|
+|          ISBN | ABBR NAME | TITLE                              | Author      |
+|---------------+-----------+------------------------------------+-------------|
+| 9781593275433 | L2PWSCR   | LEARN TO PROGRAM WITH SCRATCH      | MAJED MARJI |
+|               |           | A VISUAL INTRODUCTION TO           |             |
+|               |           | PROGRAMMING                        |             |
+|               |           | WITH GAMES, ART, SCIENCE, AND MATH |             |
+|---------------+-----------+------------------------------------+-------------|
+|               |           |                                    |             |
+|---------------+-----------+------------------------------------+-------------|
+
+SCRATCH BOOKS - L2PWSCR
+
+The L2PWSCR book covers the scratch version 2 functionality
+which is mostly still applicable to the later scratch 3 version.
+
+Ubuntu installation steps for scratux (scratch 3 equivalent) can be found at
+../../adm/term/220608.wik.
+
+SCRATCH BOOKS - L2PWSCR - TOC
+ch1 - Getting Started
+ch2 - Motion and Drawing
+
+SCRATCH BOOKS - L2PWSCR - CH1 - SCRATCH PROGRAMMING ENVIRONMENT SECTION -
+SPRITE INFO SUBSECTION - ROTATION/DIRECTION
+to set a sprite's initial rotation style in scratch 3, click on the text box
+labeled 'Direction' in the Sprite Info Area to bring up the direction controls'
+popover and click to toggle (blue highlight) one of these
+bottom popover buttons:
+    'Do not rotate' (hover text) button
+        only direction will be configured
+    'All Around' (hover text) button
+        rotates to the same angle as the direction
+    'Left/Right' (hover text) button
+        180 degree horizontal (reflecting across y-axis) rotation only based
+	based on if its in a negative or positive x direction
+	(negative x direction means it faces left)
+
+in scratch 3, a sprite's initial direction can also be set by dragging the
+arrow angle indicator found on the unit circle of the Direction popover
+
+SCRATCH BOOKS - L2PWSCR - CH1 - SCRATCH PROGRAMMING ENVIRONMENT SECTION -
+SPRITE INFO SUBSECTION - 1.12 SPRITE INFO AREA FIGURE
+the 'can drag in player' checkbox is not there in scratch 3; you can drag
+sprites to set the initial position in the mini-sized 'Stage' player area but
+not when in 'Presentation mode' (activated via fullscreen button)
+
+SCRATCH BOOKS - L2PWSCR - CH1 - SCRATCH PROGRAMMING ENVIRONMENT SECTION -
+TOOLBAR SUBSECTION - 1.14 SCRATCH'S TOOLBAR FIGURE
+in scratch 3, right-click on the sprite icon in the Sprite Info Area to bring
+up some the previous tolbar options in a right-click popover menu: includes
+duplicate, export (new?), and delete
+
+SCRATCH BOOKS - L2PWSCR - CH1 - PAINT EDITOR SECTION -
+SETTING THE CENTER OF THE IMAGE SUBSECTION
+in scratch 3 there isn't a 'Set costume center' button that enabled
+re-positioning the referential center (of rotation) point
+by dragging the x and y axes; however, you can still modify the reference point
+in version 3 by selecting all of the sprite in the Paint editor and then click-
+dragging the sprite to re-position the blue crosshairs.
+
+when the blue crosshairs are positioned?:
+   at the black crosshairs: then rotating the sprite will just rotate itself
+                            without visualized displacement
+   not at the block crosshairs: then the sprite rotates around the designated
+                                point with visualized displacement
+
+SCRATCH BOOKS - L2PWSCR - CH1 - PAINT EDITOR SECTION -
+SETTING THE CENTER OF THE IMAGE SUBSECTION - 1-10 TRY IT OUT EXERCISE
+stamp is explained in 'ch2 - the power of repeat section - exploring with stamp
+subsection'. It is used before a move command to clone a copy and leave a trail
+effect.
+
+the command blocks apply to the currently selected sprite, to affect a
+different sprite you can select it and have its own sprite code blocks
+
+

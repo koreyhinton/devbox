@@ -1,0 +1,15 @@
+VISUAL PROGRAMMING LANGUAGE FOLDERS
+mkdir /k/vpl
+mkdir /k/vpl/bin
+mkdir /k/vpl/scratch
+mkdir /k/vpl/scratch/l2pwscr
+{
+    echo "For any code taken from the book ISBN #9781593275433"
+    echo "refer to the book for it's licensed terms"
+    echo "and for any code not from the book is licensed under"
+    echo "the license found in the repository root directory ../../LICENSE"
+} | cat >/k/vpl/scratch/l2pwscr/LICENSE
+
+MAKE DIRECTORY FOR COMMAND(LINE) NOTES
+mkdir /k/cmd
+mkdir /k/cmd/info-zip

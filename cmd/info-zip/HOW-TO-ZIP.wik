@@ -1,0 +1,49 @@
+INFO-ZIP - HOW TO CONTROL WHICH FOLDERS ARE INCLUDED IN THE ZIP ARCHIVE
+
+It is a bit surprising how additional folders get tacked on causing additional
+folder nesting for the file attempting to be archived when running the zip
+(info-zip) command.
+
+Remember that the folder names given in the to-be-archived paths
+is what controls which folders will get added to the path.
+
+INFO-ZIP - HOW TO CONTROL WHICH FOLDERS ARE INCLUDED IN THE ZIP ARCHIVE -
+TEST SETUP
+mkdir how-to-zip-test
+mkdir how-to-zip-test/a
+mkdir how-to-zip-test/a/b
+mkdir how-to-zip-test/a/b/c
+echo "test" >how-to-zip-test/a/b/c/test.txt
+
+INFO-ZIP - HOW TO CONTROL WHICH FOLDERS ARE INCLUDED IN THE ZIP ARCHIVE -
+TEST 1 PROVIDE FULL RELATIVE PATH IN THE 2ND ARG
+RESULTS IN FULL RELATIVE PATHS INCLUDED
+zip how-to-zip-test-1.zip how-to-zip-test/a/b/c/test.txt
+# how-to-zip-test-1.zip
+#   how-to-zip-test
+#     a
+#       b
+#         c
+#           test.txt
+
+INFO-ZIP - HOW TO CONTROL WHICH FOLDERS ARE INCLUDED IN THE ZIP ARCHIVE -
+TEST 2 PROVIDE FULL ABSOLUTE PATH IN THE 2ND ARG, ASSUMES HOME DIRECTORY CWD
+RESULTS IN FULL ABSOLUTE PATHS INCLUDED
+zip how-to-zip-test-2.zip ${PWD}/how-to-zip-test/a/b/c/test.txt
+# how-to-zip-test-2.zip
+#   home
+#     ${USER}
+#       how-to-zip-test
+#         a
+#           b
+#             c
+#               test.txt
+
+INFO-ZIP - HOW TO CONTROL WHICH FOLDERS ARE INCLUDED IN THE ZIP ARCHIVE -
+TEST 3 PROVIDE NO FOLDER PATHS IN THE 2ND ARG
+RESULTS IN NO FOLDER PATHS INCLUDED
+cd how-to-zip-test/a/b/c/
+zip ../../../../how-to-zip-test-3.zip ./test.txt
+cd -  # return to previous directory
+# how-to-zip-test-3.zip
+#   test.txt

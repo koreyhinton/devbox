@@ -110,6 +110,9 @@
     (setq test (number-to-string (char-after (point))))
     (if (char-equal (char-after (- (point) 1)) 46) ; 46 = .
 	(backward-char)
+      )
+    (if (char-equal (char-after (- (point) 1)) 34) ; 46 = "
+	(backward-char)
 	)
     (setq end-pt (point)) ;
     (goto-char left-pt)
@@ -135,7 +138,8 @@
   (let ( (heading-begin (point)) (heading-end (point)) )
     (save-excursion
       ;;(outline-previous-heading)
-      (outline-previous-heading)
+      ;;(outline-previous-heading)
+      (wik-previous-heading)
       (setq heading-begin (point))
       (re-search-forward wik-outline-heading-end-regexp)
       (setq heading-end (point))
