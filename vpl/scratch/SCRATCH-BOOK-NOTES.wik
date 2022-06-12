@@ -68,6 +68,10 @@ when the blue crosshairs are positioned?:
 
 SCRATCH BOOKS - L2PWSCR - CH1 - PAINT EDITOR SECTION -
 SETTING THE CENTER OF THE IMAGE SUBSECTION - 1-10 TRY IT OUT EXERCISE
+Code is found in l2pwscr/RotationCenterWithParallax_sb3/.
+see commented-out steps in the ../../adm/bin/stage-scratch file to re-assemble
+the folder as a .sb3 file.
+
 stamp is explained in 'ch2 - the power of repeat section - exploring with stamp
 subsection'. It is used before a move command to clone a copy and leave a trail
 effect.
@@ -75,4 +79,8 @@ effect.
 the command blocks apply to the currently selected sprite, to affect a
 different sprite you can select it and have its own sprite code blocks
 
+the clear block might be equivalent to the 'erase all' block that can be added
+by adding in the PEN extension
+
+and the 'stamp' block is available as well after adding the PEN extension
 

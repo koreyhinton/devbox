@@ -6,6 +6,6 @@ cd /k
 for f in `find . -name "$(date +%y%m%d).wik"`;
 do
 	git add "$f"
-	msg="${msg}${f}${nl}$(cat $f)${nl}"
+	msg="${msg}${f}${nl}$(cat $f)${nl}${nl}"
 done
 echo "$msg"

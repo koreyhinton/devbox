@@ -6,7 +6,7 @@ pub/res/address.tex
 pub/res/email.tex
 pub/res/*.log
 pub/res/*.aux
-.sb3
-.zip
+*.sb3
+*.zip
 *.wav
 *.png

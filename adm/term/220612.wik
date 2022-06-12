@@ -1,0 +1,2 @@
+CREATE CHANGELOG DIRECTORY FOR VPL
+mkdir /k/vpl/log

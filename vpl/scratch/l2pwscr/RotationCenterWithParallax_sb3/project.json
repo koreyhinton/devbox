@@ -1,0 +1,433 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "name": "backdrop1",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "circle",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "r]@^=$lKx5GotV9g;|PM": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "sSU/,(qsIv{ic?9pix0O",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 79,
+                    "y": -1166
+                },
+                "sSU/,(qsIv{ic?9pix0O": {
+                    "opcode": "motion_gotoxy",
+                    "next": "KX#ha%8]U*5g{.3MLlk(",
+                    "parent": "r]@^=$lKx5GotV9g;|PM",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "KX#ha%8]U*5g{.3MLlk(": {
+                    "opcode": "motion_pointindirection",
+                    "next": "{!)Wr!JXZD3;.X$|V(-#",
+                    "parent": "sSU/,(qsIv{ic?9pix0O",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "{!)Wr!JXZD3;.X$|V(-#": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "ZcLHai4BQQ*P!X?)PFyS",
+                    "parent": "KX#ha%8]U*5g{.3MLlk(",
+                    "inputs": {},
+                    "fields": {
+                        "STYLE": [
+                            "all around",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "ZcLHai4BQQ*P!X?)PFyS": {
+                    "opcode": "pen_clear",
+                    "next": "mEn5bO-*vRy(LXU/`B71",
+                    "parent": "{!)Wr!JXZD3;.X$|V(-#",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "mEn5bO-*vRy(LXU/`B71": {
+                    "opcode": "control_forever",
+                    "next": null,
+                    "parent": "ZcLHai4BQQ*P!X?)PFyS",
+                    "inputs": {
+                        "SUBSTACK": [
+                            2,
+                            "Z.pUhNmXZ[Ec;qn%RsL_"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Z.pUhNmXZ[Ec;qn%RsL_": {
+                    "opcode": "motion_turnright",
+                    "next": "#Bn$wei[4hv4KRRzkp]n",
+                    "parent": "mEn5bO-*vRy(LXU/`B71",
+                    "inputs": {
+                        "DEGREES": [
+                            1,
+                            [
+                                4,
+                                "7"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "comment": "4GZ$X|}bm0`7%%8,gh8G"
+                },
+                "#Bn$wei[4hv4KRRzkp]n": {
+                    "opcode": "looks_changeeffectby",
+                    "next": "P8GJ8A.bELM5a8)w?_`]",
+                    "parent": "Z.pUhNmXZ[Ec;qn%RsL_",
+                    "inputs": {
+                        "CHANGE": [
+                            1,
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "EFFECT": [
+                            "COLOR",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "P8GJ8A.bELM5a8)w?_`]": {
+                    "opcode": "pen_stamp",
+                    "next": null,
+                    "parent": "#Bn$wei[4hv4KRRzkp]n",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {
+                "4GZ$X|}bm0`7%%8,gh8G": {
+                    "blockId": "Z.pUhNmXZ[Ec;qn%RsL_",
+                    "x": 396.3660068511963,
+                    "y": -862,
+                    "width": 200,
+                    "height": 200,
+                    "minimized": false,
+                    "text": "because the circle's sprite is not centered at the origin it will not appear to rotate in place and will appear that it's x and y position has changed"
+                }
+            },
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "bd34937967423fa15559cd21f1d56e44",
+                    "name": "circle",
+                    "bitmapResolution": 1,
+                    "md5ext": "bd34937967423fa15559cd21f1d56e44.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": -53.5,
+                    "rotationCenterY": 68.5
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": 105,
+            "draggable": false,
+            "rotationStyle": "all around"
+        },
+        {
+            "isStage": false,
+            "name": "square",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "xpIgXV|}AU:#)aQUI?it": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "6RB+Okm[^qfC!kE=_/^:",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 94,
+                    "y": -1688
+                },
+                "6RB+Okm[^qfC!kE=_/^:": {
+                    "opcode": "motion_gotoxy",
+                    "next": "sdSuxV=r!W`|jbfP6I0Y",
+                    "parent": "xpIgXV|}AU:#)aQUI?it",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "sdSuxV=r!W`|jbfP6I0Y": {
+                    "opcode": "motion_pointindirection",
+                    "next": ",y8PNv[DfC(AH0vqrwek",
+                    "parent": "6RB+Okm[^qfC!kE=_/^:",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "d*?2K`2PM[+xEGPMLC1-": {
+                    "opcode": "pen_clear",
+                    "next": "I::YyUq[)jd]3XXrMgh}",
+                    "parent": ",y8PNv[DfC(AH0vqrwek",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "I::YyUq[)jd]3XXrMgh}": {
+                    "opcode": "control_forever",
+                    "next": null,
+                    "parent": "d*?2K`2PM[+xEGPMLC1-",
+                    "inputs": {
+                        "SUBSTACK": [
+                            2,
+                            "Y:^oH*XGUfgQkyl{%?~G"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Y:^oH*XGUfgQkyl{%?~G": {
+                    "opcode": "motion_turnright",
+                    "next": "Yl%5`FVz_s+e)6t[f.[:",
+                    "parent": "I::YyUq[)jd]3XXrMgh}",
+                    "inputs": {
+                        "DEGREES": [
+                            1,
+                            [
+                                4,
+                                "5"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "comment": "8-9$j^;3j.TJwAMXHq:m"
+                },
+                "Yl%5`FVz_s+e)6t[f.[:": {
+                    "opcode": "pen_stamp",
+                    "next": null,
+                    "parent": "Y:^oH*XGUfgQkyl{%?~G",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false,
+                    "comment": "6-S@9OA{L^=oo!PY}TqB"
+                },
+                ",y8PNv[DfC(AH0vqrwek": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "d*?2K`2PM[+xEGPMLC1-",
+                    "parent": "sdSuxV=r!W`|jbfP6I0Y",
+                    "inputs": {},
+                    "fields": {
+                        "STYLE": [
+                            "all around",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false,
+                    "comment": "USDx2qB%(uNw@1;qXE_e"
+                }
+            },
+            "comments": {
+                "6-S@9OA{L^=oo!PY}TqB": {
+                    "blockId": "Yl%5`FVz_s+e)6t[f.[:",
+                    "x": 313.6296296296296,
+                    "y": -1331.7777777777774,
+                    "width": 208.88885498046875,
+                    "height": 96.2962646484375,
+                    "minimized": false,
+                    "text": "Adds a new part of the trail each iteration"
+                },
+                "USDx2qB%(uNw@1;qXE_e": {
+                    "blockId": ",y8PNv[DfC(AH0vqrwek",
+                    "x": 412.0740740740741,
+                    "y": -1696,
+                    "width": 201.4815673828125,
+                    "height": 162.96295166015625,
+                    "minimized": false,
+                    "text": "because the sprite is centered exactly at the origin, it's rotational reference point will cause it to rotate in place"
+                },
+                "8-9$j^;3j.TJwAMXHq:m": {
+                    "blockId": "Y:^oH*XGUfgQkyl{%?~G",
+                    "x": 358.032673517863,
+                    "y": -1466.962962962963,
+                    "width": 315.55560302734375,
+                    "height": 127.40740966796875,
+                    "minimized": false,
+                    "text": "since this moves slower than the circle sprite it produces a visual effect similar to parallax scrolling (except by rotating)"
+                }
+            },
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "4735b3d22c54894a73af54260d7f5449",
+                    "name": "square",
+                    "bitmapResolution": 1,
+                    "md5ext": "4735b3d22c54894a73af54260d7f5449.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 53.49999999999997,
+                    "rotationCenterY": 53.50000000000003
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 2,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100,
+            "direction": -105,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensions": [
+        "pen"
+    ],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0-prerelease.20200402182733",
+        "agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Scratux/1.4.1 Chrome/76.0.3809.146 Electron/6.1.7 Safari/537.36"
+    }
+}
