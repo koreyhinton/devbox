@@ -1,0 +1,4 @@
+INSTAL XMLINDENT
+sudo apt-get install xmlindent -y
+mkdir /k/adm/log
+

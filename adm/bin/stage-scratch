@@ -25,6 +25,13 @@ mv "${sb3fnm}_sb3/project.json" "${sb3fnm}_sb3/project.temp.json"
 cat "${sb3fnm}_sb3/project.temp.json" | python3 -m json.tool >"${sb3fnm}_sb3/project.json"
 rm "${sb3fnm}_sb3/project.temp.json"
 
+for f in `ls ${sb3fnm}_sb3/*.svg`
+do
+    mv "$f" "${f}.temp"
+    cat "${f}.temp" | xmlindent >"$f"
+    rm "${f}.temp"
+done
+
 if [[ $dry_run -eq 0 ]]; then
     git add "${sb3fnm}_sb3"
 fi

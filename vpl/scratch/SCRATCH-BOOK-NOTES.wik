@@ -21,6 +21,7 @@ Ubuntu installation steps for scratux (scratch 3 equivalent) can be found at
 SCRATCH BOOKS - L2PWSCR - TOC
 ch1 - Getting Started
 ch2 - Motion and Drawing
+ch5 - Variables
 
 SCRATCH BOOKS - L2PWSCR - CH1 - SCRATCH PROGRAMMING ENVIRONMENT SECTION -
 SPRITE INFO SUBSECTION - ROTATION/DIRECTION
@@ -39,6 +40,12 @@ bottom popover buttons:
 
 in scratch 3, a sprite's initial direction can also be set by dragging the
 arrow angle indicator found on the unit circle of the Direction popover
+
+the direction is a bit unusual since the angle 90 degrees is actually 0 degrees,
+so it is translated counter-clockwise by 90, additionally instead of having
+direction numbers go past 180, it instead uses negative numbers for the left
+semisphere of direction values (converts to -179 rather than 181 if you assign
+it in the 'point in direction' block)
 
 SCRATCH BOOKS - L2PWSCR - CH1 - SCRATCH PROGRAMMING ENVIRONMENT SECTION -
 SPRITE INFO SUBSECTION - 1.12 SPRITE INFO AREA FIGURE
@@ -83,4 +90,36 @@ the clear block might be equivalent to the 'erase all' block that can be added
 by adding in the PEN extension
 
 and the 'stamp' block is available as well after adding the PEN extension
+
+SCRATCH BOOKS - L2PWSCR - CH1 - YOUR FIRST SCRATCH GAME SECTION -
+STEP 1: PREPARE THE BACKDROP - 1-19 FIGURE THE STEPS FOR DRAWING A RECTANGLE
+AT THE BOTTOM OF THE BACKGROP IMAGE
+a not-so-obvious feature is that the 'Stage' can be selected and code added
+specifically for the stage/backdrops similarly as can be done with each sprite,
+with some limitations (ie: motion controls are not available). But since the
+game needs to detect a particular part of the backdrop and not the whole
+backdrop all the code for this pong game will be added to the sprites and
+the ball sprite will have code utilizing the 'touching color' 'Sensing' control
+in order to detect the out-of-bounds rectangle with ball collision.
+
+SCRATCH BOOKS - L2PWSCR - CH1 - YOUR FIRST SCRATCH GAME SECTION - STEP 3: START
+THE GAME AND GET YOUR SPRITES MOVING SUBSECTION - 1-11 TRY IT OUT EXERCISE
+Code is found in l2pwscr/PongTwoPaddles_sb3/. The custom implementation makes
+use of variables, see cautionary note down in CH5 notes.
+
+The 'mouse x' block can be dragged in place of a hardcoded value as some sort of
+special mouse binding variable.
+
+The 'pick random' block can be used as input to another block, essentially like
+nesting functions, ie: point_in_direction(pick_random(135, to: 225))
+
+the 'if on edge, bounce' block is a convenient block for this game
+
+SCRATCH BOOKS - L2PWSCR - CH5 - VARIABLES
+cautionary note:
+be careful the first time you use variables, you must use the 'Make a Variable'
+button and if possible select the radio button 'For this sprite only';
+and if you need a new variable do not duplicate+rename an existing one
+because you might end up renaming all instances where your previous variable
+was used.
 
