@@ -1,0 +1,160 @@
+MARIADB INSTALL WITH MYSQL WORKBENCH
+sudo apt-get install mariadb-server -y
+systemctl is-active mariadb.service  # sudo systemctl start mariadb.service
+sudo mysql_secure_installation
+# Enter
+# You already have your root account protected, so you can safely answer 'n'
+# Switch to unix_socket authentication [Y/n]
+# n
+# Change the root password? [Y/n]
+# Y
+# Remove anonymous users? [Y/n]
+# n
+# Disallow root login remotely? [Y/n]
+# Y
+# Remove test database and access to it? [Y/n]
+# n
+# Reload privilege tables now? [Y/n]
+# Y
+
+sudo snap install mysql-workbench-community
+
+
+mariadb -u root -p
+# > SHOW GLOBAL VARIABLES LIKE 'PORT';
+
+mysql-workbench-community
+
+# Database -> Connect to Database
+
+# "An AppArmor policy prevents this sender from sending this message
+# to this recipient"
+# To fix:
+sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
+
+mysql-workbench-community
+
+# Database -> Connect to Database
+# Connection Method: TCP/IP
+# Change port if needed
+# click to 'Store in Keychain' (password)
+
+# Difference in version
+# click 'continue anyway'
+
+# editor test:
+#     select 1;
+# Execute button
+
+# Query > Explain Current Statement
+#   > Execution Plan > Visual Explain
+# not working, trying fix:
+sudo mysql_upgrade -u root -p --force
+mysql-workbench-community
+sudo mariadb-upgrade -u root -p --force
+mysql-workbench-community
+
+INSTEAD MYSQL INSTALL WITH MYSQL WORKBENCH
+# still not working
+# Other error:
+#   'MySQL Workbench is developed and tested for MySQL Server
+#   versions 45.6, 5.7, and 8.0'
+# simulation to check for 8 version:
+#   sudo apt-get -s install  mysql-server
+sudo apt-get install mysql-server -y
+systemctl is-active mysql.service
+# inactive
+sudo systemctl stop mariadb.service
+sudo systemctl start mysql.service
+sudo apt-get purge mariadb-*
+# Y
+# Remove all MaraDB databases?
+# Yes
+sudo apt-get install mysql-server
+# Package is already latest version
+systemctl is-active mysql.service
+sudo systemctl start mysql.service
+# Error:
+#    mysql.service: Start request repeated too quickly
+# failed
+cat /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# uncomment these: see https://stackoverflow.com/a/65262947
+#   pid-file
+#   socket
+#   port
+#   datadir
+#   server-id
+#   log_bin
+
+# :wq!
+sudo systemctl start mysql.service
+# fail, same reason
+sudo mysql_secure_installation
+sudo apt purge mysql-server mysql-client mysql-common
+# Y
+sudo apt autoremove
+# Y
+sudo mv -iv /var/lib/mysql /var/tmp/mysql-backup
+# mv: cannot stat '/var/lib/mysql': No such file or directory
+sudo rm -rf /var/lib/mysql*
+sudo apt-get update
+sudo apt install mysql-server
+mysqld --initialize
+sudo /usr/bin/mysql_secure_installation
+# Enter password for user root:
+#   <Enter>
+# failed
+# Unit mysql.service failed to load properly
+sudo apt --reinstall install mysql-server
+sudo journalctl -u mysql.service -n 100
+# Error:
+#   '/usr/share/mysql/mysql-systemd-start: No such process'
+systemctl daemon-reexec
+
+# still not working, try another way:
+sudo systemctl stop mysql
+sudo apt purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+# Y
+# dpkg: warning: while removing mysql-common, directory '/etc/mysql' not empty so not removed
+sudo mv /etc/mysql/FROZEN /var/tmp/mysql-FROZEN-bkp
+sudo apt purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+sudo rm -rf /etc/mysql /var/lib/mysql /var/log/mysql
+sudo apt autoremove
+# Y
+sudo apt autoclean
+sudo apt-get install mysql-server
+# Y
+# mysqld is running as pid 88883
+systemctl is-active mysql.service
+# active
+#    YAY!!
+sudo mysql_secure_installation
+# VALIDATE PASSWORD COMPONEN
+#   n
+# password:
+#   <password>
+# and it got stuck in infinite prompt password loop
+
+sudo mysqld_safe --skip-grant-tables&
+sudo mysql --user=root mysql
+# mysql> UPDATE mysql.user SET authentication_string=null WHERE User='root';
+# mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<password>';
+# mysql> flush privileges;
+# mysql> exit
+
+mysql -u root -p
+# mysql> SHOW GLOBAL VARIABLES LIKE 'PORT';
+# take note of port Value
+
+mysql-workbench-community
+# Edit the Connection password stored in keychain
+# make sure port matches (it did)
+
+# editor query:
+#   use sys; --execute
+#   select * from version where sys_version >2; -- execute
+#   select * from version where sys_version >2; -- Query
+#                                               -- > Explain Current Statement
+# Execution Plan > Visual Explain
+# now 'Visual Explain' works, yay!
