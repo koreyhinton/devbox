@@ -1,0 +1,98 @@
+JS BOOKS - BOOK ABBREVIATIONS
+|---------------+-----------+-------------------------+-------------|
+|          ISBN | ABBR NAME | TITLE                   | Author      |
+|---------------+-----------+-------------------------+-------------|
+| 9780321996701 | JSVQSG    | JAVASCRIPT              | TOM NEGRINO |
+|               |           | VISUAL QUICKSTART GUIDE | DORI SMITH  |
+|               |           | NINTH EDITION           |             |
+|---------------+-----------+-------------------------+-------------|
+
+JS BOOKS - BOOK RESOURCES
+|-----------+-------------------------|
+| BOOK ABBR | COMPANION WEBSITE       |
+|-----------+-------------------------|
+| JSVQSG    | www.javascriptworld.com |
+|-----------+-------------------------|
+
+JS BOOKS - JSVQSG
+The first edition of this book was written by different authors
+(Ted Gesing and Jeremy Schneider).
+
+post9e - this tag will be used to take a note of something
+         that I found to be changed or believe to have been changed
+         since the 9th edition was published (2015)
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+WHAT JAVASCRIPT IS SECTION - LISTING 1.1 HELLO WORLD
+a bit simpler to just put the hello world text directly in the body element
+and in more recent javascript lambda syntax ()=>{}
+can be used for anonymous/unnamed functions, see jsvqsg/Listing-1.1.html
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+JAVASCRIPT ISN'T JAVA SECTION
+post9e: java applets might no longer be supported in modern browsers
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+WHAT JAVASCRIPT CAN'T DO SECTION
+post9e: node.js supports backend server-side javascript that can write files to
+disk
+
+post9e: javascript from a web page probably still can't close a window it
+        didn't open; but it might be possible that javascript written in a
+        chrome extension or firefox add-on might be allowed to close a
+        tab/window
+
+post9e: cross-origin requests are usually always prevented, however they can be
+        allowed by a (unsecure) server configuration that allows it
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+JAVASCRIPT AND MORE SECTION - WHAT IS JQUERY SUBSECTION
+post9e: a lot of the jQuery functionality is now provided by the browser apis;
+and while the built-in apis are different in syntax,
+they are similar in function without needing to include a jQuery script
+dependency
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+HANDLINE EVENTS SECTION
+onload can be used to manipulate after everything has loaded,
+which may take a while for all images, stylesheets, etc to load;
+usually adding a DOMContentLoaded event listener on the window
+is the preferred way since the DOM is ready to be manipulated
+but without waiting for styling, subframes, and images
+
+window.addEventListener("DOMContentLoaded", ()=>{})
+is a browser api equivalent to jQuery's $(document).ready(()=>{})
+however it only works correctly if used in the head tag
+
+JS BOOKS - JSVQSG - CH1 GETTING ACQUAINTED WITH JAVASCRIPT -
+VALUES AND VARIABLES SECTION - TABLE 1.5 COMPARISONS
+the book shows operator meanings:
+  x == y as 'x and y are equal'
+  x === y as 'x and y are identical'
+
+and Mozilla's website[1] uses this terminology:
+  x == y as '[x and y are] equal'
+  x === y as '[x and y are] strict[ly] equal..and of the same type'
+
+these operators are only meant to work on primitive values or variables that
+hold primitive values (ie: numbers, strings) and not for checking object
+equivalence. Even though a={}; a==a && a===a will show true because it is the
+object itself, any other kind of object comparison will not work,
+ie: (({}) == ({})) will be false
+
+I like to think of it more in terms of whether type coercion is used:
+  x == y as 'x and y (are primitive types) can be type coerced to be equal'
+  x === y as 'x and y must be the same (primitive) type and equal'
+
+ expr.  | ret. val | type coercion comparison operator description
+ -------+----------+-----------------------------------------------------------
+ 1=='1'   true       == type coerced number versus string value could be true
+ 1==='1'  false      === not coerced number versus string value is always false
+ 1===1    true       === not coerced number versus number value could be true
+
+[1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+/Expressions_and_Operators#comparison_operators
+
+JS BOOKS - JSVQSG - CH2 START ME UP
+
+

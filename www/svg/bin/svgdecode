@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# TODO: psuedocode
+# (1 in bash?) extract svg base64 embeds into base64 files
+#              {img_name}.svg.img{number}.base64
+# (2 xslt) change image tags:
+#          * becomes container svg tag
+#          * remove href attribute
+#          * add dynamic text indicator inside svg, ie: {{EMBED_SVG}}
+# (3 bash?) iterate {{EMBED_SVG}} and replace each instance
+#           with img{i+1}.base64 decoded contents
+# (4 bash?) format the whole svg file with xmlindent

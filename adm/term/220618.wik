@@ -1,0 +1,81 @@
+SQL BOOK NOTE FOLDERS
+mkdir /k/sql
+mkdir /k/sql/effsql
+mkdir /k/sql/log
+
+JAVASCRIPT BOOK NOTE FOLDERS
+mkdir /k/www
+mkdir /k/www/js
+mkdir /k/www/js/jsvqsg
+mkdir /k/www/log
+
+INSTALL POSTGRESQL WITH PGADMIN
+sudo apt-get update
+sudo apt-get install postgresql -y
+sudo systemctl start postgresql
+systemctl is-active postgresql
+# active
+systemctl status postgresql
+psql --version
+# psql (PostgreSQL) 14.3 (Ubuntu 14.3-0ubuntu0.22.04.1)
+pg_isready
+# /var/run/postgresql:5432 - accepting connections
+
+INSTALL POSTGRESQL WITH PGADMIN - CREATE POSTGRESQL USER
+sudo su - postgres
+psql
+# > \password postgres
+# > exit
+
+INSTALL POSTGRESQL WITH PGADMIN - PGADMIN INSTALL
+exit # logout of postgres linux user
+sudo apt-get install curl
+curl  -fsSL https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgadmin.gpg
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list'
+# file contents: deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/bullseye pgadmin4 main
+sudo apt update
+sudo apt install pgadmin4
+# Y
+sudo /usr/pgadmin4/bin/setup-web.sh
+# Email address: <my email address>
+# Password: <password>
+# enabling wsgi module?
+#   y
+# restart apache?
+#   y
+# http://127.0.0.1/pgadmin4
+
+INSTALL POSTGRESQL WITH PGADMIN - WEB BROWSER CONFIGURATION
+# http://127.0.0.1/pgadmin4
+# login
+# 'Add New Server' button
+# General Tab
+#   Name: pgServer1
+#   Server group: Servers
+#   Comments: pgServer1 on localhost
+# Connection Tab
+#   Host name/address: localhost
+#   Port: 5432
+#   Maintenance database: postgres
+#   Username: <postgres user from
+#                'install postgresql with pgadmin - create postgresql user'>
+#   'Save' button
+
+# try out query
+# sel. left-pane > Servers > pgServer1 > Databases > postgres > Schemas > public
+# click top pane > Tools > Query Tool
+#   Select 1; -- in editor
+# execute run button
+# click 'E' (explain) button
+# (on Graphical tab) click download icon to download the svg
+
+# create table mytest (ignore int);
+
+# select "ignore" mycol from mytest where "ignore" > 0
+# and "ignore" in (select "ignore" from mytest where "ignore" < 100);
+
+
+SVG CODE FOLDERS
+mkdir /k/www/svg
+mkdir /k/www/svg/bin
+

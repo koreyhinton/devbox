@@ -1,0 +1,17 @@
+SQL BOOKS - BOOK ABBREVIATIONS
+|---------------+-----------+---------------------+----------------|
+|          ISBN | ABBR NAME | TITLE               | AUTHOR         |
+|---------------+-----------+---------------------+----------------|
+| 9780134578897 | EFFSQL    | EFFECTIVE SQL       | JOHN VIESCAS   |
+|               |           | 61 SPECIFIC WAYS    | DOUGLAS STEELE |
+|               |           | TO WRITE BETTER SQL | BEN CLOTHIER   |
+|---------------+-----------+---------------------+----------------|
+
+SQL BOOKS - BOOK RESOURCES
+|-----------+---------------------------------------|
+| BOOK ABBR | COMPANION WEBSITE                     |
+|-----------+---------------------------------------|
+| EFFSQL    | github.com/TexanInParis/Effective-SQL |
+|-----------+---------------------------------------|
+
+SQL BOOKS - EFFSQL

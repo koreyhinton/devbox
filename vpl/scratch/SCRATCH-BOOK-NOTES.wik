@@ -10,6 +10,13 @@ SCRATCH BOOKS - BOOK ABBREVIATIONS
 |               |           |                                    |             |
 |---------------+-----------+------------------------------------+-------------|
 
+SCRATCH BOOKS - BOOK RESOURCES
+|-----------+------------------------------------|
+| BOOK ABBR | COMPANION WEBSITE                  |
+|-----------+------------------------------------|
+| L2PWSCR   | nostarch.com/learnscratchresources |
+|-----------+------------------------------------|
+
 SCRATCH BOOKS - L2PWSCR
 
 The L2PWSCR book covers the scratch version 2 functionality
@@ -17,6 +24,10 @@ which is mostly still applicable to the later scratch 3 version.
 
 Ubuntu installation steps for scratux (scratch 3 equivalent) can be found at
 ../../adm/term/220608.wik.
+
+the text that relates to a script from the book resource website has a blue
+filename in the left margin next to the text, ie: TennisBallChaser.sb2
+(ch2 - using motion commands section - other motion commands subsection)
 
 SCRATCH BOOKS - L2PWSCR - TOC
 ch1 - Getting Started
@@ -114,6 +125,28 @@ The 'pick random' block can be used as input to another block, essentially like
 nesting functions, ie: point_in_direction(pick_random(135, to: 225))
 
 the 'if on edge, bounce' block is a convenient block for this game
+
+
+SCRATCH BOOKS - L2PWSCR - CH1 - ARITHMETIC OPERATORS AND FUNCTIONS SECTION -
+MATHEMATICAL FUNCTION SUBSECTION
+in v3, to get a 'sqrt of' block drag an 'abs of' block onto the scripts/code
+area and then change it's dropdown to choose 'sqrt' or whichever  math
+function is required
+
+SCRATCH BOOKS - L2PWSCR - CH2 - USING MOTION COMMANDS SECTION -
+ABSOLUTE MOTION SUBSECTION
+in v3, the 'glide to' command block now also has a secs (time duration)
+input parameter
+
+the book mentions a 'x position' and 'y position reporter blocks', I assume
+that means placing a 'x position' built-in variable block into a 'say' command
+block (useful for debugging purposes)
+
+the 'change by x' and 'change by y' blocks are useful alternatives to
+'move steps' if you aren't concerned with direction/rotation
+
+the 'turn _ degrees' command block also modifies the direction configuration
+of the sprite
 
 SCRATCH BOOKS - L2PWSCR - CH5 - VARIABLES
 cautionary note:
