@@ -1,0 +1,13 @@
+INSTALL PYGAME
+sudo apt-get update
+sudo apt-get install python3-pip -y
+python3 -m pip install -U pygame --user
+# --user installs to home dir without requiring root system directory access
+# -U upgrades to the newest available version
+python3 -m pygame.examples.aliens  # test pygame
+# pygame 2.1.2 (SDL 2.0.16, Python 3.10.4)
+
+PYTHON BOOK NOTE FOLDERS
+mkdir /k/py3
+mkdir /k/py3/log
+mkdir /k/py3/gmprtll
