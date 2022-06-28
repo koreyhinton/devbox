@@ -16,7 +16,7 @@ PYTHON BOOKS - BOOK RESOURCES
 |           | #companion-sites-section                                   |
 |-----------+------------------------------------------------------------|
 
-SCRATCH BOOKS - GMPRTLL
+PYTHON BOOKS - GMPRTLL
 
 Ubuntu installation steps for pygame (python 3) can be found at
 ../adm/term/220620.wik.
@@ -25,7 +25,7 @@ post1e - this tag will be used to take a note of something
          that I found to be changed or believe to have been changed
          since the 1st edition was published (2007)
 
-SCRATCH BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
 INSTALLING AND STARTING PYTHON SECTION - STARTING THE ENGINE SUBSECTION
 
 # post1e: how to run the command-line console for python3 (on linux)
@@ -37,22 +37,28 @@ python3
 
 post1e: py v3 uses `print("")` syntax instead of `print ""`
 
-SCRATCH BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
 WRITING YOUR FIRST INTERACTIVE GAME SECTION
 
 custom py v3 version found here: gmprtll/cheeseShop.py
 post1e: `input()` replaces `raw_input()` in py v3
 
-SCRATCH BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
 INTRODUCING STRING VARIABLES SECTION -
 EXAMINING OTHER STRING CAPABILITIES SUBSECTION
 
 python3
 >>> help("str")
 
-
-SCRATCH BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
 INTRODUCING STRING VARIABLES SECTION -
 BUILDING A NAME GAME WITH STRING MANIPULATION SUBSECTION
 custom py v3 version: gmprtll/nameGame.py
 
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+INTRODUCING STRING VARIABLES SECTION - SLICING STRINGS SUBSECTION
+custom py v3 version: gmprtll/salamiSlice.py
+
+PYTHON BOOKS - GMPRTLL - CH1 WRITING YOUR FIRST PROGRAM -
+INTRODUCING STRING VARIABLES SECTION - INTERPOLATING TEXT SUBSECTION
+custom py v3 version: gmprtll/interpolation.py
