@@ -148,6 +148,16 @@ the 'change by x' and 'change by y' blocks are useful alternatives to
 the 'turn _ degrees' command block also modifies the direction configuration
 of the sprite
 
+SCRATCH BOOKS - L2PWSCR - CH2 - USING MOTION COMMANDS SECTION -
+OTHER MOTION COMMANDS SUBSECTION
+see custom code version: l2pwscr/TennisBallChaserAndEat_sb3/
+
+SCRATCH BOOKS - L2PWSCR - CH2 - PEN COMMANDS AND EASY DRAW SECTION
+in v3 the pen palette is not there by default, click the add extension button
+on the bottom left of the left-most pane to select it
+
+see custom code version: todo l2pwscr/EasyDrawAutoTri_sb3
+
 SCRATCH BOOKS - L2PWSCR - CH5 - VARIABLES
 cautionary note:
 be careful the first time you use variables, you must use the 'Make a Variable'

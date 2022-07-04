@@ -1,0 +1,28 @@
+PUZZLES FROM LITERATURE
+mkdir /k/pub/puzzle
+mkdir /k/pub/puzzle/wot
+
+SCREEN BRIGHTNESS NOT WORKING
+sudo emacs /etc/default/grub
+# # GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor"
+# C-x c
+sudo update-grub
+
+# still didn't fix, next set this variable to false:
+sudo emacs /etc/default/grub
+# GRUB_DISABLE_OS_PROBER=false
+
+# still didn't fix it, trying this:
+xrandr -q | grep " connected"
+# eDP connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 344mm x 194mm
+xrandr --output eDP --brightness 1.0
+
+cat /sys/class/backlight/*/max_brightness
+# 255
+cat /sys/class/backlight/amdgpu_bl0/brightness
+# 20
+sudo bash
+echo 255 >/sys/class/backlight/amdgpu_bl0/brightness
+exit
+# FINALLY!
