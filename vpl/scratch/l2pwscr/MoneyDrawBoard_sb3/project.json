@@ -1,0 +1,1308 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {
+                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
+                    "my variable",
+                    0
+                ],
+                "vf]H,~uR~KzfJs0%%Kr_": [
+                    "score",
+                    18
+                ],
+                "J=%@wG:!t0MLMAewos4E": [
+                    "moves",
+                    183
+                ]
+            },
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+                    "name": "backdrop1",
+                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "on",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "Sprite1",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "]^@I+}mfyObt1d-`w,DA": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "uIZ(tlG]_xBZ.@)WL58v",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 346,
+                    "y": -503
+                },
+                "17,-{Y}!d6nkgUN/*mwX": {
+                    "opcode": "motion_gotoxy",
+                    "next": "BDM*(wpQQ2i@}#Q/Lqi}",
+                    "parent": "YS?qRY~9nF-5jXx+l^JC",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "-30"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "30"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "BDM*(wpQQ2i@}#Q/Lqi}": {
+                    "opcode": "motion_pointindirection",
+                    "next": null,
+                    "parent": "17,-{Y}!d6nkgUN/*mwX",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "4c}C|.40tQU[X(Cx$d/5": {
+                    "opcode": "event_whenkeypressed",
+                    "next": "BVPa;VtTHW31}B,bl.n_",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "left arrow",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 41,
+                    "y": -76
+                },
+                "4+9++!_j/vbfp?fPWg2c": {
+                    "opcode": "event_whenkeypressed",
+                    "next": "8XX@8CsQw+7N[-LOV_!C",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "right arrow",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 32,
+                    "y": 207
+                },
+                "eSfdVVz({uf:F|-f#I#{": {
+                    "opcode": "event_whenkeypressed",
+                    "next": "JNTc7{0/co$r^S;6Dm9_",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "up arrow",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 19,
+                    "y": 505
+                },
+                "+(L!I^@@$R90)(IU#[+7": {
+                    "opcode": "event_whenkeypressed",
+                    "next": "EP+.2;5}ZetH6.u#TbTK",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {
+                        "KEY_OPTION": [
+                            "down arrow",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 23,
+                    "y": 750
+                },
+                "BVPa;VtTHW31}B,bl.n_": {
+                    "opcode": "motion_pointindirection",
+                    "next": "[Li]sv$Zsx4ziO2)^E!N",
+                    "parent": "4c}C|.40tQU[X(Cx$d/5",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "-90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[Li]sv$Zsx4ziO2)^E!N": {
+                    "opcode": "motion_movesteps",
+                    "next": "|#WJ-qu94/t/?TVCw?yL",
+                    "parent": "BVPa;VtTHW31}B,bl.n_",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "|#WJ-qu94/t/?TVCw?yL": {
+                    "opcode": "motion_ifonedgebounce",
+                    "next": "[8RUa`P1~Bm3@g`bt.F#",
+                    "parent": "[Li]sv$Zsx4ziO2)^E!N",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "8XX@8CsQw+7N[-LOV_!C": {
+                    "opcode": "motion_pointindirection",
+                    "next": "XlljpT5`4^A^*bQ4BD7u",
+                    "parent": "4+9++!_j/vbfp?fPWg2c",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "XlljpT5`4^A^*bQ4BD7u": {
+                    "opcode": "motion_movesteps",
+                    "next": "3X-0{P3~COZa|6^aW7w,",
+                    "parent": "8XX@8CsQw+7N[-LOV_!C",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "3X-0{P3~COZa|6^aW7w,": {
+                    "opcode": "motion_ifonedgebounce",
+                    "next": "x:k~NPMi1/P?_=mI7Arv",
+                    "parent": "XlljpT5`4^A^*bQ4BD7u",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "JNTc7{0/co$r^S;6Dm9_": {
+                    "opcode": "motion_pointindirection",
+                    "next": "}D[S,`aYtN0G[uBIFU2Z",
+                    "parent": "eSfdVVz({uf:F|-f#I#{",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "EP+.2;5}ZetH6.u#TbTK": {
+                    "opcode": "motion_pointindirection",
+                    "next": "F/By^Z^?sjMBG?ucuXZ[",
+                    "parent": "+(L!I^@@$R90)(IU#[+7",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "180"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "}D[S,`aYtN0G[uBIFU2Z": {
+                    "opcode": "motion_movesteps",
+                    "next": "poL.fhZ2L;Sxd$.lGx9)",
+                    "parent": "JNTc7{0/co$r^S;6Dm9_",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "F/By^Z^?sjMBG?ucuXZ[": {
+                    "opcode": "motion_movesteps",
+                    "next": "3_I`b9=7wEDG/7rLB%sh",
+                    "parent": "EP+.2;5}ZetH6.u#TbTK",
+                    "inputs": {
+                        "STEPS": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "poL.fhZ2L;Sxd$.lGx9)": {
+                    "opcode": "motion_ifonedgebounce",
+                    "next": "bd$YC{;4X%j%)O(VCXs!",
+                    "parent": "}D[S,`aYtN0G[uBIFU2Z",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "3_I`b9=7wEDG/7rLB%sh": {
+                    "opcode": "motion_ifonedgebounce",
+                    "next": "E}~=nT(q|N?`SsX1xGT4",
+                    "parent": "F/By^Z^?sjMBG?ucuXZ[",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[8RUa`P1~Bm3@g`bt.F#": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "|#WJ-qu94/t/?TVCw?yL",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "moves",
+                            "J=%@wG:!t0MLMAewos4E"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "x:k~NPMi1/P?_=mI7Arv": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "3X-0{P3~COZa|6^aW7w,",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "moves",
+                            "J=%@wG:!t0MLMAewos4E"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "bd$YC{;4X%j%)O(VCXs!": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "poL.fhZ2L;Sxd$.lGx9)",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "moves",
+                            "J=%@wG:!t0MLMAewos4E"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "E}~=nT(q|N?`SsX1xGT4": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "3_I`b9=7wEDG/7rLB%sh",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "moves",
+                            "J=%@wG:!t0MLMAewos4E"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "uIZ(tlG]_xBZ.@)WL58v": {
+                    "opcode": "motion_gotoxy",
+                    "next": "wr|zB)AOpsP.KmzTKAZY",
+                    "parent": "]^@I+}mfyObt1d-`w,DA",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "-240"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "180"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "wr|zB)AOpsP.KmzTKAZY": {
+                    "opcode": "pen_clear",
+                    "next": "hCP?1S(Q~0Ba5LDoS+U/",
+                    "parent": "uIZ(tlG]_xBZ.@)WL58v",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "hCP?1S(Q~0Ba5LDoS+U/": {
+                    "opcode": "pen_penDown",
+                    "next": ",~RA(f47!=#(IiQ1`{s%",
+                    "parent": "wr|zB)AOpsP.KmzTKAZY",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "1u9z(3v(rYxlZTQ`;a@j": {
+                    "opcode": "motion_movesteps",
+                    "next": "}*?-J!ef]Eu;5;^M#?iH",
+                    "parent": "!NRQBa.6+6iWJ;)9ntl~",
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            ",wj=mN4WhdA4^2lU(4o$",
+                            [
+                                4,
+                                "30"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "!NRQBa.6+6iWJ;)9ntl~": {
+                    "opcode": "control_repeat",
+                    "next": "BB=^EQigVT[qG:IvDRK,",
+                    "parent": ",~RA(f47!=#(IiQ1`{s%",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "6"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "1u9z(3v(rYxlZTQ`;a@j"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "=cB=[]oV-mW`{HmeI+cl": {
+                    "opcode": "control_repeat",
+                    "next": "YS?qRY~9nF-5jXx+l^JC",
+                    "parent": "B,3d0vR,yAyJKBBO.TV[",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "8"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "H7io/EPor_gcXu;k,|kt"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "BB=^EQigVT[qG:IvDRK,": {
+                    "opcode": "motion_pointindirection",
+                    "next": "B,3d0vR,yAyJKBBO.TV[",
+                    "parent": "!NRQBa.6+6iWJ;)9ntl~",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "180"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ",wj=mN4WhdA4^2lU(4o$": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "1u9z(3v(rYxlZTQ`;a@j",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                "8"
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B,3d0vR,yAyJKBBO.TV[": {
+                    "opcode": "motion_gotoxy",
+                    "next": "=cB=[]oV-mW`{HmeI+cl",
+                    "parent": "BB=^EQigVT[qG:IvDRK,",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "-240"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "180"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "lNuoVURanf[cV{,MwUz]": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "H7io/EPor_gcXu;k,|kt",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                "8"
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "H7io/EPor_gcXu;k,|kt": {
+                    "opcode": "motion_movesteps",
+                    "next": "r~R@sr~z#2`pxYA~0Lkt",
+                    "parent": "=cB=[]oV-mW`{HmeI+cl",
+                    "inputs": {
+                        "STEPS": [
+                            3,
+                            "lNuoVURanf[cV{,MwUz]",
+                            [
+                                4,
+                                "10"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "YS?qRY~9nF-5jXx+l^JC": {
+                    "opcode": "pen_penUp",
+                    "next": "17,-{Y}!d6nkgUN/*mwX",
+                    "parent": "=cB=[]oV-mW`{HmeI+cl",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "}*?-J!ef]Eu;5;^M#?iH": {
+                    "opcode": "motion_setx",
+                    "next": "MVY/)T:cfOolUELTmxzZ",
+                    "parent": "1u9z(3v(rYxlZTQ`;a@j",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "-240"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "MVY/)T:cfOolUELTmxzZ": {
+                    "opcode": "motion_changeyby",
+                    "next": null,
+                    "parent": "}*?-J!ef]Eu;5;^M#?iH",
+                    "inputs": {
+                        "DY": [
+                            1,
+                            [
+                                4,
+                                "-60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "r~R@sr~z#2`pxYA~0Lkt": {
+                    "opcode": "motion_sety",
+                    "next": "w`tBO2}^3HCPU};6{)k1",
+                    "parent": "H7io/EPor_gcXu;k,|kt",
+                    "inputs": {
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "180"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "w`tBO2}^3HCPU};6{)k1": {
+                    "opcode": "motion_changexby",
+                    "next": null,
+                    "parent": "r~R@sr~z#2`pxYA~0Lkt",
+                    "inputs": {
+                        "DX": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ",~RA(f47!=#(IiQ1`{s%": {
+                    "opcode": "motion_pointindirection",
+                    "next": "!NRQBa.6+6iWJ;)9ntl~",
+                    "parent": "hCP?1S(Q~0Ba5LDoS+U/",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "feed90c0c397ced874c860c66f06dddf",
+                    "name": "costume2",
+                    "bitmapResolution": 1,
+                    "md5ext": "feed90c0c397ced874c860c66f06dddf.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 19.445964016880993,
+                    "rotationCenterY": 38.804003854117724
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": -172.22161865234375,
+            "y": -28.72160339355449,
+            "size": 40,
+            "direction": -90,
+            "draggable": false,
+            "rotationStyle": "left-right"
+        },
+        {
+            "isStage": false,
+            "name": "Sprite2",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "(Qz$:D=%Fj!m3b2kU|mv": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "29R.,jJt7YEN?g6Xadp!",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 40,
+                    "y": -477
+                },
+                "29R.,jJt7YEN?g6Xadp!": {
+                    "opcode": "data_setvariableto",
+                    "next": "H$X(q:7}Vo7W.5z;Veon",
+                    "parent": "(Qz$:D=%Fj!m3b2kU|mv",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "moves",
+                            "J=%@wG:!t0MLMAewos4E"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "H$X(q:7}Vo7W.5z;Veon": {
+                    "opcode": "data_setvariableto",
+                    "next": "N;u|]?qFrp7c31]bB,xF",
+                    "parent": "29R.,jJt7YEN?g6Xadp!",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                10,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "score",
+                            "vf]H,~uR~KzfJs0%%Kr_"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "N;u|]?qFrp7c31]bB,xF": {
+                    "opcode": "motion_gotoxy",
+                    "next": ")k%Si?|h9AGRwqm95|^n",
+                    "parent": "H$X(q:7}Vo7W.5z;Veon",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "30"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "30"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ")k%Si?|h9AGRwqm95|^n": {
+                    "opcode": "control_repeat",
+                    "next": null,
+                    "parent": "N;u|]?qFrp7c31]bB,xF",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "20"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "cG1yo=Aq~c{6s.,-=?.b"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "cG1yo=Aq~c{6s.,-=?.b": {
+                    "opcode": "motion_setx",
+                    "next": "HHhu2crEDw`[7?=jE/E]",
+                    "parent": ")k%Si?|h9AGRwqm95|^n",
+                    "inputs": {
+                        "X": [
+                            3,
+                            "[+nnpwho$Mp2W_bxc6d6",
+                            [
+                                4,
+                                "109"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "[+nnpwho$Mp2W_bxc6d6": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "cG1yo=Aq~c{6s.,-=?.b",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                "-210"
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            "z,lmdg?(RMo{E35Z!BL|",
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "~Inicfa{=z`pUd4/8-0*": {
+                    "opcode": "operator_random",
+                    "next": null,
+                    "parent": "z,lmdg?(RMo{E35Z!BL|",
+                    "inputs": {
+                        "FROM": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "TO": [
+                            1,
+                            [
+                                4,
+                                "7"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "z,lmdg?(RMo{E35Z!BL|": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "[+nnpwho$Mp2W_bxc6d6",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            "~Inicfa{=z`pUd4/8-0*",
+                            [
+                                4,
+                                "8"
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "HHhu2crEDw`[7?=jE/E]": {
+                    "opcode": "motion_sety",
+                    "next": "B7-DZU1MQVF:*bgmYwax",
+                    "parent": "cG1yo=Aq~c{6s.,-=?.b",
+                    "inputs": {
+                        "Y": [
+                            3,
+                            "K-JIunE@Z)VvHVFL}3/3",
+                            [
+                                4,
+                                "-5"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "K-JIunE@Z)VvHVFL}3/3": {
+                    "opcode": "operator_add",
+                    "next": null,
+                    "parent": "HHhu2crEDw`[7?=jE/E]",
+                    "inputs": {
+                        "NUM1": [
+                            1,
+                            [
+                                4,
+                                "-150"
+                            ]
+                        ],
+                        "NUM2": [
+                            3,
+                            "q=/%DD(A{Ryz%bow]wx}",
+                            [
+                                4,
+                                ""
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "+j2+{%Ih]NiaBh!$/{Z~": {
+                    "opcode": "operator_random",
+                    "next": null,
+                    "parent": "q=/%DD(A{Ryz%bow]wx}",
+                    "inputs": {
+                        "FROM": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "TO": [
+                            1,
+                            [
+                                4,
+                                "5"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "q=/%DD(A{Ryz%bow]wx}": {
+                    "opcode": "operator_multiply",
+                    "next": null,
+                    "parent": "K-JIunE@Z)VvHVFL}3/3",
+                    "inputs": {
+                        "NUM1": [
+                            3,
+                            "+j2+{%Ih]NiaBh!$/{Z~",
+                            [
+                                4,
+                                "8"
+                            ]
+                        ],
+                        "NUM2": [
+                            1,
+                            [
+                                4,
+                                "60"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "B7-DZU1MQVF:*bgmYwax": {
+                    "opcode": "sensing_resettimer",
+                    "next": "KZK)H@@m[NJj_Vsx$HQ4",
+                    "parent": "HHhu2crEDw`[7?=jE/E]",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "KZK)H@@m[NJj_Vsx$HQ4": {
+                    "opcode": "control_wait_until",
+                    "next": "Uat`6dwisti_UL=#MrT1",
+                    "parent": "B7-DZU1MQVF:*bgmYwax",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "l*}B]#I+bVc*b@h-G5Pp"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "l*}B]#I+bVc*b@h-G5Pp": {
+                    "opcode": "operator_or",
+                    "next": null,
+                    "parent": "KZK)H@@m[NJj_Vsx$HQ4",
+                    "inputs": {
+                        "OPERAND1": [
+                            2,
+                            "CTN2}^-9;Uv~8)I{)?sJ"
+                        ],
+                        "OPERAND2": [
+                            2,
+                            "K;0-$-ohgLh,|T+wbaC5"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "CTN2}^-9;Uv~8)I{)?sJ": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": "l*}B]#I+bVc*b@h-G5Pp",
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            1,
+                            "BZc0^1#?~9^O#@bYeNaj"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "BZc0^1#?~9^O#@bYeNaj": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": "CTN2}^-9;Uv~8)I{)?sJ",
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "Sprite1",
+                            null
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "K;0-$-ohgLh,|T+wbaC5": {
+                    "opcode": "operator_gt",
+                    "next": null,
+                    "parent": "l*}B]#I+bVc*b@h-G5Pp",
+                    "inputs": {
+                        "OPERAND1": [
+                            3,
+                            "C#mOuzfh%QMa-.vO@kLN",
+                            [
+                                10,
+                                ""
+                            ]
+                        ],
+                        "OPERAND2": [
+                            1,
+                            [
+                                10,
+                                "3"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "C#mOuzfh%QMa-.vO@kLN": {
+                    "opcode": "sensing_timer",
+                    "next": null,
+                    "parent": "K;0-$-ohgLh,|T+wbaC5",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Uat`6dwisti_UL=#MrT1": {
+                    "opcode": "control_if",
+                    "next": null,
+                    "parent": "KZK)H@@m[NJj_Vsx$HQ4",
+                    "inputs": {
+                        "CONDITION": [
+                            2,
+                            "b-%=?XYi0]30}B,A1}8W"
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "9q8Eo=^A`;Ni%V|u+4oV"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "b-%=?XYi0]30}B,A1}8W": {
+                    "opcode": "sensing_touchingobject",
+                    "next": null,
+                    "parent": "Uat`6dwisti_UL=#MrT1",
+                    "inputs": {
+                        "TOUCHINGOBJECTMENU": [
+                            1,
+                            "DDvOdFz|Dz]IDr6Siyl7"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "DDvOdFz|Dz]IDr6Siyl7": {
+                    "opcode": "sensing_touchingobjectmenu",
+                    "next": null,
+                    "parent": "b-%=?XYi0]30}B,A1}8W",
+                    "inputs": {},
+                    "fields": {
+                        "TOUCHINGOBJECTMENU": [
+                            "Sprite1",
+                            null
+                        ]
+                    },
+                    "shadow": true,
+                    "topLevel": false
+                },
+                "9q8Eo=^A`;Ni%V|u+4oV": {
+                    "opcode": "data_changevariableby",
+                    "next": null,
+                    "parent": "Uat`6dwisti_UL=#MrT1",
+                    "inputs": {
+                        "VALUE": [
+                            1,
+                            [
+                                4,
+                                "1"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "VARIABLE": [
+                            "score",
+                            "vf]H,~uR~KzfJs0%%Kr_"
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "b5fb5e05d79dc53ce7861a135751f1ce",
+                    "name": "costume1",
+                    "bitmapResolution": 1,
+                    "md5ext": "b5fb5e05d79dc53ce7861a135751f1ce.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 59,
+                    "rotationCenterY": 65
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 2,
+            "visible": true,
+            "x": 30,
+            "y": 150,
+            "size": 30,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [
+        {
+            "id": "vf]H,~uR~KzfJs0%%Kr_",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "score"
+            },
+            "spriteName": null,
+            "value": 18,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 5,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        },
+        {
+            "id": "J=%@wG:!t0MLMAewos4E",
+            "mode": "default",
+            "opcode": "data_variable",
+            "params": {
+                "VARIABLE": "moves"
+            },
+            "spriteName": null,
+            "value": 183,
+            "width": 0,
+            "height": 0,
+            "x": 5,
+            "y": 32,
+            "visible": true,
+            "sliderMin": 0,
+            "sliderMax": 100,
+            "isDiscrete": true
+        }
+    ],
+    "extensions": [
+        "pen"
+    ],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0-prerelease.20200402182733",
+        "agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Scratux/1.4.1 Chrome/76.0.3809.146 Electron/6.1.7 Safari/537.36"
+    }
+}

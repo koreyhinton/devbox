@@ -1,0 +1,292 @@
+{
+    "targets": [
+        {
+            "isStage": true,
+            "name": "Stage",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {},
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "b4169bd8340e23532b2a122d609ad9ca",
+                    "name": "background1",
+                    "bitmapResolution": 1,
+                    "md5ext": "b4169bd8340e23532b2a122d609ad9ca.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 240,
+                    "rotationCenterY": 180
+                }
+            ],
+            "sounds": [
+                {
+                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
+                    "name": "pop",
+                    "dataFormat": "wav",
+                    "format": "",
+                    "rate": 44100,
+                    "sampleCount": 1032,
+                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
+                }
+            ],
+            "volume": 100,
+            "layerOrder": 0,
+            "tempo": 60,
+            "videoTransparency": 50,
+            "videoState": "off",
+            "textToSpeechLanguage": null
+        },
+        {
+            "isStage": false,
+            "name": "cat",
+            "variables": {},
+            "lists": {},
+            "broadcasts": {},
+            "blocks": {
+                "L9Jq5IZ=Tt}m[!C1bY1R": {
+                    "opcode": "event_whenflagclicked",
+                    "next": "AFuvBZ7++q4rlC:Ei3:s",
+                    "parent": null,
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": true,
+                    "x": 22,
+                    "y": 24
+                },
+                "AFuvBZ7++q4rlC:Ei3:s": {
+                    "opcode": "motion_gotoxy",
+                    "next": "NVv*3xd%|WJ*[S8]=jE#",
+                    "parent": "L9Jq5IZ=Tt}m[!C1bY1R",
+                    "inputs": {
+                        "X": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ],
+                        "Y": [
+                            1,
+                            [
+                                4,
+                                "0"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "NVv*3xd%|WJ*[S8]=jE#": {
+                    "opcode": "motion_pointindirection",
+                    "next": "rcT-RiL~?gI~vfxzFFX;",
+                    "parent": "AFuvBZ7++q4rlC:Ei3:s",
+                    "inputs": {
+                        "DIRECTION": [
+                            1,
+                            [
+                                8,
+                                "90"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "rcT-RiL~?gI~vfxzFFX;": {
+                    "opcode": "pen_clear",
+                    "next": ";5u@!*K=8rhsIyIJw[Xc",
+                    "parent": "NVv*3xd%|WJ*[S8]=jE#",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                ";5u@!*K=8rhsIyIJw[Xc": {
+                    "opcode": "motion_setrotationstyle",
+                    "next": "4f:qbnUqiTBkX9sRo4^W",
+                    "parent": "rcT-RiL~?gI~vfxzFFX;",
+                    "inputs": {},
+                    "fields": {
+                        "STYLE": [
+                            "all around",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "4f:qbnUqiTBkX9sRo4^W": {
+                    "opcode": "control_repeat",
+                    "next": null,
+                    "parent": ";5u@!*K=8rhsIyIJw[Xc",
+                    "inputs": {
+                        "TIMES": [
+                            1,
+                            [
+                                6,
+                                "8"
+                            ]
+                        ],
+                        "SUBSTACK": [
+                            2,
+                            "G~#Gg=4*!06VnNy3nC/v"
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "G~#Gg=4*!06VnNy3nC/v": {
+                    "opcode": "pen_stamp",
+                    "next": "Jr^g^0ct%s17iXWeYNkM",
+                    "parent": "4f:qbnUqiTBkX9sRo4^W",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "Jr^g^0ct%s17iXWeYNkM": {
+                    "opcode": "motion_turnleft",
+                    "next": "XPG7|=iM;8)x3-bn^$?[",
+                    "parent": "G~#Gg=4*!06VnNy3nC/v",
+                    "inputs": {
+                        "DEGREES": [
+                            1,
+                            [
+                                4,
+                                "30"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "XPG7|=iM;8)x3-bn^$?[": {
+                    "opcode": "looks_changeeffectby",
+                    "next": "9v909(%7P`qoT/FPX$.R",
+                    "parent": "Jr^g^0ct%s17iXWeYNkM",
+                    "inputs": {
+                        "CHANGE": [
+                            1,
+                            [
+                                4,
+                                "-25"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "EFFECT": [
+                            "COLOR",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "9v909(%7P`qoT/FPX$.R": {
+                    "opcode": "pen_stamp",
+                    "next": "h)[]EG0*u?Hm7mJyK3yv",
+                    "parent": "XPG7|=iM;8)x3-bn^$?[",
+                    "inputs": {},
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h+EkamuTSqTK0@{oPRih": {
+                    "opcode": "looks_changeeffectby",
+                    "next": "@ajD5+WthtB%8803fF;,",
+                    "parent": "h)[]EG0*u?Hm7mJyK3yv",
+                    "inputs": {
+                        "CHANGE": [
+                            1,
+                            [
+                                4,
+                                "25"
+                            ]
+                        ]
+                    },
+                    "fields": {
+                        "EFFECT": [
+                            "COLOR",
+                            null
+                        ]
+                    },
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "@ajD5+WthtB%8803fF;,": {
+                    "opcode": "motion_turnleft",
+                    "next": null,
+                    "parent": "h+EkamuTSqTK0@{oPRih",
+                    "inputs": {
+                        "DEGREES": [
+                            1,
+                            [
+                                4,
+                                "15"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                },
+                "h)[]EG0*u?Hm7mJyK3yv": {
+                    "opcode": "control_wait",
+                    "next": "h+EkamuTSqTK0@{oPRih",
+                    "parent": "9v909(%7P`qoT/FPX$.R",
+                    "inputs": {
+                        "DURATION": [
+                            1,
+                            [
+                                5,
+                                "0.3"
+                            ]
+                        ]
+                    },
+                    "fields": {},
+                    "shadow": false,
+                    "topLevel": false
+                }
+            },
+            "comments": {},
+            "currentCostume": 0,
+            "costumes": [
+                {
+                    "assetId": "5339bd1dac6fbf79f1cb89812f135f69",
+                    "name": "cat1-a",
+                    "bitmapResolution": 1,
+                    "md5ext": "5339bd1dac6fbf79f1cb89812f135f69.svg",
+                    "dataFormat": "svg",
+                    "rotationCenterX": 2,
+                    "rotationCenterY": 97
+                }
+            ],
+            "sounds": [],
+            "volume": 100,
+            "layerOrder": 1,
+            "visible": true,
+            "x": 0,
+            "y": 0,
+            "size": 100.00000002328306,
+            "direction": 90,
+            "draggable": false,
+            "rotationStyle": "all around"
+        }
+    ],
+    "monitors": [],
+    "extensions": [
+        "pen"
+    ],
+    "meta": {
+        "semver": "3.0.0",
+        "vm": "0.2.0-prerelease.20200402182733",
+        "agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Scratux/1.4.1 Chrome/76.0.3809.146 Electron/6.1.7 Safari/537.36"
+    }
+}
