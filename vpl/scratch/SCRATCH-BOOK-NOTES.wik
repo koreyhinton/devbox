@@ -29,6 +29,12 @@ the text that relates to a script from the book resource website has a blue
 filename in the left margin next to the text, ie: TennisBallChaser.sb2
 (ch2 - using motion commands section - other motion commands subsection)
 
+tryio -> try it out
+
+The companion website contains chapter scripts, and will be converted
+from sb2 to sb3 upon opening in scratux. There is a button in the Costumes
+tab to convert the images from bitmap to vector (svg).
+
 SCRATCH BOOKS - L2PWSCR - TOC
 ch1 - Getting Started
 ch2 - Motion and Drawing
@@ -157,6 +163,137 @@ in v3 the pen palette is not there by default, click the add extension button
 on the bottom left of the left-most pane to select it
 
 see custom code version: todo l2pwscr/EasyDrawAutoTri_sb3
+
+SCRATCH BOOKS - L2PWSCR - CH2 - THE POWER OF REPEAT SECTION
+
+l2pwscr/DrawSquareRepeated_sb3/
+sb3 conversion:        -sb2-   ->   -sb3-
+                       clear   ->   erase all (+Pen extension)
+
+side note: one way to reset a starting position without moving the sprite is
+           to have multiple 'when flag clicked' blocks and then just click
+	   the one that has just reset control blocks
+
+SCRATCH BOOKS - L2PWSCR - CH2 - THE POWER OF REPEAT SECTION - TRYIO.2-5
+
+l2pwscr/PolygonMultiColor_sb3/
+sb3 conversion:        -sb2-   ->   -sb3-
+                       clear   ->   erase all (+Pen extension)
+
+note: the sb2 book companion code version when opened in v3 converted the
+      "set pen color to" block to have a number in it instead of
+      the usual v3 color picker; so this means it works with a value
+      and you can replace the color picker with a number variable by
+      dragging a variable and landing it over the block's color icon.
+
+question: how do the colors work numerically as it is just a single number?
+answer: see [1], the color is stored as a 3 byte integer
+        0xFF0000 Red (255*256*256)
+        0x00FF00 Green (255*256)
+	0x0000FF Blue (255)
+[1] https://scratch-tutorial.readthedocs.io/fr/latest/4_pen/pen.html
+
+SCRATCH BOOKS - L2PWSCR - CH2 - THE POWER OF REPEAT SECTION -
+ROTATED SQUARES SUBSECTION
+
+l2pwscr/RotatedSquaresLoopUnrolled_sb3/
+sb3 conversion:        -sb2-   ->   -sb3-
+                       clear   ->   erase all (+Pen extension)
+
+SCRATCH BOOKS - L2PWSCR - CH2 - THE POWER OF REPEAT SECTION -
+EXPLORING WITH STAMP SUBSECTION
+
+l2pwscr/WindmillWithColorEFfect_sb3/
+sb3 conversion:        -sb2-   ->   -sb3-
+                       clear   ->   erase all (+Pen extension)
+
+SCRATCH BOOKS - L2PWSCR - CH2 - SCRATCH PROJECTS SECTION -
+GET THE MONEY SUBSECTION
+
+l2pwscr/MoneyDrawBoard_sb3/
+
+note: book companion code's implementation uses a backdrop
+      ghost effect amnd it is the ghost effect that can be used to
+      change a sprite's transparency
+
+use 'change score by' 1 block to increment by 1 (ie: var++)
+
+note2: the player sprite needs to have Left/Right rotation turned on,
+and the 'if on edge, bounce' block will automatically rotate once hitting
+a left or right edge
+
+Variables can be shown directly on the screen by clicking the checkbox
+in the left pane (palette). Once shown it can be dragged, see score
+
+SCRATCH BOOKS - L2PWSCR - CH2 - SCRATCH PROJECTS SECTION -
+GET THE MONEY SUBSECTION - SCRATCH'S TIMER INFOBOX
+
+Scratch has a built-in timer that will automatically increase in value
+over time. The timer variable has the current time value that can be
+read/compared, and then can be reset back to 0 with the 'reset timer' block.
+
+SCRATCH BOOKS - L2PWSCR - CH2 - SCRATCH PROJECTS SECTION -
+CATCHING APPLES SUBSECTION
+
+l2pwscr/CatchApplesHideOnStop_sb3/
+(for info on the HideOnStop addition see notes below in "scratch books -
+l2pwscr - ch2 - scratch projects section - catching apples subsection -
+2-23 figure")
+
+without knowing if there is a boolean variable option, implemented it
+with 0 meaning false and 1 meaning true:
+    (repeat until (gameStopped = 1) or (gameEnded = 1))
+
+note: the 'when I start as a clone' event block is useful to start a chain of
+      blocks for whenever the 'create clone of myself' block
+      creates a sprite clone elsewhere in the code
+
+note2: a more imperative game loop example is shown for the cart sprite,
+       as opposed to the event-driven method used in the Money game
+       (l2pwscr/MoneyDrawBoard_sb3/), this time it now uses a forever block
+       instead of a 'when key pressed' block
+
+note3: 'when I start as a clone' is unexpectedly found within
+       the control blocks section of the code palette rather
+       than the events section
+
+SCRATCH BOOKS - L2PWSCR - CH2 - SCRATCH PROJECTS SECTION -
+CATCHING APPLES SUBSECTION - 2-23 FIGURE
+
+The code figure displays a 'show' (looks) block at the start of the program
+and a 'hide' (looks) block at the end of the program. Couldn't find an
+explanation of why it is doing this
+but by testing it out it seems to use show/hide so that the apple
+will start invisible and then when the start flag is clicked it will become
+visible; and then it would return to the invisible state
+when the game ends (has repeated 30 times).
+Unfortunately if you stop the game early with the stop button it
+will not return it to an invisible state.
+
+The problem with this is that before you save your
+latest/final version of this game you'd have to
+play it all the way through to the end in order for it to be played again
+in the correct invisible state.
+There is a bit of a hack that can be done
+so that an action can be performed after the stop button is pressed
+by forever incrementing a variable to be past the timer
+(ie: forever { timerPlusOne = timer+1 })
+and then using a 'when timer > timerPlusOne' block
+to perform an action (in this case attach a hide block) when manually stopped.
+(This works because the timer continues on even after stopped is pressed.
+You can test this by checking the box next to the timer variable and you
+can see its value continue to get higher on the screen after stopping)
+
+Now if you stop early the apple will hide correctly but the game now doesn't
+stop after 30 repeats (once apple clones are done being created the game is
+supposed to be over) because the forever incrementing timerPlusOne keeps
+the program running.
+So to accomplish both things you can use a
+'repeat until' block instead of the forever block and check a 2nd variable that
+will be toggled to indicate all apples are done cloning and when compared
+to be in a 'cloning is done' state, the 'repeat until' block will exit
+and the timerPlusOne will stop being assigned. See example of this
+implementation in l2pwscr/CatchApplesHideOnStop_sb3/
 
 SCRATCH BOOKS - L2PWSCR - CH5 - VARIABLES
 cautionary note:
