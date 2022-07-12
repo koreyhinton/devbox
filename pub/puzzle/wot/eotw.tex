@@ -176,30 +176,125 @@ that it is the cloak's weight that is causing the immovability, with equal
 weight being distributed throughout the fabric.
 
 The rider removes his cloak and ties it to branches on a nearby tree
-just in the right spot so it will block the wind when he lights the fire.
+just in the right spot so it will
+\textbf{block the wind}* when he lights the fire.
 
 Assume that he had performed a magic spell that gave extra magic weights
 to what was previously a normal fabric coat, but that he did so
-without any wasted magic; this means that the force of gravity of the coat
+without any wasted magic. Assume force of gravity and force of the wind
+are the only forces acting on the cloak (ignoring any air resistance/drag,
+ignoring any force of tension from being tied to the tree, etc). Given these
+properties, you can deduce that the force of gravity on the coat
 is equal to the wind force.
 
-$F = ma$
-
-$F_{wind} = F_{cloak}$
-
-The wind force is being applied across the whole 3 square meter cloak
+The wind force is being applied across the entire 0.8 square meter cloak
 with an air density mass of $1.229 kg / m^{3}$ and a speed
 of 46.4922 meters per second (104 mph).
 
-The gravitational force of the cloak is affected by
+The gravitational force on the cloak is affected by
 gravity that accelerates by 9.8 meters per second every second.
 
-What is the weight of the cloak?
+\begin{itemize}
+\item $F_{wind} = ma$ on 0.8 square meters**
+\item $F_{gravity\ on\ cloak} = mg$
+\item $F_{wind} = F_{gravity\ on\ cloak}$***
+\item $a_{wind} = \delta velocity / \delta time = m/s^{2} = v^{2}$****
+\end{itemize}
+
+\noindent What is the weight of the cloak?\\
+
+\noindent \scriptsize \textbf{*} \textbf{``block the wind''} is not referring
+to a fabric's ability to prevent air from moving
+through the threads of fabric; just assume that the fabric is fully windproof
+in this regard because of its tight threading.
+What \textbf{``block the wind''} means here
+is that the cloak is heavy enough that the wind won't move/lift/tilt the cloak
+and the wind will
+not be able to pass through any where that the cloak was previously hanging.
+
+\noindent \scriptsize \textbf{**} F=ma (force equals mass times acceleration)
+for wind assumes a default factor of
+1 square meter area of impact: F = 1 * m * a. The cloak is not 1 square meter;
+substitute in the area into the corrected formula version:\\ \indent
+F = sq\_mtr\_area * m * a
+
+\noindent \scriptsize \textbf{***} F=mg is another way to write F=ma when
+dealing with gravity since g is the gravity acceleration constant
+
+\noindent \scriptsize \textbf{****} m/s = v; meters per seconds is equal to velocity. Substitute v in place of m/s and acceleration becomes equal to v^{2}
 
 \subsection*{EOTW 1}
 \textit{ Set in The Eye of the World $>$ An Empty Road }  \pagebreak
 
-\section*{Solutions}
+\section*{What If There Were 2 More Months of Winter?}
+
+Rand received a thick silver coin from Moraine,
+with enough silver to buy a horse!
+
+Rand and Tam's mare, Bela, was already able to get them safely
+to Edmond's Field in time for Bel Tine, but let's roll back the months
+and pretend to be in the past,
+except Rand gets to keep this coin. He now has two months of winter left
+before he will travel to Bel Tine with just enough money to buy a horse.
+
+Bela's living configuration consists of an unshared stall enclosure
+with a fence
+that is not secured. A month back there were 1,000 horses total (including Bela) in the Two Rivers.
+However the last winter month was brutal as can be shown in the ledger below,
+and it is expected to continue that way for the 2 remaining winter months.
+
+Rand has a few options. A safe option might be to keep the coin and just buy
+another horse if Bela doesn't make it the 2 months, however, if enough horses
+die then the price for the horses will go up which would prevent him from
+being able to buy a horse. There will be a raising in price
+if the population of horses gets below 700 (assume the ledger is a complete
+listing of deaths and assume there are no new horse births). This is still
+an option if the total loss rates from the ledger
+are found to be favorable enough (assume the rate percentages will be exactly
+as shown on the ledger for both upcoming months).
+
+Another option is that Rand can buy a horse now, but since he won't have
+any extra he will need Bela to share the enclosure and won't have enough
+to secure it.
+
+The last option is that Rand can buy tools to secure Bela's fence and
+accept that he won't have enough to later buy another horse.
+
+\vspace{14pt}
+\indent \textbf{Last (Winter) Month Equine Head Count Ledger - Two Rivers}
+\VerbatimInput{eotw2.tbl}
+
+Which option gives Rand the most favorable odds
+to have a horse available that can carry his father's (Tam) barrels
+of ale for the Bel Tine celebration 2 months from now?
+\begin{itemize}
+\item[(1)] Keep the coin to possibly have money to buy a horse
+if needed in 2 months ($U+0$ config)**
+\item[(2)] Buy a stallmate for Bela right now ($U+1$ config)
+  \item[(3)] Secure Bela's fence right now ($S+0$ config)
+\end{itemize}
+
+%1,000
+% .06 = 43/723
+% .11 = 79/723
+% .02 = /277
+
+\noindent \scriptsize \textbf{*} The S+1 configuration in the ledger is not an
+option for Rand since he does not have enough to buy Bela a stallmate and
+buy tools to secure Bela's enclosure. He can only do 1 or the other.
+
+\noindent \scriptsize \textbf{**} Keeping the coin gives the worst odds
+for Bela's enclosure configuration ($U+0$), so it will only beat the other
+configurations
+if it can be expected that after 2 months
+the Two Rivers' horse population is $>= 700$ horses
+(this is true because without price fluctuation Rand will get a guaranteed
+``to-be-alive'' horse for his Bel Tine travels)
+
+\subsection*{EOTW 2}
+\textit{ Set in The Eye of the World $>$ Strangers }  \pagebreak
+
+\section*{Attempted Solutions}
 
 \subsection*{SLN EOTW -1}
 \VerbatimInput{eotw-1.py}
@@ -207,7 +302,15 @@ What is the weight of the cloak?
 
 \subsection*{SLN EOTW 0}
 \VerbatimInput{eotw0.py}
-\VerbatimInput{eotw0.sln}
+\VerbatimInput{eotw0.sln} \pagebreak
+
+\subsection*{SLN EOTW 1}
+\VerbatimInput{eotw1.py}
+\VerbatimInput{eotw1.sln} \pagebreak
+
+\subsection*{SLN EOTW 2}
+\VerbatimInput{eotw2.py}
+\VerbatimInput{eotw2.sln}
 
 
 \end{document}
