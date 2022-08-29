@@ -1,3 +1,4 @@
+;; WIK MODE - VARS
 
 ;; This is a hack to get M-<up>, M-<down> working
 ;; which will allow the wik-mode-map keybinding for
@@ -13,11 +14,22 @@
 ;;(define-key input-decode-map (kbd "M-n")  (kbd "<meta-n>"))
 
 ;; overrideable variables
-(setq wik-file-path-begin-regexp "[ \n][{\\[]?"); "[ \n][\\{{\\[]?"
-(setq wik-file-path-end-regexp "[.,;\\)}a-zA-Z0-9]?[ \n]"); spaces must be marked in region  ; "[.,;\\)}\\]a-zA-Z0-9]?[ \n]"
-(setq wik-outline-regexp "[A-Z][A-Z]")
+;(setq wik-file-path-begin-regexp "[ \n][{\\[]?"); "[ \n][\\{{\\[]?"
+(setq wik-file-path-begin-regexp "[\" \n][{\\[]?"); "[ \n][\\{{\\[]?"
+;(setq wik-file-path-end-regexp "[.,;\\)}a-zA-Z0-9]?[ \n]"); spaces must be marked in region  ; "[.,;\\)}\\]a-zA-Z0-9]?[ \n]"
+;;;; (setq wik-outline-regexp "[\/]*[#]*[ ]*[A-Z][A-Z]")
+(setq wik-file-path-end-regexp "[.,;\\)}a-zA-Z0-9]?[\" \n]"); spaces must be marked in region
+(setq wik-outline-regexp "[-;\/# \*<!>]*[A-Z][A-Z]")  ;; - has to be at start,
+                                                      ;; otherwise escape it
+
 ;;(setq wik-outline-heading-end-regexp "[A-Z0-9 _*\n]+[A-Z0-9 _*]\n")
-(setq wik-outline-heading-end-regexp "[A-Z0-9 _*\n]+[A-Z0-9 _*][A-Z0-9 _*]\n")
+;;;(setq wik-outline-heading-end-regexp "[A-Z0-9 _*\n]+[\/]*[#]*[ ]*[A-Z0-9 _*][A-Z0-9 _*]\n")
+;;;; (setq wik-outline-heading-end-regexp "[\/]*[#]*[ ]*[A-Z0-9 _*][A-Z0-9 _*]\n")
+;;;;; (setq wik-outline-heading-end-regexp "[\/# \*<!->]*[A-Z][A-Z][\/# \*<!->0-9_-]*\n")
+;;;;;;(setq wik-outline-heading-end-regexp "[A-Z][A-Z][-\/# \*<!>0-9_]*\n")
+;;;;;;;(setq wik-outline-heading-end-regexp "[A-Z][A-Z][-\/# \*<!>0-9_]*(?html)?[>]?\n")
+(setq wik-outline-heading-end-regexp "[A-Z][A-Z][ ]?[h]?[t]?[m]?[l]?[-\/# \*<!>0-9_]*\n")
+
 (setq wik-kbd-wik-move-to-file "M-S-<left>")
 (setq wik-kbd-wik-move-from-file "M-S-<right>")
 (setq wik-kbd-wik-open-file-at-point "M-S-<down>") ;"M-S-<down>"
@@ -27,7 +39,7 @@
 ;;(defvar wik-mode-map nil "Keymap for `wik-mode'")
 (setq wik-mode-map (make-sparse-keymap))
 
-
+;; WIK MODE - OUTLINE MODE DERIVATION
 (define-derived-mode wik-mode outline-mode "WIK"
   (setq case-fold-search nil)
   (setq outline-regexp wik-outline-regexp)
@@ -45,6 +57,9 @@
   ;;(define-key wik-mode-map (kbd "M-*") 'wik-all-heading-expand)
   (define-key wik-mode-map [(meta shift a)] 'wik-all-heading-expand)
   (define-key wik-mode-map [(meta shift o)] 'wik-outline-entry-toggle)
+  (define-key wik-mode-map [(tab)] 'wik-indent)
+  (define-key wik-mode-map [(return)] 'wik-nl)
+  (define-key wik-mode-map [(meta shift f)] 'wik-find-file)
   )
 
 
@@ -53,6 +68,22 @@
 
 (add-to-list 'auto-mode-alist '("\\.wik\\'" . wik-mode))
 
+;; WIK MODE - FUNCTIONS
+(defun wik-indent ()
+  (interactive)
+  (insert "    ")
+  )
+
+(defun wik-nl ()
+  (interactive)
+  (insert "\n")
+  )
+
+(defun wik-find-file ()
+  (interactive)
+  (find-file (read-file-name "Find Wik: "))
+  (wik-mode)
+  )
 
 (defun wik-move-to-file ()
   (interactive)
@@ -123,6 +154,7 @@
     (find-file-other-window file-name)
     (message test)
     )
+    (wik-mode)
   )
 
 (defun wik-close-file ()
@@ -144,14 +176,19 @@
       (re-search-forward wik-outline-heading-end-regexp)
       (setq heading-end (point))
       )
-    (outline-next-heading)
-    ;;(if (eq (- (char-after (point)) 1) "\n")
+    ;;;;(outline-next-heading)
+
+    ;(if (eq (- (char-after (point)) 1) "\n")
+    ;(if (eq (char-after (- (point) 1)) 10)
+    (if (eq (char-after (- (point) 1)) 10)
+	 nil (progn (insert "\n")))
     (insert (buffer-substring heading-begin heading-end))
     ;;(insert (concat "\n" (buffer-substring wik-repeat-heading-begin wik-repeat-heading-end)))
     ;;  )
-    (insert "\n")
-    (backward-char)
-    (backward-char)
+    (delete-backward-char 1)
+    ;;;;(insert "\n")
+    ;;;;(backward-char)
+    ;;;;(backward-char)
     )
   )
 

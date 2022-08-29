@@ -6,7 +6,18 @@ Wik mode is an emacs mode for plain text wiki notes/documentation that are not
 meant to be formatted/exported, but provides some of the useful features,
 similar to what features exist in outline mode or org mode.
 
+WIK KEY MODIFICATIONS
+
+tab
+    inserts 4 spaces
+
+enter
+    inserts a newline and DOES NOT indent
+
 WIK EDITING SHORTCUTS
+
+M-S-f (wik-find-file)
+    Opens any file in Wik Mode.
 
 M-S-o (wik-outline-entry-toggle)
     Toggles visibility for the current heading's content.
@@ -32,12 +43,12 @@ M-S-UP (wik-close-file)
 M-S-DOWN (wik-open-file-at-point)
     Visits a file in another window for the file name or path at the cursor
     point, except for paths with spaces which require region marking
-    any of the spaces in the path.
+    any of the spaces in the path. The file will be opened in Wik Mode.
 
 M-S-RET (wik-repeat-heading)
     Creates a new heading at point by copying in the previous heading. This
     assists when using repitious/hierarchically-delimited headings (ie:
-    REPORT X * ARTICLE Y * SECTION Z).
+    \ REPORT X * ARTICLE Y * SECTION Z).
 
 M-S-n (wik-next-heading)
     Moves to the next heading regardless of each heading's
@@ -193,10 +204,10 @@ Here is what it would be structured like in wik mode.
 Remove the leading 2 spaces to see heading recognition in emacs
 ..or just type Control-x e after this expression: (replace-string "  " "")
 
-  JAVA CODE ORGANIZATION
+  \ JAVA CODE ORGANIZATION
   - overview..
-  JAVA CODE ORGANIZATION * PACKAGES
+  \ JAVA CODE ORGANIZATION * PACKAGES
   - valid/invalid package examples..
-  JAVA CODE ORGANIZATION * PACKAGES * CLASSES
-  JAVA CODE ORGANIZATION * PACKAGES * CLASSES * METHODS
-  JAVA CODE ORGANIZATION * PACKAGES * INTERFACES
+  \ JAVA CODE ORGANIZATION * PACKAGES * CLASSES
+  \ JAVA CODE ORGANIZATION * PACKAGES * CLASSES * METHODS
+  \ JAVA CODE ORGANIZATION * PACKAGES * INTERFACES

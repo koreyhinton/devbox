@@ -1,0 +1,6 @@
+WIK MODE CHANGES
+Allow programming code files to be written in wik mode
+with headings in uppercase comment lines
+
+EMACS INIT CHANGES
+Start up emacs in wik mode + scratch buffer
