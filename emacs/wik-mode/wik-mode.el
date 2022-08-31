@@ -165,6 +165,7 @@
     )
   )
 
+;; WIK MODE - FUNCTIONS - WIK-REPEAT-HEADING
 (defun wik-repeat-heading ()
   (interactive)
   (let ( (heading-begin (point)) (heading-end (point)) )
@@ -175,7 +176,25 @@
       (setq heading-begin (point))
       (re-search-forward wik-outline-heading-end-regexp)
       (setq heading-end (point))
+
+      ;; calc heading end point if multiline
+      (setq heading-line-first (line-number-at-pos))
+      (setq heading-line-last (line-number-at-pos))
+      (while (string-equal (number-to-string heading-line-first) (number-to-string heading-line-last))
+        (progn
+          (if (re-search-forward wik-outline-heading-end-regexp nil t)
+            (setq heading-line-last (line-number-at-pos))
+            (setq heading-line-last -99))
+          
+          (if (string-equal (number-to-string heading-line-first) (number-to-string heading-line-last))
+              (setq heading-line-last -99)
+              (if (string-equal (number-to-string (+ heading-line-first 1)) (number-to-string heading-line-last))
+                (progn (setq heading-end (point)) (setq heading-line-first (line-number-at-pos)))
+                (setq heading-line-last -99))
+          )
+        )
       )
+    )
     ;;;;(outline-next-heading)
 
     ;(if (eq (- (char-after (point)) 1) "\n")
