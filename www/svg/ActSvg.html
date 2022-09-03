@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Activity Svg</title>
+<!-- PAGE SCRIPT -->
+    <script src="ActSvg.js"></script>
+<!-- PAGE STYLE -->
+    <link rel="stylesheet" href="ActSvg.css">
+</head>
+<body>
+<!-- PAGE CONTENT -->
+    <div id="pageContent">
+<!-- PAGE CONTENT - TOOLBAR -->
+        <div id="pageToolbar">
+            <div id="tools1" class="tool">&lt;<button class="tool" id="buttonStart" onclick="onStart()">START</button>/&gt;</div>
+            <div style="visibility:hidden" id="tools2" class="tool">
+                <button id="btn1" class="tool" onclick="onNum(this)">-- 1</button>
+                <button id="btn2" class="tool" onclick="onNum(this)">-&gt; 2</button>
+                <button id="btn3" class="tool" onclick="onNum(this)">|| 3</button>
+                <button id="btn4" class="tool" onclick="onNum(this)">() 4</button>
+                <button id="btn5" class="tool" onclick="onNum(this)">&lt;&gt; 5</button>
+                <button id="btn6" class="tool" onclick="onNum(this)">&nbsp;@ 6</button>
+                <button id="btn7" class="tool" onclick="onNum(this)">(@ 7</button>
+                <button id="btn8"  class="tool" onclick="onNum(this)">= 8</button>
+                <button id="btn9" class="tool" onclick="onNum(this)">Txt 9</button>
+                <button id="btn0" class="tool active" onclick="onNum(this)">0</button>
+            </div>
+        </div>
+<!-- PAGE CONTENT - CODE FRAME -->
+        <div id="pageCodeFrame">
+            <textarea id="svgFullTextarea"></textarea>
+            <div id="editModalBG">
+                <div id="editModal">
+                    <textarea id="svgPartTextarea" onchange="onApplyEdits()"></textarea>
+                    <button id="btnModal" onclick="onDone()">Done</button>
+                </div>
+            </div>
+        </div>
+<!-- PAGE CONTENT - DISPLAY FRAME -->
+        <div id="pageDisplayFrame">
+        </div>
+    </div>
+</body>
+</html>

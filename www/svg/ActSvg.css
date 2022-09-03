@@ -1,0 +1,133 @@
+/* GENERIC ELEMENTS */
+
+body {
+    font-family: "Courier New";
+}
+
+textarea {
+    border: 0;
+    resize: none;
+    background-color: transparent;
+    font-family: "Courier New";
+    color: rgb(80,80,80);
+    font-size: 22px;
+}
+
+textarea:focus {
+   outline-color: #FFA500;
+}
+
+/* RIGHT-PANE DISPLAY ELEMENTS */
+
+#pageDisplayFrame {
+    position:absolute;
+    width:748px;
+    height:750px;
+    left:750px;
+    top:88px;
+    border:1px solid black;
+    box-shadow: 1px 2px 3px black;
+}
+
+
+/* LEFT-PANE EDITING ELEMENTS */
+
+#pageCodeFrame {
+    position:absolute;
+    top:88px;
+    left:0px;
+    width:750px;
+    height:750px;
+    border:1px solid black;
+    background-color: rgb(255,255,240);
+}
+
+.disabled {
+    background-color: lightgrey !important;
+}
+
+#svgFullTextarea {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    width:743px;
+    height:744px;
+}
+
+#editModalBG {
+    /*position: absolute;
+    left: 0px;
+    top: 0px;*/
+    position: relative;
+    left: 0px;
+    top: -750px;
+    width: 750px;
+    height: 750px;
+    visibility: hidden;
+    background-color: black;
+    z-index: 10000;
+}
+
+#editModal {
+    position: relative;
+    top: 160px;/*-650px;*/
+    left: 100px;
+    width: 500px;
+    height: 250px;
+    background-color: rgb(255,255,240);
+}
+
+#svgPartTextarea {
+    width: 500px;
+    height: 250px;
+}
+
+
+#btnModal {
+    margin-top:0;
+    border: 0;
+    padding-top:6px;
+    font-size: 20px;
+    color: white;
+    background-color: green;
+}
+
+/* TOP-PANE TOOLBAR ELEMENTS  */
+
+#pageToolbar {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width: 1500px;
+    height:88px;
+    background-color: rgba(0,0,0,0.88);
+}
+
+#buttonStart {
+    border: 0;
+    padding-top:6px;
+    background-color: rgba(255,255,255,0.08);
+}
+
+#tools1  {
+    margin-left: 400px;
+    margin-top: 18px;
+    color: green;
+}
+
+.tool {
+    font-size: 40px;
+    color: white;
+    font-family: "Courier New";
+}
+
+#tools2 {
+    position: absolute;
+    left: 0px;
+    top:0px;
+    font-size: 80px;
+}
+
+.active {
+    background-color: rgba(255,255,255,0.08);
+}
