@@ -17,8 +17,8 @@ var svgEx = `
     <circle cx="375" cy="40" r="10" stroke="black" stroke-width="1"/>
     <polyline points="375 52 375 110 365 100 375 110 385 100" stroke="black" fill="transparent" stroke-width="1"/>
     <rect rx="10" ry="10" x="325" y="112" width="100" height="50" stroke="black" fill="transparent" stroke-width="1"/>
-    <!--<text x="333" y="134">Receive</text>
-    <text x="333" y="154">Request</text>-->
+    <text x="333" y="134" fill="black">Receive</text>
+    <text x="333" y="154" fill="black">Request</text>
 `;
 var svgTrail = `
 </svg>
@@ -30,11 +30,28 @@ function setNumMode(num) {
         active[0].classList.remove("active");
     }
     document.getElementById("btn"+num).classList.add("active");
+    var notifyMd = document.createElement("div");
+    notifyMd.style.backgroundColor="rgba(0,255,0,0.6)";
+    notifyMd.style.color="white";
+    notifyMd.style.position="fixed";
+    notifyMd.style.right="0";
+    notifyMd.style.top="0";
+    notifyMd.style.fontSize="78px";
+    notifyMd.innerHTML = (num==0) ? "0 =&gt; Select Mode" : num+" =&gt; Coming Soon";
+    document.body.appendChild(notifyMd);
+    setTimeout(function(){notifyMd.remove();}, 3000);
 }
 
+// ATTRIBUTE ACCESS FUNCTIONS
 function setcolor(nd, color) {
     for (var i=0; i<nd.attrs.length; i++) {
-        if (nd.attrs[i].name == "stroke") {
+        var attr = nd.attrs[i];
+        var textFill = (
+            attr.name == "fill" &&
+            nd.tagName.toLowerCase() == "text"
+        );
+        if (textFill || attr.name == "stroke") {
+            //attr.value = color;
             nd.attrs[i].value = color;
             break;
         }
@@ -42,8 +59,13 @@ function setcolor(nd, color) {
 }
 function getcolor(nd) {
     for (var i=0; i<nd.attrs.length; i++) {
-        if (nd.attrs[i].name == "stroke") {
-            return nd.attrs[i].value;
+        var attr = nd.attrs[i];
+        var textFill = (
+            attr.name == "fill" &&
+            nd.tagName.toLowerCase() == "text"
+        );
+        if (textFill || attr.name == "stroke") {
+            return attr.value;
         }
     }
     return "#FF0000";
@@ -103,6 +125,7 @@ function addscalarr(nd, name, query, scalar) {
     }
 }
 
+// SET CLICK RECTANGLE FUNCTION
 function setMouseRects(nd) {
     if (nd.tagName.toLowerCase() == "circle") {
         var cx = getscal(nd.attrs, "cx");
@@ -143,8 +166,34 @@ function setMouseRects(nd) {
         nd.ymin = y - strokeWidth;
         nd.ymax = y + height + strokeWidth;
     }
+    if (nd.tagName.toLowerCase() == "text") {
+        var x = getscal(nd.attrs, "x");
+        var y = getscal(nd.attrs, "y");
+        nd.xmin = x;
+        nd.xmax = x + (12*nd.text.length);
+        nd.ymin = y - 10;//12;
+        nd.ymax = y + 5;//12;//25;
+    }
 }
 
+// ARRAY ALGORITHM FUNCTION
+// Text nodes MUST be first in the array in order to
+// ensure text in a box gets prioritized on the click
+// over the surrounding rectangle
+function sortSvgNodes() {
+    var newArray = [];
+    for (var i=0; i<svgNodes.length; i++) {
+        if (svgNodes[i].tagName.toLowerCase() == "text") {
+            newArray.push(svgNodes[i]);
+        }
+    }
+    for (var i=0; i<svgNodes.length; i++) {
+        if (svgNodes[i].tagName.toLowerCase() != "text") {
+            newArray.push(svgNodes[i]);
+        }
+    }
+    svgNodes = newArray;
+}
 // CONVERSIONS
 
 function nds2xml(nds) {
@@ -163,13 +212,20 @@ function nds2xml(nds) {
 function nd2xml(nd, colorOverride) {
     var xml = "<" + nd.tagName;
     for (var i=0; i<nd.attrs.length; i++) {
-        var attr = nd.attrs[i]
-
+        var attr = nd.attrs[i];
         // this is tricky: in the 1 case where a component gets loaded from
         // the active selected node that stroke color (selColor) should not
         // be included in the edit. So use cacheColor instead.
-
-        if (colorOverride != null && nd.attrs[i].name == "stroke") {
+        var textOverride = (
+            nd.tagName.toLowerCase() == "text" &&
+            attr.name == "fill" &&
+            colorOverride != null
+        );
+        var strokeOverride = (
+            !textOverride &&
+            (colorOverride != null && nd.attrs[i].name == "stroke")
+        );
+        if (strokeOverride || textOverride) {
             //for (var j=0; j<nd.attrs.length; j++) {
                 //if (nd.attrs[j].name == "stroke") {
                     nd.attrs[i].value = colorOverride;
@@ -179,7 +235,11 @@ function nd2xml(nd, colorOverride) {
         }
         xml += (" "+ attr.name + "=" + `"` + attr.value + `"`);
     }
-    xml += "/>";
+    if (nd.tagName.toLowerCase() == "text") {
+        xml += (">" + nd.text + "</text>");
+    } else {
+        xml += "/>";
+    }
     return xml;
 }
 
@@ -203,7 +263,6 @@ function xdom2nd(xdomNd, nd) {
     var push = false;
     if (nd.attrs == null) { console.log("push"); nd.attrs = []; push = true;} // var nd = {attrs:[]}
     for (var i=0; i<xdomNd.attributes.length; i++) {
-        console.log("ATTRS", xdomNd.attributes[i].nodeName, xdomNd.attributes[i].nodeValue);
         if (!push) {
             push = true;
             for (var j=0; j<nd.attrs.length; j++) {
@@ -222,6 +281,9 @@ function xdom2nd(xdomNd, nd) {
         }
     }
     nd.tagName = xdomNd.tagName;
+    if (nd.tagName == "text") {
+        nd.text = xdomNd.innerHTML;
+    }
     //nd.cacheColor = cacheColor;
     return nd;
 }
@@ -271,6 +333,9 @@ function diffscalarr(ndV1, ndV2, name, query) {
 // MAPPINGS
 function forceMap(src, dest) {
     dest.tagName = src.tagName;
+    if (src.tagName == "text") {
+        dest.text = src.text;
+    }
     dest.attrs = [];
     dest.cacheColor = src.cacheColor;
     for (var i=0; i<src.attrs.length; i++) {
@@ -285,6 +350,7 @@ function smartMap(src, dest) {
         dest.tagName.toLowerCase();
     switch (mapDescriptor) {
 
+        // MAPPINGS - RECT
         case "rect -> circle": {
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscal(dest, "cx", diffscal(cacheNd,src,"x"));
@@ -310,6 +376,25 @@ function smartMap(src, dest) {
             break;
         }
 
+        case "rect -> text": {
+            addscalarr(dest, "points", "even", diffscal(cacheNd,src,"x"));
+            addscalarr(dest, "points", "odd", diffscal(cacheNd,src,"y"));
+            break;
+        }
+        case "text -> rect": {
+            addscal(dest, "x", diffscal(cacheNd,src,"x"));
+            addscal(dest, "y", diffscal(cacheNd,src,"y"));
+            break;
+        }
+
+        case "rect -> rect": {
+            addscalarr(dest, "x", diffscal(cacheNd,src,"x"));
+            addscalarr(dest, "y", diffscal(cacheNd,src,"y"));
+            break;
+        }
+
+        // MAPPINGS - (EXCL RECT) POLYLINE
+
         case "circle -> polyline": {
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscalarr(dest, "points", "even", diffscal(cacheNd,src,"cx"));
@@ -322,31 +407,57 @@ function smartMap(src, dest) {
             addscal(dest, "cy", diffscalarr(cacheNd,src,"points","odd"));
             break;
         }
+
+        case "text -> polyline": {
+            addscalarr(dest, "points", "even", diffscal(cacheNd,src,"x"));
+            addscalarr(dest, "points", "odd", diffscal(cacheNd,src,"y"));
+            break;
+        }
+        case "polyline -> text": {
+            addscal(dest, "x", diffscalarr(cacheNd,src,"points","even"));
+            addscal(dest, "y", diffscalarr(cacheNd,src,"points","odd"));
+            break;
+        }
+
+        case "polyline -> polyline": {
+            addscalarr(dest, "points", "even", diffscalarr(cacheNd,src,"points","even"));
+            addscalarr(dest, "points", "odd", diffscalarr(cacheNd,src,"points","even"));
+            break;
+        }
+
+
+        // MAPPINGS - (EXCL RECT,POLYLINE) CIRCLE
+
+        case "circle -> text": {
+            addscal(dest, "x", diffscal(cacheNd,src,"cx"));
+            addscal(dest, "y", diffscal(cacheNd,src,"cy"));
+            break;
+        }
+        case "text -> circle": {
+            addscal(dest, "cx", diffscal(cacheNd,src,"x"));
+            addscal(dest, "cy", diffscal(cacheNd,src,"y"));
+            break;
+        }
+
+        case "circle -> circle": {
+            addscal(dest, "cx", diffscal(cacheNd,src,"cx"));
+            addscal(dest, "cy", diffscal(cacheNd,src,"cy"));
+            break;
+        }
+
+        // MAPPING (EXCL RECT,POLYLINE,CIRCLE) TEXT
+
+        case "text -> text": {
+            addscal(dest, "x", diffscal(cacheNd,src,"x"));
+            addscal(dest, "y", diffscal(cacheNd,src,"y"));
+            break;
+        }
+
         default: ()=>{};
     }
 }
 
 // ETC
-
-/*function prepareAndGetMultiEdit(selNd) {
-
-    if (curNd != null) {
-        for (var i=0; i<curNd.attrs.length; i++) {
-            if (curNd.attrs[i].name == "stroke") {
-                curNd.attrs[i].value = selColor;
-                break;
-            }
-        }
-    }
-
-    for (var i=0; i<selNd.attrs.length; i++) {
-        if (selNd.attrs[i].name == "stroke") {
-            selNd.attrs[i].value = editColor;
-            break;
-        }
-    }
-    return nd2xml(selNd);
-}*/
 
 // updateFrames MUST be called after issueClick since updateFrames
 // depends on curId that gets modified by track/untrack functions
@@ -381,7 +492,7 @@ function updateFrames(selNd) {
 
     document
         .getElementById("svgPartTextarea")
-        .value = nd2xml(editNd, editNd.cacheColor);
+        .value = nd2xml(editNd, editNd.cacheColor); console.log("tag", editNd.text);
     cacheNd = {attrs:[]};
     forceMap(editNd, cacheNd);
 }
@@ -506,6 +617,7 @@ function mousedown(e) {
     e = e || window.event;
     var x = e.clientX - 750;
     var y = e.clientY - 88;
+    console.log(x,y);
     if (isNaN(x) || isNaN(y)) { return; }
     // curIds.push({x: x, y: y});
     // curId.x = x;
@@ -597,6 +709,8 @@ function onStart() {
             setMouseRects(svgNodes[sni]);
         }*/
     }
+    sortSvgNodes();
+    setNumMode(0);
 }
 
 function onNum(obj) {

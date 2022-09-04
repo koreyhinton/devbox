@@ -17,6 +17,10 @@ textarea:focus {
    outline-color: #FFA500;
 }
 
+svg {
+    pointer-events: none;
+}
+
 /* RIGHT-PANE DISPLAY ELEMENTS */
 
 #pageDisplayFrame {
