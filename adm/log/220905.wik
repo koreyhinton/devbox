@@ -1,0 +1,9 @@
+AUTO-ASSIGN DATED-FILENAMES TO UNDATED CHANGELOG
+WIK FILES THAT ARE NAMED STAGE
+
+temp filesys naming: STAGE.wik
+auto-converted to: {YYMMDD}.wik
+
+# /k/{SUBPATH}/log/STAGE.wik
+stage-changelog
+# /k/{SUBPATH}/log/{YYMMDD}.wik

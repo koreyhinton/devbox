@@ -9,8 +9,25 @@ cacheNd = {attrs:[]};
                             // todo: de-selecting all should hide the editor
                             // todo: should optionally allow reconfiguring to
                             //       have a much larger image area?
-var selColor = "#C0D6FC";
-var editColor = "#CAFFB5";
+selColor = "#C0D6FC";
+editColor = "#CAFFB5";
+
+numMode = 0;
+clickCnt = 0;
+drawClick = { x:-1, y: -1 };
+notifyTextArr = [
+    "0 =&gt; Select Mode",
+    "1 =&gt; Line Mode",
+    "2 =&gt; Coming Soon",
+    "3 =&gt; Coming Soon",
+    "4 =&gt; Coming Soon",
+    "5 =&gt; Coming Soon",
+    "6 =&gt; Coming Soon",
+    "7 =&gt; Coming Soon",
+    "8 =&gt; Coming Soon",
+    "9 =&gt; Coming Soon"
+];
+
 
 var svgHead=`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="750" height="750" viewBox="0,0,750,750">`;
 var svgEx = `
@@ -24,26 +41,35 @@ var svgTrail = `
 </svg>
 `;
 
-function setNumMode(num) {
-    var active = document.getElementsByClassName("active");
-    while (active.length > 0) {
-        active[0].classList.remove("active");
-    }
-    document.getElementById("btn"+num).classList.add("active");
+function notifyMsg(htmlMsg, styleBG) {
     var notifyMd = document.createElement("div");
-    notifyMd.style.backgroundColor="rgba(0,255,0,0.6)";
+    notifyMd.style.backgroundColor=(styleBG==null)?"rgba(0,255,0,0.6)":styleBG;
     notifyMd.style.color="white";
     notifyMd.style.position="fixed";
     notifyMd.style.right="0";
     notifyMd.style.top="0";
     notifyMd.style.fontSize="78px";
-    notifyMd.innerHTML = (num==0) ? "0 =&gt; Select Mode" : num+" =&gt; Coming Soon";
+    notifyMd.innerHTML = htmlMsg;
     document.body.appendChild(notifyMd);
     setTimeout(function(){notifyMd.remove();}, 3000);
+    return notifyMsg;
+}
+
+function setNumMode(num, test) {
+    numMode = num;
+    var active = document.getElementsByClassName("active");
+    while (active.length > 0) {
+        active[0].classList.remove("active");
+    }
+    document.getElementById("btn"+num).classList.add("active");
+    if (test == null) {
+        notifyMsg(notifyTextArr[num]);
+    }
 }
 
 // ATTRIBUTE ACCESS FUNCTIONS
 function setcolor(nd, color) {
+    // console.warn(nd);
     for (var i=0; i<nd.attrs.length; i++) {
         var attr = nd.attrs[i];
         var textFill = (
@@ -170,7 +196,7 @@ function setMouseRects(nd) {
         var x = getscal(nd.attrs, "x");
         var y = getscal(nd.attrs, "y");
         nd.xmin = x;
-        nd.xmax = x + (12*nd.text.length);
+        nd.xmax = x + (10*nd.text.length); // TDDTEST1 FIX
         nd.ymin = y - 10;//12;
         nd.ymax = y + 5;//12;//25;
     }
@@ -288,6 +314,19 @@ function xdom2nd(xdomNd, nd) {
     return nd;
 }
 
+// This function requires an updateFrames call in order to
+// get this new node to show up in the left code pane and
+// the right display frame.
+function xml2nd(xml, tagName) {  // TDDTEST2 FTR
+    console.log(xml);
+    var nd = {attrs:[]};
+    svgNodes.push(nd);
+    var dp = new DOMParser();
+    var xmlDocument = dp.parseFromString(xml, 'text/xml');
+    var xdomNd = xmlDocument.getElementsByTagName(tagName)[0];
+    var nd = xdom2nd(xdomNd, nd);
+    sortSvgNodes();
+}
 
 // DIFFERENCES
 function diffscal(ndV1, ndV2, name) {
@@ -377,8 +416,8 @@ function smartMap(src, dest) {
         }
 
         case "rect -> text": {
-            addscalarr(dest, "points", "even", diffscal(cacheNd,src,"x"));
-            addscalarr(dest, "points", "odd", diffscal(cacheNd,src,"y"));
+            addscal(dest, "x", diffscal(cacheNd,src,"x")); // TDDTEST0 FIX
+            addscal(dest, "y", diffscal(cacheNd,src,"y")); // TDDTEST0 FIX
             break;
         }
         case "text -> rect": {
@@ -492,7 +531,7 @@ function updateFrames(selNd) {
 
     document
         .getElementById("svgPartTextarea")
-        .value = nd2xml(editNd, editNd.cacheColor); console.log("tag", editNd.text);
+        .value = nd2xml(editNd, editNd.cacheColor); console.log("tag", editNd.tagName);
     cacheNd = {attrs:[]};
     forceMap(editNd, cacheNd);
 }
@@ -554,9 +593,33 @@ function issueSelection(nd) {
     return selType;
 }
 
+// EVENTS - PROGRAMMATIC - ISSUE DRAW
+
+function issueDraw(xml, tagName) {
+    xml2nd(xml, tagName);
+    updateFrames();
+}
+
 // EVENTS - PROGRAMMATIC - ISSUE CLICK
 
 function issueClick(x, y) {
+    if (numMode == 1) {  // TDDTEST2 FTR
+        if (clickCnt == 1) {
+            issueDraw(`<line x1="`
+                +drawClick.x+`" y1="`
+                +drawClick.y+`" x2="`
+                +x+`" y2="`
+                +y+`" stroke="black" stroke-width="1"/>`, 'line');
+            clickCnt = 0;  drawClick = {x:-1,y:-1};
+        }
+        else {
+            clickCnt += 1;
+            drawClick.x = x; drawClick.y = y;
+        }
+        return;
+    }
+
+    clickCnt = 0; drawClick = {x:-1,y:-1};
     var clickedNd = xy2nd(x, y);
     if (clickedNd == null) { return; }
     setMouseRects(clickedNd);//todo: does this work?
@@ -600,6 +663,11 @@ function issueClick(x, y) {
 /////     
 /////     //     if (removeTracking) {untrackNd(clickedNd);} return clickedNd;
 }
+// EVENTS - PROGRAMMATIC - ISSUE KEY NUM
+
+function issueKeyNum(num, test) {
+    setNumMode(num, test);
+}
 
 // EVENTS - UI
 
@@ -607,7 +675,7 @@ function keydown(e) {
     if (document.activeElement && document.activeElement.tagName.toLowerCase() != "body") { return; }
     e = e || window.event;
     if ("1234567890".indexOf(e.key) > -1) {
-        setNumMode(parseInt(e.key));
+        issueKeyNum(parseInt(e.key));
         e.view.event.preventDefault();
     }
 }
@@ -662,7 +730,7 @@ function onDone() {
 /////         }    /*curIds = [];*/    updateFrames();
 }
 
-function onStart() {
+function onStart(test) {
     var svg = document.createElement("div");
     svg.id = "svgId";
     svg.innerHTML = (svgHead + svgEx + svgTrail);
@@ -710,12 +778,12 @@ function onStart() {
         }*/
     }
     sortSvgNodes();
-    setNumMode(0);
+    issueKeyNum(0, test);
 }
 
 function onNum(obj) {
     var num = parseInt(obj.innerHTML[obj.innerHTML.length-1]);
-    setNumMode(num);
+    issueKeyNum(num);
 }
 
 function onApplyEdits() {

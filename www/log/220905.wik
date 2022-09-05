@@ -1,0 +1,20 @@
+SVGACT - FEATURE
+1 button (Line mode) is implemented // TDDTEST2 FTR
+
+SVGACT - TDD TESTING
+Add TDD Testing support
+
+SVGACT - TDD TESTING - URL
+?tdd=<#>
+?tddf=<#>
+
+SVGACT - TDD TESTING - URL - RUN FIRST (0TH) TEST AND (STOP) FREEZE
+file:///k/www/svg/ActSvg.html?tddf=0
+
+SVGACT - TDD TESTING - URL - RUN FIRST (0TH) TEST AND CONTINUE
+file:///k/www/svg/ActSvg.html?tdd=0
+
+SVGACT - TDD TESTS
+test0 - rect move x should move subselected text
+test1 - click whitespace beyond text should select surrounding rect
+test2 - mode two click twice creates line

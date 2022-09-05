@@ -3,9 +3,16 @@
 nl=$'\n'
 msg="${nl}$(date +%y%m%d)${nl}${nl}"
 cd /k
-for f in `find . -name "$(date +%y%m%d).wik"`;
+for f in `find . -name "STAGE.wik"`;
 do
-	git add "$f"
-	msg="${msg}${f}${nl}$(cat $f)${nl}${nl}"
+    dt=$(date +%y%m%d)
+    fn=$(echo "$f" | sed "s/STAGE/$dt/g")
+    if [[ -e "$fn" ]]; then
+        echo "Error: ${fn} file exists!" 1>&2
+        exit 1;
+    fi
+    mv "$f" "$fn"
+    git add "$fn"
+    msg="${msg}${fn}${nl}$(cat $fn)${nl}${nl}"
 done
 echo "$msg"
