@@ -1,0 +1,13 @@
+ACTSVG - FEATURE
+implement select line // TDDTEST3 FTR
+implement move line subselection // TDDTEST4 FTR
+implement swimlane selection  // TDDTEST5 FTR
+implement auto-close editor // TDDTEST6 FTR
+implement draw arrows // TDDTEST7 FTR
+
+ACTSVG - TDD TESTS
+test3 - mode 0 can click to select line
+test4 - mode 0 can move line subselection
+test5 - swimlane select do not prioritized over inner components
+test6 - de-selecting all nodes should hide the (single-node) editor
+test7 - mode two click twice creates arrow

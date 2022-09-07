@@ -3,10 +3,7 @@ svgBaseNode = {attrs:[]};
 svgNodes = [];
 curIds = []; // { x:-1, y:-1 };
 cacheNd = {attrs:[]};
-// todo: change to curIds and handle multiple edits
-                            // todo: cache color on svgNode objects rather than
-                            //       assuming black was the color while editing
-                            // todo: de-selecting all should hide the editor
+// todo: custom cursor to help w/ selection precision of lines
                             // todo: should optionally allow reconfiguring to
                             //       have a much larger image area?
 selColor = "#C0D6FC";
@@ -18,8 +15,8 @@ drawClick = { x:-1, y: -1 };
 notifyTextArr = [
     "0 =&gt; Select Mode",
     "1 =&gt; Line Mode",
-    "2 =&gt; Coming Soon",
-    "3 =&gt; Coming Soon",
+    "2 =&gt; Arrow Mode",
+    "3 =&gt; Rect Mode",
     "4 =&gt; Coming Soon",
     "5 =&gt; Coming Soon",
     "6 =&gt; Coming Soon",
@@ -200,6 +197,16 @@ function setMouseRects(nd) {
         nd.ymin = y - 10;//12;
         nd.ymax = y + 5;//12;//25;
     }
+    if (nd.tagName.toLowerCase() == "line") { // TDDTEST3 FTR
+        var x1 = getscal(nd.attrs, "x1");
+        var y1 = getscal(nd.attrs, "y1");
+        var x2 = getscal(nd.attrs, "x2");
+        var y2 = getscal(nd.attrs, "y2");
+        nd.xmin = x1 - 1;
+        nd.xmax = x2 + 1;
+        nd.ymin = y1 - 1;
+        nd.ymax = y2 + 1;
+    }
 }
 
 // ARRAY ALGORITHM FUNCTION
@@ -207,7 +214,15 @@ function setMouseRects(nd) {
 // ensure text in a box gets prioritized on the click
 // over the surrounding rectangle
 function sortSvgNodes() {
+    function swimLane(nd) { // TDDTEST5 FTR
+        return (
+            nd.tagName.toLowerCase() == "rect" &&
+            ((nd.xmax - nd.xmin) > 200) &&
+            ((nd.ymax - nd.ymin) > 300)
+        );
+    }
     var newArray = [];
+    // text nodes go first
     for (var i=0; i<svgNodes.length; i++) {
         if (svgNodes[i].tagName.toLowerCase() == "text") {
             newArray.push(svgNodes[i]);
@@ -215,12 +230,53 @@ function sortSvgNodes() {
     }
     for (var i=0; i<svgNodes.length; i++) {
         if (svgNodes[i].tagName.toLowerCase() != "text") {
+            if (swimLane(svgNodes[i])) { continue; } // TDDTEST5 FTR
+            newArray.push(svgNodes[i]);
+        }
+    }
+    for (var i=0; i<svgNodes.length; i++) { // TDDTEST5 FTR
+        if (swimLane(svgNodes[i])) {
             newArray.push(svgNodes[i]);
         }
     }
     svgNodes = newArray;
 }
 // CONVERSIONS
+
+// https://stackoverflow.com/a/17411276
+function rotate(cx, cy, x, y, angle) { // TDDTEST7
+    var rad = (Math.PI / 180) * angle;
+    var cos = Math.cos(rad);
+    var sin = Math.sin(rad);
+    var pt = {};
+    pt.x = (cos * (x - cx)) + (sin * (y - cy)) + cx,
+    pt.y = (cos * (y - cy)) - (sin * (x - cx)) + cy;
+    return pt;
+}
+
+function arrowPoint(pt1, pt2, deg, len, sign) {  // TDDTEST7
+    var m = /*rise/run*/ (pt2.y-pt1.y)/(pt2.x-pt1.x);
+    var b = pt2.y - m*pt2.x;
+    var dir = 1;
+    if (pt2.x > pt1.x) {
+        dir = -1;
+    }
+    pt1.x = pt2.x;//todo:check
+    pt1.x += (dir)*1;
+    pt1.y = m*pt1.x + b;
+    var d = Math.sqrt( (pt2.x - pt1.x)*(pt2.x - pt1.x) +
+        (pt2.y - pt1.y)*(pt2.y - pt1.y));
+    var maxIter = 30; var i = 0;
+    while (d < len) {
+        pt1.x += (dir)*1;
+        pt1.y = m*pt1.x + b;
+        d = Math.sqrt( (pt2.x - pt1.x)*(pt2.x - pt1.x) +
+            (pt2.y - pt1.y)*(pt2.y - pt1.y));
+        i += 1;
+        if (i>maxIter) {console.warn("max iter"); break;}
+    }
+    return rotate(pt2.x,pt2.y, pt1.x, pt1.y, sign*deg);
+}
 
 function nds2xml(nds) {
     var xml = nd2xml(svgBaseNode);
@@ -400,6 +456,7 @@ function smartMap(src, dest) {
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscal(dest, "x", diffscal(cacheNd,src,"cx"));
             addscal(dest, "y", diffscal(cacheNd,src,"cy"));
+            break;
         }
 
         case "rect -> polyline": {
@@ -415,6 +472,23 @@ function smartMap(src, dest) {
             break;
         }
 
+        case "rect -> line": { // TDDTEST4 FIX
+            var diffX = diffscal(cacheNd,src,"x");
+            var diffY = diffscal(cacheNd,src,"y");
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscal(dest, "x1", diffX);
+            addscal(dest, "x2", diffX);
+            addscal(dest, "y1", diffY);
+            addscal(dest, "y2", diffY);
+            break;
+        }
+        case "line -> rect": { // TDDTEST4 FIX
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscal(dest, "x", diffscal(cacheNd,src,"x1"));
+            addscal(dest, "y", diffscal(cacheNd,src,"y1"));
+            break;
+        }
+
         case "rect -> text": {
             addscal(dest, "x", diffscal(cacheNd,src,"x")); // TDDTEST0 FIX
             addscal(dest, "y", diffscal(cacheNd,src,"y")); // TDDTEST0 FIX
@@ -427,6 +501,7 @@ function smartMap(src, dest) {
         }
 
         case "rect -> rect": {
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscalarr(dest, "x", diffscal(cacheNd,src,"x"));
             addscalarr(dest, "y", diffscal(cacheNd,src,"y"));
             break;
@@ -458,7 +533,25 @@ function smartMap(src, dest) {
             break;
         }
 
+        case "polyline -> line": { // TDDTEST4 FIX
+            var diffX = diffscalarr(cacheNd,src,"points","even");
+            var diffY = diffscalarr(cacheNd,src,"points","odd");
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscal(dest, "x1", diffX);
+            addscal(dest, "x2", diffX);
+            addscal(dest, "y1", diffY);
+            addscal(dest, "y2", diffY);
+            break;
+        }
+        case "line -> polyline": { // TDDTEST4 FIX
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscalarr(dest, "points", "even", diffscal(cacheNd,src,"x1"));
+            addscalarr(dest, "points", "odd", diffscal(cacheNd,src,"y1"));
+            break;
+        }
+
         case "polyline -> polyline": {
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscalarr(dest, "points", "even", diffscalarr(cacheNd,src,"points","even"));
             addscalarr(dest, "points", "odd", diffscalarr(cacheNd,src,"points","even"));
             break;
@@ -478,7 +571,25 @@ function smartMap(src, dest) {
             break;
         }
 
+        case "circle -> line": { // TDDTEST4 FIX
+            var diffX = diffscal(cacheNd,src,"cx");
+            var diffY = diffscal(cacheNd,src,"cy");
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscalarr(dest, "x1", diffX);
+            addscalarr(dest, "x2", diffX);
+            addscalarr(dest, "y1", diffY);
+            addscalarr(dest, "y2", diffY);
+            break;
+        }
+        case "line -> circle": { // TDDTEST4 FIX
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscalarr(dest, "cx", diffscal(cacheNd,src,"x1"));
+            addscalarr(dest, "cy", diffscal(cacheNd,src,"y1"));
+            break;
+        }
+
         case "circle -> circle": {
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
             addscal(dest, "cx", diffscal(cacheNd,src,"cx"));
             addscal(dest, "cy", diffscal(cacheNd,src,"cy"));
             break;
@@ -486,9 +597,34 @@ function smartMap(src, dest) {
 
         // MAPPING (EXCL RECT,POLYLINE,CIRCLE) TEXT
 
+        case "text -> line": { // TDDTEST4 FIX
+            var diffX = diffscal(cacheNd,src,"x");
+            var diffY = diffscal(cacheNd,src,"y");
+            addscal(dest, "x1", diffX);
+            addscal(dest, "x2", diffX);
+            addscal(dest, "y1", diffY);
+            addscal(dest, "y2", diffY);
+            break;
+        }
+        case "line -> text": { // TDDTEST4 FIX
+            addscal(dest, "x", diffscal(cacheNd,src,"x1"));
+            addscal(dest, "y", diffscal(cacheNd,src,"y1"));
+            break;
+        }
+
         case "text -> text": {
             addscal(dest, "x", diffscal(cacheNd,src,"x"));
             addscal(dest, "y", diffscal(cacheNd,src,"y"));
+            break;
+        }
+
+        // MAPPINGS (EXCL RECT,POLYLINE,CIRCLE,TEXT) LINE
+        case "line -> line": { // TDDTEST4 FIX
+            addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
+            addscal(dest, "x1", diffscal(cacheNd,src,"x1"));
+            addscal(dest, "x2", diffscal(cacheNd,src,"x2"));
+            addscal(dest, "y1", diffscal(cacheNd,src,"y1"));
+            addscal(dest, "y2", diffscal(cacheNd,src,"y2"));
             break;
         }
 
@@ -557,7 +693,9 @@ function untrackNd(nd) {
 function issueSelection(nd) {
     var selType = "select";
     var color = getcolor(nd);
-    if (color.toUpperCase() == selColor || color.toUpperCase() == editColor) {
+    if (color.toUpperCase() == selColor || color.toUpperCase() == editColor
+        || nd.cacheColor != null // TDDTEST6 FTR
+    ) {
         // setcolor(nd, nd.cacheColor);
         selType = "deselect";
         untrackNd(nd);
@@ -589,6 +727,7 @@ function issueSelection(nd) {
             /*nd=*/ nd,
             /*color=*/ nd.cacheColor
         );
+        nd.cacheColor=null; // TDDTEST6 FTR
     }
     return selType;
 }
@@ -610,6 +749,70 @@ function issueClick(x, y) {
                 +drawClick.y+`" x2="`
                 +x+`" y2="`
                 +y+`" stroke="black" stroke-width="1"/>`, 'line');
+            clickCnt = 0;  drawClick = {x:-1,y:-1};
+        }
+        else {
+            clickCnt += 1;
+            drawClick.x = x; drawClick.y = y;
+        }
+        return;
+    }
+    if (numMode == 2) { // TDDTEST7 FTR
+        if (clickCnt == 1) {
+            var iter = 0;
+            var x1 = drawClick.x;
+            var x2 = x;
+            var s = (x2>x1) ? -1 : 1;
+
+            var pt1={};
+            var pt2={};
+
+            if (Math.abs(drawClick.x - x) < 11) { x = drawClick.x; }
+            if (Math.abs(drawClick.y - y) < 11) { y = drawClick.y; }
+            if (drawClick.x == x) {
+                pt1.x = x-10;
+                pt2.x = x+10;
+                pt1.y = y + (y>drawClick.y?-1:1)*10;
+                pt2.y = y + (y>drawClick.y?-1:1)*10;
+            } else if (drawClick.y == y) {
+                pt1.y = y - 10;
+                pt2.y = y + 10;
+                pt1.x = x + (x>drawClick.x?-1:1)*10;
+                pt2.x = x + (x>drawClick.x?-1:1)*10;
+            } else {
+                var pt1in = {x: drawClick.x, y: drawClick.y};
+                var pt2in = {x: x, y: y};
+                pt1 = arrowPoint(pt1in, pt2in, 45, 10, -1);
+                pt2 = arrowPoint(pt1in, pt2in, 45, 10, 1);
+            }
+
+            issueDraw(`<polyline points="`
+                +drawClick.x+` `
+                +drawClick.y+` `
+                +x+` `
+                +y+` `
+                +pt1.x+` `
+                +pt1.y+` `
+                +x+` `
+                +y+` `
+                +pt2.x+` `
+                +pt2.y+`" `
+                +` stroke="black" fill="transparent" stroke-width="1"/>`, 'polyline');
+            clickCnt = 0;  drawClick = {x:-1,y:-1};
+        }
+        else {
+            clickCnt += 1;
+            drawClick.x = x; drawClick.y = y;
+        }
+        return;
+    }
+    if (numMode == 3) { // TDDTEST5 FTR
+        if (clickCnt == 1) {
+            issueDraw(`<rect rx="0" ry="0" x="`
+                +drawClick.x+`" y="`
+                +drawClick.y+`" width="`
+                +(x-drawClick.x)+`" height="`
+                +(y-drawClick.y)+`" stroke="black" fill="transparent" stroke-width="1"/>`, 'rect');
             clickCnt = 0;  drawClick = {x:-1,y:-1};
         }
         else {
