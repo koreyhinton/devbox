@@ -154,6 +154,170 @@ tddTests = [
             .indexOf(expectedPoints) >-1);
         return found;
     },
+    // TDD TEST 8 - MODE FOUR CLICK TWICE CREATES ROUNDED RECT
+    function test8() {
+        var hExpect = 66;
+        var y1 = 30;
+        onStart({});
+        issueKeyNum(4, {}); // Rounded Rect Mode
+        issueClick(30, y1);    updateFrames();
+        issueClick(90, hExpect + y1);    updateFrames();
+
+        var rects = document.getElementsByTagName("rect");
+        var rect = null;
+        for (var i=0; i<rects.length; i++) {
+            if (rects[i].getAttribute("height") == ""+hExpect) {
+                rect = rects[i];
+            }
+        }
+
+        var foundXml = (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(`height="${hExpect}"`)
+            >-1);
+        return rect != null && foundXml;
+    },
+    // TDD TEST 9 - RECT MOVE X SHOULD MOVE SUBSELECTED RECT
+    function test9() {
+        var rect1X = 325;
+        var rect2X = 30;
+        var mvX = 44;
+        var expectX = rect1X + mvX;
+        onStart({});
+        issueKeyNum(4, {}); // Rounded Rect Mode
+        issueClick(rect2X, 30);    updateFrames();
+        issueClick(90, 90);    updateFrames();
+
+        issueKeyNum(0, {}); // Select Mode
+        issueClick(rect1X, 112);    updateFrames();
+        issueClick(rect2X, 30);    updateFrames();
+        var ta = document.getElementById("svgPartTextarea");
+        var oldX = rect2X;
+        var newX = rect2X + mvX;
+        ta.value = ta.value.replace(""+oldX, ""+newX);
+        onApplyEdits();
+
+        var rects = document.getElementsByTagName("rect");
+        var rect = null;
+        for (var i=0; i<rects.length; i++) {
+            if (rects[i].getAttribute("x") == ""+expectX) {
+                rect = rects[i];
+            }
+        }
+
+        var foundXml = (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(`x="${expectX}"`)
+            >-1);
+        return rect != null && foundXml;
+    },
+    // TDD TEST 10 - MODE FIVE CLICK ONCE PLACES DECISION NODE
+    function test10() {
+        var segLen = 7;
+        var expectedP1 = {x:26, y:31};
+        var expectedPoints = `${expectedP1.x} ${expectedP1.y} `;
+        onStart({});
+        issueKeyNum(5, {}); // Decision Mode
+        issueClick(expectedP1.x+segLen, expectedP1.y);    updateFrames();
+
+        var found = false;
+        var pls = document.getElementsByTagName("polyline");
+        var pl = null;
+        for (var i=0; i<pls.length; i++) {
+            if (pls[i].getAttribute("points").indexOf(expectedPoints)>-1) {
+                found = true;
+                pl = pls[i];
+            }
+        }
+
+        found &&= (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(expectedPoints) >-1);
+        return found;
+    },
+    // TDD TEST 11 - MODE SIX CLICK ONCE PLACES INITIAL NODE
+    function test11() {
+        var expectedcx = 139;
+        onStart({});
+        issueKeyNum(6, {}); // Decision Mode
+        issueClick(expectedcx, 40);    updateFrames();
+
+        var found = false;
+        var pls = document.getElementsByTagName("circle");
+        var pl = null;
+        for (var i=0; i<pls.length; i++) {
+            if (pls[i].getAttribute("cx").indexOf(expectedcx+"")>-1) {
+                found = true;
+                pl = pls[i];
+            }
+        }
+
+        found &&= (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(expectedcx+"") >-1);
+        return found;
+    },
+    // TDD TEST 12 - MODE SEVEN CLICK ONCE PLACES FINAL NODE
+    function test12() {
+        var expectedFill = "transparent";
+        onStart({});
+        issueKeyNum(7, {}); // Decision Mode
+        issueClick(80, 400);    updateFrames();
+
+        var found = false;
+        var pls = document.getElementsByTagName("circle");
+        var pl = null;
+        for (var i=0; i<pls.length; i++) {
+            if (pls[i].getAttribute("fill").indexOf(expectedFill)>-1) {
+                found = true;
+                pl = pls[i];
+            }
+        }
+
+        found &&= (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(`r="10" fill="${expectedFill}"`) >-1);
+        return found;
+    },
+    // TDD TEST 13 - MODE EIGHT CLICK TWICE PLACES JOIN/FORK NODE
+    function test13() {
+        var expectedStrokeWidth = 3;
+        onStart({});
+        issueKeyNum(8, {}); // Decision Mode
+        issueClick(80, 400);    updateFrames();
+        issueClick(150, 400);    updateFrames();
+
+        var found = false;
+        var pls = document.getElementsByTagName("line");
+        var pl = null;
+        for (var i=0; i<pls.length; i++) {
+            if (pls[i].getAttribute("stroke-width").indexOf(expectedStrokeWidth+"")>-1) {
+                found = true;
+                pl = pls[i];
+            }
+        }
+
+        found &&= (document
+            .getElementById("svgFullTextarea")
+            .value
+            .indexOf(`stroke-width="${expectedStrokeWidth}"`) >-1);
+        return found;
+    },
+    // TDD TEST 14 - MODE NINE CLICK OPENS (SINGLE-NODE) EDITOR
+    function test14() {
+        onStart({});
+        issueKeyNum(9, {});  // text mode
+        issueClick(400, 80);    updateFrames(); // sel initial node
+        return window.getComputedStyle(
+            document.getElementById("svgPartTextarea")
+        ).visibility == "visible";
+    }
+
 ];
 
 function tddTestMsg(pass) {

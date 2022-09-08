@@ -4,6 +4,7 @@ svgNodes = [];
 curIds = []; // { x:-1, y:-1 };
 cacheNd = {attrs:[]};
 // todo: custom cursor to help w/ selection precision of lines
+// todo: add in template links in footer to pre-load examples (ie: swimlanes)
                             // todo: should optionally allow reconfiguring to
                             //       have a much larger image area?
 selColor = "#C0D6FC";
@@ -17,18 +18,18 @@ notifyTextArr = [
     "1 =&gt; Line Mode",
     "2 =&gt; Arrow Mode",
     "3 =&gt; Rect Mode",
-    "4 =&gt; Coming Soon",
-    "5 =&gt; Coming Soon",
-    "6 =&gt; Coming Soon",
-    "7 =&gt; Coming Soon",
-    "8 =&gt; Coming Soon",
-    "9 =&gt; Coming Soon"
+    "4 =&gt; Rounded Rect Mode",
+    "5 =&gt; Decision Node Mode",
+    "6 =&gt; Initial Node Mode",
+    "7 =&gt; Final Node Mode",
+    "8 =&gt; Fork/Join Node Mode",
+    "9 =&gt; Text Mode"
 ];
 
 
 var svgHead=`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="750" height="750" viewBox="0,0,750,750">`;
 var svgEx = `
-    <circle cx="375" cy="40" r="10" stroke="black" stroke-width="1"/>
+    <circle cx="375" cy="40" r="10" fill="black" stroke="black" stroke-width="1"/>
     <polyline points="375 52 375 110 365 100 375 110 385 100" stroke="black" fill="transparent" stroke-width="1"/>
     <rect rx="10" ry="10" x="325" y="112" width="100" height="50" stroke="black" fill="transparent" stroke-width="1"/>
     <text x="333" y="134" fill="black">Receive</text>
@@ -502,8 +503,8 @@ function smartMap(src, dest) {
 
         case "rect -> rect": {
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
-            addscalarr(dest, "x", diffscal(cacheNd,src,"x"));
-            addscalarr(dest, "y", diffscal(cacheNd,src,"y"));
+            addscal(dest, "x", diffscal(cacheNd,src,"x")); // TDDTEST9 9
+            addscal(dest, "y", diffscal(cacheNd,src,"y")); // TDDTEST9 9
             break;
         }
 
@@ -821,6 +822,71 @@ function issueClick(x, y) {
         }
         return;
     }
+    if (numMode == 4) { // TDDTEST8 FTR
+        if (clickCnt == 1) {
+            issueDraw(`<rect rx="10" ry="10" x="`
+                +drawClick.x+`" y="`
+                +drawClick.y+`" width="`
+                +(x-drawClick.x)+`" height="`
+                +(y-drawClick.y)+`" stroke="black" fill="transparent" stroke-width="1"/>`, 'rect');
+            clickCnt = 0;  drawClick = {x:-1,y:-1};
+        }
+        else {
+            clickCnt += 1;
+            drawClick.x = x; drawClick.y = y;
+        }
+        return;
+    }
+    if (numMode == 5) { // TDDTEST10 FTR
+        var segLen = 7;
+        var x1=x-segLen,        y1=y,
+            x2=x,               y2=y-segLen,
+            x3=x+segLen,        y3=y,
+            x4=x,               y4=y+segLen,
+            x5=x-segLen,        y5=y;
+        issueDraw(`<polyline points="${x1} ${y1} ${x2} ${y2} ${x3} ${y3} ${x4} ${y4} ${x5} ${y5}" stroke="black" fill="transparent" stroke-width="1"/>`, 'polyline');
+        drawClick = {x:-1,y:-1}; clickCnt = 0;
+        return;
+    }
+    if (numMode == 6) { // TDDTEST11 FTR
+        issueDraw(`<circle cx="${x}" cy="${y}" r="10" fill="black" stroke="black" stroke-width="1"/>`, 'circle');
+        drawClick = {x:-1,y:-1}; clickCnt = 0;
+        return;
+    }
+    if (numMode == 7) { // TDDTEST12 FTR
+        // smaller circle must precede larger in order to allow
+        // clicking and selecting both
+        issueDraw(`<circle cx="${x}" cy="${y}" r="6" fill="black" stroke="black" stroke-width="1"/>`, 'circle');
+        issueDraw(`<circle cx="${x}" cy="${y}" r="10" fill="transparent" stroke="black" stroke-width="1"/>`, 'circle');
+        drawClick = {x:-1,y:-1}; clickCnt = 0;
+        return;
+    }
+    if (numMode == 8) { // TDDTEST13 FTR
+        if (clickCnt == 1) {
+            issueDraw(`<line x1="${drawClick.x}" y1="${drawClick.y}" x2="${x}" y2="${y}" stroke="black" stroke-width="3"/>`, 'line');
+            clickCnt = 0;  drawClick = {x:-1,y:-1};
+        }
+        else {
+            clickCnt += 1;
+            drawClick.x = x; drawClick.y = y;
+        }
+        return;
+    }
+    if (numMode == 9) { // TDDTEST14 FTR
+        var adjY = y +3;
+        var adjX = x -7;
+        var elStr = `<text x="${adjX}" y="${adjY}" fill="black">?</text>`;
+        issueDraw(elStr, 'text');
+        issueKeyNum(0, {});
+        issueClick(adjX, adjY);    updateFrames();
+        document.getElementById("svgPartTextarea").focus();
+        document.getElementById("svgPartTextarea").setSelectionRange(
+            elStr.indexOf("?"),
+            elStr.indexOf("?")+1
+        );
+        drawClick = {x:-1,y:-1}; clickCnt = 0;
+        return;
+    }
 
     clickCnt = 0; drawClick = {x:-1,y:-1};
     var clickedNd = xy2nd(x, y);
@@ -982,6 +1048,7 @@ function onStart(test) {
     }
     sortSvgNodes();
     issueKeyNum(0, test);
+    updateFrames();
 }
 
 function onNum(obj) {

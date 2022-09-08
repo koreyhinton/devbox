@@ -1,0 +1,17 @@
+ACTSVG - FEATURE
+implement draw rounded rect // TDDTEST8 FTR
+fix rect move subselected rect // TDDTEST9 FIX
+implement draw decision node // TDDTEST10 FTR
+implement draw initial node // TDDTEST11 FTR
+implement draw final node // TDDTEST12 FTR
+implement draw join/fork node // TDDTEST13 FTR
+implement draw text // TDDTEST14 FTR
+
+ACTSVG - TDD TESTS
+test8 - mode four click twice creates rounded rect
+test9 - rect move x should move subselected rect
+test10 - mode five click once places decision node
+test11 - mode six click once places initial node
+test12 - mode seven click once places final node
+test13 - mode eight click twice places join/fork node
+test14 - mode nine click opens (single-node) editor
