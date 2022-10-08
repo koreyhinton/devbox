@@ -1,0 +1,8 @@
+ACTSVG - FIXES
+Added MoveTester helper class to reuse thorough checking against all move tests.
+Fix circle move x,y should move subselected line // TDDTEST15
+Fix line move x,y should move subselected circle // TDDTEST16
+
+ACTSVG - TESTS
+test15 - fix circle move x,y should move subselected line
+test16 - fix line move x,y should move subselected circle

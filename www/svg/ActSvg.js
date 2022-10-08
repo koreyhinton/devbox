@@ -29,7 +29,7 @@ notifyTextArr = [
 
 var svgHead=`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="750" height="750" viewBox="0,0,750,750">`;
 var svgEx = `
-    <circle cx="375" cy="40" r="10" fill="black" stroke="black" stroke-width="1"/>
+    <circle cx="375" cy="39" r="10" fill="black" stroke="black" stroke-width="1"/>
     <polyline points="375 52 375 110 365 100 375 110 385 100" stroke="black" fill="transparent" stroke-width="1"/>
     <rect rx="10" ry="10" x="325" y="112" width="100" height="50" stroke="black" fill="transparent" stroke-width="1"/>
     <text x="333" y="134" fill="black">Receive</text>
@@ -37,7 +37,7 @@ var svgEx = `
 `;
 var svgTrail = `
 </svg>
-`;
+`; // cy=40 -> cy=39 fix: // TDDTEST0 FIX
 
 function notifyMsg(htmlMsg, styleBG) {
     var notifyMd = document.createElement("div");
@@ -576,16 +576,16 @@ function smartMap(src, dest) {
             var diffX = diffscal(cacheNd,src,"cx");
             var diffY = diffscal(cacheNd,src,"cy");
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
-            addscalarr(dest, "x1", diffX);
-            addscalarr(dest, "x2", diffX);
-            addscalarr(dest, "y1", diffY);
-            addscalarr(dest, "y2", diffY);
+            addscal(dest, "x1", diffX); // TDDTEST15 FIX
+            addscal(dest, "x2", diffX); // TDDTEST15 FIX
+            addscal(dest, "y1", diffY); // TDDTEST15 FIX
+            addscal(dest, "y2", diffY); // TDDTEST15 FIX
             break;
         }
         case "line -> circle": { // TDDTEST4 FIX
             addscal(dest, "stroke-width", diffscal(cacheNd,src,"stroke-width"));
-            addscalarr(dest, "cx", diffscal(cacheNd,src,"x1"));
-            addscalarr(dest, "cy", diffscal(cacheNd,src,"y1"));
+            addscal(dest, "cx", diffscal(cacheNd,src,"x1")); // TDDTEST16 FIX
+            addscal(dest, "cy", diffscal(cacheNd,src,"y1")); // TDDTEST16 FIX
             break;
         }
 
@@ -708,7 +708,6 @@ function issueSelection(nd) {
         // setcolor(nd, selColor);
     }
     // if (curIds.length == 0) { return selType; }
-
     if (selType == "select") {
         setcolor(
             /*nd=*/ nd,
@@ -724,6 +723,9 @@ function issueSelection(nd) {
         }
     }
     else if (selType == "deselect") {
+        if (nd.cacheColor == null) {
+            console.warn("WARNING: "+nd.tagName+" is too close to another element" );
+        }
         setcolor(
             /*nd=*/ nd,
             /*color=*/ nd.cacheColor
@@ -887,7 +889,6 @@ function issueClick(x, y) {
         drawClick = {x:-1,y:-1}; clickCnt = 0;
         return;
     }
-
     clickCnt = 0; drawClick = {x:-1,y:-1};
     var clickedNd = xy2nd(x, y);
     if (clickedNd == null) { return; }

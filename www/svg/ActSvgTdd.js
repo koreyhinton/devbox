@@ -9,23 +9,25 @@
 //     at onDone
 //     at onApplyEdits
 tddTests = [
-    // TDD TEST 0 - RECT MOVE X SHOULD MOVE SUBSELECTED TEXT
+    // TDD TEST 0 - RECT MOVE X,Y SHOULD MOVE SUBSELECTED TEXT
     function test0() {
+
         onStart({});
-        var x = parseInt(document.getElementsByTagName("text")[0].getAttribute("x"));
+
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("rect")[0],
+            movee: document.getElementsByTagName("text")[0]
+        });
+
         issueClick(378, 41);    updateFrames();
         issueClick(376, 92);    updateFrames();
         issueClick(364, 129);    updateFrames();
         issueClick(364, 151);    updateFrames();
-        issueClick(412, 113);    updateFrames();
-        var ta = document.getElementById("svgPartTextarea");
-        var oldX = 325;
-        var newX = 25;
-        ta.value = ta.value.replace(""+oldX, ""+newX);
-        onApplyEdits();
-        // console.log(document.getElementById("svgId"));
-        var affectedX = parseInt(document.getElementsByTagName("text")[0].getAttribute("x"));
-        return (oldX - newX) == (x - affectedX);
+        issueClick(412, 113);    updateFrames();  // rect selected last
+
+        mt.moveBy(-300, 1);
+
+        return mt.test();
     },
     // TDD TEST 1 - CLICK WHITESPACE BEYOND TEXT SHOULD SELECT SURROUNDING RECT
     function test1() {
@@ -65,7 +67,6 @@ tddTests = [
     function test4() {
         var yStart = 164;
         var yMove = -33;
-        var yExpect = yStart + yMove;
         onStart({});
         issueKeyNum(1, {});
         issueClick(250, yStart);    updateFrames();
@@ -73,30 +74,16 @@ tddTests = [
         issueKeyNum(0, {});
         issueClick(270, yStart);    updateFrames();  // propagatee
 
-        function nonTestSel() {
-            // these selections are only done for it to make sense visually.
-            // visually everything should look to be connected together,
-            // moved up to be located at frame-top
-            issueClick(333, 134);    updateFrames();
-            issueClick(333, 154);    updateFrames();
-            issueClick(375, 52);    updateFrames();
-            issueClick(375, 40);    updateFrames();
-        }
-        nonTestSel();
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("rect")[0],
+            movee: document.getElementsByTagName("line")[0],
+        });
 
-        issueClick(325, 112);    updateFrames(); // propagator
+        issueClick(325, 112);    updateFrames(); // rect propagator
 
-        var ta = document.getElementById("svgPartTextarea");
-        ta.value = ta.value.replace("112", (112+yMove)+"");
+        mt.moveBy(3, yMove);
 
-        onApplyEdits();
-
-        var y2 = parseFloat(
-            document
-                .getElementsByTagName("line")[0]
-                .getAttribute("y2")
-        );
-        return y2 == yExpect;
+        return mt.test();
     },
     // TDD TEST 5 - SWIMLANE SELECT DO NOT PRIORITIZED OVER INNER COMPONENTS
     function test5() {
@@ -192,26 +179,14 @@ tddTests = [
         issueKeyNum(0, {}); // Select Mode
         issueClick(rect1X, 112);    updateFrames();
         issueClick(rect2X, 30);    updateFrames();
-        var ta = document.getElementById("svgPartTextarea");
-        var oldX = rect2X;
-        var newX = rect2X + mvX;
-        ta.value = ta.value.replace(""+oldX, ""+newX);
-        onApplyEdits();
 
-        var rects = document.getElementsByTagName("rect");
-        var rect = null;
-        for (var i=0; i<rects.length; i++) {
-            if (rects[i].getAttribute("x") == ""+expectX) {
-                rect = rects[i];
-            }
-        }
+        var mt = new MoveTester({
+            mover: document.querySelector(`rect[x="${rect2X}"]`),
+            movee: document.querySelector(`rect[x="325"]`)
+        });
 
-        var foundXml = (document
-            .getElementById("svgFullTextarea")
-            .value
-            .indexOf(`x="${expectX}"`)
-            >-1);
-        return rect != null && foundXml;
+        mt.moveBy(mvX, 11);
+        return mt.test();
     },
     // TDD TEST 10 - MODE FIVE CLICK ONCE PLACES DECISION NODE
     function test10() {
@@ -316,7 +291,57 @@ tddTests = [
         return window.getComputedStyle(
             document.getElementById("svgPartTextarea")
         ).visibility == "visible";
-    }
+    },
+    // TDD TEST 15 - CIRC MOVE X,Y SHOULD MOVE SUBSELECTED LINE
+    // WITHOUT UNDEFINED ATTRIBUTES
+    function test15() {
+        var cX = 375;
+        var lineX = 30;
+        var mvX = 44;
+        var expectX = lineX + mvX;
+        onStart({});
+        issueKeyNum(1, {}); // Line Mode
+        issueClick(lineX, 30);    updateFrames();
+        issueClick(lineX, 90);    updateFrames();
+
+        issueKeyNum(0, {}); // Select Mode
+        issueClick(lineX, 45);    updateFrames();
+        issueClick(375, 40);    updateFrames();//initial node
+
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("circle")[0],
+            movee: document.getElementsByTagName("line")[0]
+        });
+
+        mt.moveBy(mvX, -11);
+
+        return mt.test();
+    },
+    // TDD TEST 16 - LINE MOVE X,Y SHOULD MOVE SUBSELECTED CIRC
+    // WITHOUT UNDEFINED ATTRIBUTES
+    function test16() {
+
+        var cX = 375;
+        var lineX = 33;
+        var mvX = 44;
+        var expectX = cX + mvX;
+        onStart({});
+        issueKeyNum(1, {}); // Line Mode
+        issueClick(lineX, 30);    updateFrames();
+        issueClick(lineX, 90);    updateFrames();
+
+        issueKeyNum(0, {}); // Select Mode
+        issueClick(cX, 40);    updateFrames();//select line
+        issueClick(lineX, 45);    updateFrames();
+
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("line")[0],
+            movee: document.getElementsByTagName("circle")[0]
+        });
+
+        mt.moveBy(lineX + mvX, -13);
+        return mt.test();
+    },
 
 ];
 

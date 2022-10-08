@@ -1,0 +1,42 @@
+# PIXEL ART SOFTWARE
+sudo apt-get install -y grafx2
+
+# INSTALL STEAM
+sudo add-apt-repository multiverse
+# enter key
+sudo apt update
+upgrade
+sudo apt-get install steam-installer -y
+steam  # runs steam updater and launches steam
+
+# INSTALL NODE
+# see README at https://github.com/nodejs/snap
+sudo snap install node --classic --channel=14
+npm --version
+# 6.14.17
+
+# INSTALL GITK
+upgrade
+# INSTALL GITK - FIXES SINCE UPGRADE BROKE MY MACHINE
+# error: ucsi PPM init failed (-110)
+sudo apt install software-properties-common -y
+sudo add-apt-repository ppa:graphics-drivers/ppa #for proprietary nvidia drivers
+sudo apt update
+sudo apt upgrade
+# to find driver look at lspci output and compare to nvidia driver site
+# driver filename:
+lspci | grep VGA
+# 01:00.0 VGA compatible controller: NVIDIA Corporation GA107M \
+#   [GeForce RTX 3050 Ti Mobile] (rev a1)
+sudo apt install nvidia-driver-515 -y
+# to get desktop back and stop re-booting into terminal:
+sudo apt-get install ubuntu-desktop -y
+# INSTALL GITK - CONTINUED
+upgrade
+sudo apt-get install gitk -y
+
+# INSTALL MUSESCORE
+sudo apt-get install musescore -y
+
+# INSTALL GIT GUI
+sudo apt-get install git-gui -y
