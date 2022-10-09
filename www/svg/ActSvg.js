@@ -30,7 +30,7 @@ notifyTextArr = [
 var svgHead=`<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="750" height="750" viewBox="0,0,750,750">`;
 var svgEx = `
     <circle cx="375" cy="39" r="10" fill="black" stroke="black" stroke-width="1"/>
-    <polyline points="375 52 375 110 365 100 375 110 385 100" stroke="black" fill="transparent" stroke-width="1"/>
+    <polyline points="375 52 375 108 365 98 375 108 385 98" stroke="black" fill="transparent" stroke-width="1"/>
     <rect rx="10" ry="10" x="325" y="112" width="100" height="50" stroke="black" fill="transparent" stroke-width="1"/>
     <text x="333" y="134" fill="black">Receive</text>
     <text x="333" y="154" fill="black">Request</text>
@@ -141,7 +141,7 @@ function addscalarr(nd, name, query, scalar) {
             if (query == "odd") { j+=1; inc=2; }
             if (query == "even") { inc=2; }
             for (; j<strsRd.length; j+=inc) {
-                strsWrt[j] = parseFloat(strsRd[j]) + scalar;
+                strsWrt[j] = ''+(parseFloat(strsRd[j]) + scalar);
             }
             nd.attrs[i].value = strsWrt.join(' ');
             break;
@@ -151,6 +151,13 @@ function addscalarr(nd, name, query, scalar) {
 
 // SET CLICK RECTANGLE FUNCTION
 function setMouseRects(nd) {
+
+    // reset vals: // TDDTEST17 FIX
+        nd.xmin = null;  // TDDTEST17 FIX
+        nd.xmax = null;  // TDDTEST17 FIX
+        nd.ymin = null;  // TDDTEST17 FIX
+        nd.ymax = null;  // TDDTEST17 FIX
+
     if (nd.tagName.toLowerCase() == "circle") {
         var cx = getscal(nd.attrs, "cx");
         var cy = getscal(nd.attrs, "cy");
@@ -690,7 +697,7 @@ function untrackNd(nd) {
 }
 
 // EVENTS - PROGRAMMATIC - ISSUE SELECTION
-
+//for (var i=0; i<svgNodes.length; i++) { var nd=svgNodes[i]; console.log(nd.tagName, nd.xmin,nd.ymin, nd.xmax, nd.ymax); }
 function issueSelection(nd) {
     var selType = "select";
     var color = getcolor(nd);
@@ -704,7 +711,6 @@ function issueSelection(nd) {
     else {
         trackNd(nd.xmin,nd.ymin);
         nd.cacheColor = color; 
-        console.warn(color.toUpperCase());
         // setcolor(nd, selColor);
     }
     // if (curIds.length == 0) { return selType; }
@@ -725,6 +731,7 @@ function issueSelection(nd) {
     else if (selType == "deselect") {
         if (nd.cacheColor == null) {
             console.warn("WARNING: "+nd.tagName+" is too close to another element" );
+            //nd.cacheColor = 'black';//todo: find a better fix
         }
         setcolor(
             /*nd=*/ nd,
@@ -892,8 +899,10 @@ function issueClick(x, y) {
     clickCnt = 0; drawClick = {x:-1,y:-1};
     var clickedNd = xy2nd(x, y);
     if (clickedNd == null) { return; }
-    setMouseRects(clickedNd);//todo: does this work?
+    setMouseRects(clickedNd);
     var selType = issueSelection(clickedNd);
+// for (var i=0; i<curIds.length; i++) { setMouseRects(xy2nd(curIds[i].x, curIds[i].y)); }
+    return selType;
 /////         if (curIds.length == 0) { if (removeTracking) {untrackNd(clickedNd);}
 /////     
 /////         //var removeTracking = false;
@@ -973,11 +982,13 @@ addEventListener('DOMContentLoaded', (e) => {
 function onDone() {
     var i=0;
     var j=curIds.length;
-    var limit =10000;
+    var limit =10000; var x=-1; var y=-1;
     while (j > -1) {
-        setcolor(xy2nd(curIds[0].x, curIds[0].y), selColor); // This is a temp.
+        //setcolor(xy2nd(curIds[0].x, curIds[0].y), selColor); // This is a temp.
             // workaround because somewhere else the color is resetting to cache
             // value and shouldn't be
+        if (x == curIds[0].x && y==curIds[0].y) throw new Error("foreverloop"+x+","+y);
+        x=curIds[0].x; y=curIds[0].y;
         issueClick(curIds[0].x, curIds[0].y);
         i += 1;
         if (i > limit) {console.warn("max num iterations"); break;}
@@ -1072,6 +1083,9 @@ function onApplyEdits() {
 
     var xdomNd = elements[0];
     var nd = xy2nd(curIds[curIds.length-1].x, curIds[curIds.length-1].y);
+    cacheNd = {attrs:[]}  // TDDTEST17 FIX
+    forceMap(nd,cacheNd);  // TDDTEST17 FIX
+
     // {
         // must happen all together
         //forceMap(xdom2nd(xdomNd, nd.cacheColor), nd);
@@ -1096,5 +1110,5 @@ function onApplyEdits() {
     console.log("IMPORTANT", curIds.length);
     onDone();
     console.log("IMPORTANT", curIds.length);
-    //updateFrames();
+    // updateFrames();
 }

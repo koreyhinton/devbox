@@ -32,7 +32,19 @@ class MoveTester {
         } else if (movee.tagName == 'circle') {
             this.moveeX = parseInt(movee.getAttribute("cx"));
             this.moveeY = parseInt(movee.getAttribute("cy"));
-        }
+        } else if (movee.tagName == 'polyline') {
+            var pts = movee.getAttribute("points").split(" ");
+            this.moveeX = parseInt(pts[0]);
+            this.moveeY = parseInt(pts[1]);
+            this.moveeX2 = parseInt(pts[2]);
+            this.moveeY2 = parseInt(pts[3]);
+            this.moveeX3 = parseInt(pts[4]);
+            this.moveeY3 = parseInt(pts[5]);
+            this.moveeX4 = parseInt(pts[6]);
+            this.moveeY4 = parseInt(pts[7]);
+            this.moveeX5 = parseInt(pts[8]);
+            this.moveeY5 = parseInt(pts[9]);
+	}
     }
     moveBy(x, y) {
         this.moverNewX=(this.moverX+x);this.moverNewY=(this.moverY+y);
@@ -106,10 +118,23 @@ class MoveTester {
                 (null != document.querySelector(
                     this.moveeTagName + `[x2="${calcX2}"][y2="${calcY2}"]`));
         } else if (this.moveeTagName == 'circle') {
-            var calcX2 = this.moveeX2 + (this.moverNewX - this.moverX);
-            var calcY2 = this.moveeY2 + (this.moverNewY - this.moverY);
             foundMove = null != document.querySelector(
                 this.moveeTagName + `[cx="${calcX}"][cy="${calcY}"]`);
+        } else if (this.moveeTagName == 'polyline') {
+            var calcX2 = this.moveeX2 + (this.moverNewX - this.moverX);
+            var calcY2 = this.moveeY2 + (this.moverNewY - this.moverY);
+
+            var calcX3 = this.moveeX3 + (this.moverNewX - this.moverX);
+            var calcY3 = this.moveeY3 + (this.moverNewY - this.moverY);
+
+            var calcX4 = this.moveeX4 + (this.moverNewX - this.moverX);
+            var calcY4 = this.moveeY4 + (this.moverNewY - this.moverY);
+
+            var calcX5 = this.moveeX5 + (this.moverNewX - this.moverX);
+            var calcY5 = this.moveeY5 + (this.moverNewY - this.moverY);
+
+            foundMove = (null != document.querySelector(
+                this.moveeTagName + `[points="${calcX} ${calcY} ${calcX2} ${calcY2} ${calcX3} ${calcY3} ${calcX4} ${calcY4} ${calcX5} ${calcY5}"]`));
         }
         console.log(
             "moved? "+this.moved,

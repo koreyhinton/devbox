@@ -1,0 +1,5 @@
+ACTSVG - FIXES
+fixed: moving rect twice was making subselected arrow disappear
+
+ACTSVG - TESTS
+test17 - rect move x,y twice should move subselected arrow

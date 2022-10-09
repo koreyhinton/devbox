@@ -342,6 +342,32 @@ tddTests = [
         mt.moveBy(lineX + mvX, -13);
         return mt.test();
     },
+    // TDD TEST 17 - RECT MOVE X,Y TWICE SHOULD MOVE SUBSELECTED ARROW
+    // WITHOUT ARROW DISAPPEARING
+    function test17() {
+        onStart({}); // select mode is the default mode
+        issueClick(375, 52);    updateFrames();  // click polyline
+        issueClick(325, 112);    updateFrames(); // click rect
+
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("rect")[0],
+            movee: document.getElementsByTagName("polyline")[0]
+        });
+
+        mt.moveBy(500-325, 500-112);
+        var test1 = mt.test();
+
+        issueClick(375+(500-325), 52+(500-112));    updateFrames();  // click polyline
+        issueClick(500, 500);    updateFrames(); // click rect
+
+        var mt2 = new MoveTester({
+            mover: document.getElementsByTagName("rect")[0],
+            movee: document.getElementsByTagName("polyline")[0]
+        });
+
+        mt2.moveBy(400-500, 400-500);
+        return test1 && mt2.test();
+    }
 
 ];
 
