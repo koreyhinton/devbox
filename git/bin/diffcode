@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# DIFF (TOOL = VS) CODE
+# A non-persisting way to run VS Code as the git diff tool
+# without changing global/local configs.
+
+# Dependencies: bash, git, VS Code, and unix-like shell invocation.
+
+# Installation requires placing this script into a bin directory
+# that is present in your path:
+#     echo "$PATH" 
+# And then invoke within a git repo directory
+# giving 1 or 2 path arguments, just as you would for the git diff command:
+#     diffcode path/to/file.txt
+#     diffcode HEAD:path/to/file.txt path/to/file.txt
+
+# Remember, when specifying two files, the base (original) file gets placed
+# as the first argument then the overlay (updated) file goes as the
+# 2nd argument. As done in other tools, like git diff and diff,
+# you list them in the chronological order that they happened.
+
+codepath=$(which code)  # ie: /snap/bin/code
+
+if [[ -n "$1" && -z "$2" ]]; then
+    # FOR A TRACKED FILE WITH MODIFICATIONS, YOU CAN PROVIDE JUST 1 ARG, WHICH IS THE OVERLAY, SINCE GIT KNOWS THE BASE FILE.
+    overlay="$1"
+    git -c diff.tool=code -c difftool.code.cmd=${codepath}\ --wait\ --diff\ \$LOCAL\ \$REMOTE difftool -t code -y "$overlay"
+elif [[ -n "$2" ]]; then
+    # FULLY-SPECIFIED DIFF USES 2 ARGS.
+    base="$1"
+    overlay="$2"
+    git -c diff.tool=code -c difftool.code.cmd=${codepath}\ --wait\ --diff\ \$LOCAL\ \$REMOTE difftool -t code -y "$base" "$overlay"
+else
+    # NO-ARG SPECIFIED WILL JUST DIFF ALL TRACKED FILES IN THE REPO
+    # WITH MODIFICATIONS.
+    git -c diff.tool=code -c difftool.code.cmd=${codepath}\ --wait\ --diff\ \$LOCAL\ \$REMOTE difftool -t code -y # HEAD
+    # To see all changes: close the current VS Code window
+    # and the next change will open
+fi
+

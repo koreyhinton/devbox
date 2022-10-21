@@ -1,0 +1,101 @@
+# VS CODE
+sudo snap install --classic code
+code  # launch program
+
+# VS CODE AS DIFFTOOL
+mkdir /k/git/log
+diffcode (exists in dir /k/git/bin that is in PATH)
+
+# FIX TEX ERROR:
+# ! LaTeX Error: File `tcolorbox.sty' not found.
+sudo tlmgr install tcolorbox
+#: (running on Debian, switching to user mode!)
+#: (see /usr/share/doc/texlive-base/README.tlmgr-on-Debian.md)
+#: TLPDB: not a directory, not loading: /root/texmf
+#: tlmgr: user mode not initialized, please read the documentation!
+
+# that didn't work! try another approach
+# following installation steps at:
+#     https://ctan.org/tex-archive/macros/latex/contrib/tcolorbox?lang=en
+# and SO comment:
+#    https://tex.stackexchange.com/questions/1137/where-do-i-place-my-own-sty-or-cls-files-to-make-them-available-to-all-my-te#comment323661_142953
+# that refers to this SO pos:
+#    https://tex.stackexchange.com/a/1138
+kpsewhich -var-value=TEXMFHOME
+#: ${HOME}/texmf
+mkdir ${HOME}/texmf
+mkdir ${HOME}/texmf/tex
+mkdir ${HOME}/texmf/tex/latex
+mkdir ${HOME}/texmf/tex/latex/tcolorbox
+
+cd ~/Downloads
+wget https://mirrors.ctan.org/install/macros/latex/contrib/tcolorbox.tds.zip
+unzip tcolorbox.tds.zip
+
+cd tex/latex/tcolorbox/
+tcolorbox=${HOME}/texmf/tex/latex/tcolorbox
+mv tcolorbox.sty ${tcolorbox}/
+mv tcbbreakable.code.tex ${tcolorbox}/
+mv tcbdocumentation.code.tex ${tcolorbox}/
+mv tcbexternal.code.tex ${tcolorbox}/
+mv tcbfitting.code.tex ${tcolorbox}/
+mv tcbhooks.code.tex ${tcolorbox}/
+mv tcblistings.code.tex ${tcolorbox}/
+mv tcblistingscore.code.tex ${tcolorbox}/
+mv tcblistingsutf8.code.tex ${tcolorbox}/
+mv tcbmagazine.code.tex ${tcolorbox}/
+mv tcbminted.code.tex ${tcolorbox}/
+mv tcbposter.code.tex ${tcolorbox}/
+mv tcbprocessing.code.tex ${tcolorbox}/
+mv tcbraster.code.tex ${tcolorbox}/
+mv tcbskins.code.tex ${tcolorbox}/
+mv tcbskinsjigsaw.code.tex ${tcolorbox}/
+mv tcbtheorems.code.tex ${tcolorbox}/
+mv tcbvignette.code.tex ${tcolorbox}/
+mv tcbxparse.code.tex ${tcolorbox}/
+mv blueshade.png ${tcolorbox}/
+mv crinklepaper.png ${tcolorbox}/
+mv goldshade.png ${tcolorbox}/
+mv pink_marble.png ${tcolorbox}/
+
+mkdir ${HOME}/texmf/doc
+mkdir ${HOME}/texmf/doc/latex
+mkdir ${HOME}/texmf/doc/latex/tcolorbox
+
+ls  # no files left
+
+cd ../../../doc/latex/tcolorbox/
+mv *.* ${HOME}/texmf/doc/latex/tcolorbox
+ls  # no files left
+
+cd ~/Downloads
+
+rm -rf ~/Downloads/tex
+rm -rf ~/Downloads/doc
+rm ~/Downloads/tcolorbox.tds.zip
+
+# still having problems with the pgf dependency
+#: ! LaTeX Error: File `pgf.sty' not found
+
+# try another approach:
+tlmgr install texliveonfly
+#: tlmgr: user mode not initialized, please read the documentation!
+tlmgr init-usertree
+tlmgr install texliveonfly
+
+# found that this has worked before!!:
+# re-trying the install command:
+sudo apt-get install texlive-full -y
+
+# error about read-only filesystem!!
+fsck -yf /dev/nv{whatever the rest was}
+exit
+
+# one more time??
+sudo apt-get install texlive-full -y
+# E: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem.
+sudo dpkg --configure -a
+
+# Important: when it stops working again, just update textlive-full
+
+
