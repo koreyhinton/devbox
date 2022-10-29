@@ -147,3 +147,13 @@ svg {
     padding-left:10px;
     background-color: lightblue;
 }
+/* MOVE MARKER */
+#moveMarker {
+    position: absolute;
+    visibility: hidden;
+}
+#moveMarker pre {
+    font-size: 32px;
+    font-weight: lighter;
+    color: #4169E1; /*Royal Blue*/
+}

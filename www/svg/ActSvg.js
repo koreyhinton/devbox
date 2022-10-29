@@ -2,6 +2,8 @@
 svgBaseNode = {attrs:[]};
 svgNodes = [];
 curIds = []; // { x:-1, y:-1 };
+curMvX = null;
+curMvY = null;
 cacheNd = {attrs:[]};
 // todo: custom cursor to help w/ selection precision of lines
 // todo: add in template links in footer to pre-load examples (ie: swimlanes)
@@ -948,6 +950,55 @@ function issueKeyNum(num, test) {
     setNumMode(num, test);
 }
 
+// EVENTS - PROGRAMMATIC - ISSUE KEY NAME
+
+function issueKeyName(name) { // TDDTEST18 FTR
+    var moveMark = document.getElementById("moveMarker");
+    moveMark.style.visibility = "visible";
+
+    if (name == "enter") {
+        curMvX = null;
+        curMvY = null;
+        moveMark.style.visibility = "hidden";
+        onApplyEdits();
+        return;
+    }
+
+    if (curMvX == null) {
+        var nd = xy2nd(curIds[curIds.length-1].x, curIds[curIds.length-1].y);
+        curMvX = getscal(nd.attrs, "x");
+        curMvY = getscal(nd.attrs, "y");
+    }
+
+    var ta = document.getElementById("svgPartTextarea");
+    var x = curMvX;
+    var y = curMvY;
+    if (ta.value.indexOf(` x="`) > -1) {
+        if (name == "left" || name == "right") {
+            var delta = 1;
+            if (name == "left") {
+                delta = -1;
+            }
+            x += delta;
+            ta.value = ta.value.replace(/ x="[0-9]+"/g, ` x="${x}"`);
+            //addscal(nd, "x", delta);
+        }
+        if (name == "up" || name == "down") {
+            var delta = 1;
+            if (name == "up") {
+                delta = -1;
+            }
+            y += delta;
+            ta.value = ta.value.replace(/ y="[0-9]+"/g, ` y="${y}"`);
+            //addscal(nd, "y", delta);
+        }
+    }
+    curMvX = x;
+    curMvY = y;
+    moveMark.style.left=(740+x)+"px";//why not 750??
+    moveMark.style.top=(37+y)+"px";
+}
+
 // EVENTS - UI
 
 function keydown(e) {
@@ -955,6 +1006,13 @@ function keydown(e) {
     e = e || window.event;
     if ("1234567890".indexOf(e.key) > -1) {
         issueKeyNum(parseInt(e.key));
+        e.view.event.preventDefault();
+    } else if (
+        (e.key == "Enter" || e.key.substring(0,5) == "Arrow") &&
+        window.getComputedStyle(document.getElementById("svgPartTextarea")).visibility == 'visible'
+    ) { // TDDTEST18 FTR
+        var key = (e.key.substring(0,5) == "Arrow") ? e.key.substring(5).toLowerCase() : e.key.toLowerCase();
+        issueKeyName(key);
         e.view.event.preventDefault();
     }
 }

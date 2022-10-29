@@ -46,8 +46,11 @@ class MoveTester {
             this.moveeY5 = parseInt(pts[9]);
 	}
     }
-    moveBy(x, y) {
+    expectBy(x, y) {
         this.moverNewX=(this.moverX+x);this.moverNewY=(this.moverY+y);
+    }
+    moveBy(x, y) {
+        this.expectBy(x, y);
         var ta = document.getElementById("svgPartTextarea");
         console.log('before edit:', ta.value);
         this.moved = true;

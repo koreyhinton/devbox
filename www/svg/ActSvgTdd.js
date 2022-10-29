@@ -367,6 +367,28 @@ tddTests = [
 
         mt2.moveBy(400-500, 400-500);
         return test1 && mt2.test();
+    },
+    // TDD TEST 18 - SELECTIONS MOVE BY ARROW KEYS
+    function test18() {
+        onStart({});
+        issueKeyNum(0, {}); // Select Mode
+        var mt = new MoveTester({
+            mover: document.getElementsByTagName("rect")[0],
+            movee: document.getElementsByTagName("text")[0]
+        });
+        issueClick(378, 41);    updateFrames();
+        issueClick(376, 92);    updateFrames();
+        issueClick(364, 129);    updateFrames();
+        issueClick(364, 151);    updateFrames();
+        issueClick(412, 113);    updateFrames();  // rect selected last
+
+        mt.expectBy(-1, -1);
+        issueKeyName("left");
+        issueKeyName("up");
+        issueKeyName("enter");
+        mt.moved = true;
+
+        return mt.test();
     }
 
 ];
