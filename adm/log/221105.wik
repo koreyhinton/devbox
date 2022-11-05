@@ -1,0 +1,5 @@
+PULL IN ALL CODE INCLUDING EXTERNAL REPOS
+For fuller projects that make sense to have their own repository or
+already exist there can be referenced and tracked from this monorepo
+.gitignore    repos/
+adm/bin/pull    pull latest and external repos

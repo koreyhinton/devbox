@@ -1,0 +1,4 @@
+LATER VERSION OF MUSESCORE
+sudo snap install musescore
+/snap/bin/musescore.mscore # this is how to launch version 3
+

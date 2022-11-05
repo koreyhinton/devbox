@@ -5,3 +5,8 @@ This is a monorepo that will host all my just-for-fun coding.
 
 This README was created in wik-mode,
 see emacs/wik-mode/WIK-MODE-DOCUMENTATION.wik
+
+DEV MONOREPO - PULL ALL THE CODE
+This repo also contains references to other code repositories, which you
+can pull in using the pull script:
+K=${PWD} adm/bin/pull

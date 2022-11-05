@@ -1,0 +1,44 @@
+#!/bin/bash
+
+saveDir="${PWD}"
+: ${K:=/k}
+
+if [ ! -e "${K}/adm/bin/pull" ]; then
+    {
+        echo "Error: ${K}/adm/bin/pull path is invalid."
+        echo "Please assign K to be the repo path."
+    } | cat 1>&2
+    exit 1;
+fi
+
+prof_found=$(cat /home/$USER/.bashrc | grep "\. ${K}/adm/.profile" | wc -l)
+if [[ $prof_found -lt 1 ]]; then
+    {
+        echo "WARNING: repo's .profile not found in "'.bashrc.'\
+" Add this line to "'~/.bashrc:'
+        echo "             . ${K}/adm/.profile"
+    } | cat 1>&2
+    sleep 2s
+fi
+
+cd "${K}"
+echo "ATTEMPTING PULL LATEST FROM MONOREPO MAIN {"
+    git pull origin main  2>&1 | sed -e 's/^/      /'
+echo "}"
+
+mkdir -p repos
+
+mkdir -p repos/kh
+for r in `echo "https://github.com/koreyhinton/xpm2html https://github.com/koreyhinton/moonshot-bingo"`; do
+    rurl="${r%/}"
+    rname="${r##*/}"
+    rowner=kh
+    if [ ! -e "${K}/repos/${rowner}/${rname}" ]; then
+        git clone "$rurl" "${K}/repos/${rowner}/${rname}"
+    fi
+    cd "${K}/repos/${rowner}/${rname}"
+    git pull origin main
+    cd "${K}"
+done
+
+cd "$saveDir"
