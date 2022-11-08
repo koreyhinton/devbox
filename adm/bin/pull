@@ -29,7 +29,7 @@ echo "}"
 mkdir -p repos
 
 mkdir -p repos/kh
-for r in `echo "https://github.com/koreyhinton/xpm2html https://github.com/koreyhinton/moonshot-bingo"`; do
+for r in `echo "https://github.com/koreyhinton/xpm2html https://github.com/koreyhinton/moonshot-bingo https://github.com/koreyhinton/MuseReel"`; do
     rurl="${r%/}"
     rname="${r##*/}"
     rowner=kh

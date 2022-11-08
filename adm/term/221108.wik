@@ -1,0 +1,52 @@
+INSTALL PYTHON POETRY
+curl -sSL https://install.python-poetry.org | python3 -
+poetry --version  # see /k/adm/.profile
+Poetry (version 1.2.2)
+
+INSTALL LXML FOR PYTHON 3 PROJECT
+sudo apt-get install libxml2-dev libxslt-dev python3-dev
+# Note, selecting 'libxslt1-dev' instead of 'libxslt-dev'
+# You might want to run 'apt --fix-broken install' to correct these.
+# The following packages have unmet dependencies:
+#  libeval-closure-perl : Depends: libsub-exporter-pmrl but it is not installable
+#  libxml2-dev : Depends: libicu-dev but it is not going to be installed
+#  python3-dev : Depends: python3 (= 3.10.6-1~22.04) but 3.10.4-0ubuntu2 is to be installed
+#                Depends: libpython3-dev (= 3.10.6-1~22.04) but 3.10.4-0ubuntu2 is to be installed
+#                Depends: python3-distutils (>= 3.10.6-1~) but 3.10.4-0ubuntu1 is to be installed
+# E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+python3 --version
+# Python 3.10.6
+sudo apt-get update && sudo apt-get install python3
+# You might want to run 'apt --fix-broken install' to correct these.
+# The following packages have unmet dependencies:
+#  libeval-closure-perl : Depends: libsub-exporter-pmrl but it is not installable
+#  python3 : PreDepends: python3-minimal (= 3.10.6-1~22.04) but 3.10.4-0ubuntu2 is to be installed
+#            Depends: libpython3-stdlib (= 3.10.6-1~22.04) but 3.10.4-0ubuntu2 is to be installed
+# E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+
+sudo apt --fix-broken install
+# Y
+sudo apt-get update && sudo apt-get install python3
+# Y
+python3 --version
+# Python 3.10.6
+sudo apt-get install libxml2-dev libxslt-dev python3-dev
+# Y
+# (success)
+apt-cache show libxml2
+# Package: libxml2
+# Architecture: amd64
+# Version: 2.9.13+dfsg-1ubuntu0.1
+# ..
+
+sudo apt-get install python3-lxml
+python3
+>>> from lxml import etree
+>>> etree.LXML_VERSION
+# (4, 8, 0, 0)
+
+
+poetry install
+# Warning: poetry.lock is not consistent with pyproject.toml. You may be getting improper dependencies. Run `poetry lock [--no-update]` to fix it.
+poetry lock --no-update
+poetry install
