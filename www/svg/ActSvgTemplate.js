@@ -33,14 +33,38 @@ templateXml = {'swim3': `
     <circle cx="696" cy="131" r="6" fill="black" stroke="black" stroke-width="1"/>
     <circle cx="696" cy="131" r="10" fill="transparent" stroke="black" stroke-width="1"/>
 
+`,'connectors': `
+
+    <text x="15" y="334" fill="black">How to create (Wireless) Connector:</text>
+    <text x="25" y="364" fill="black">[6] Initial Node (set attrs to: r="12" fill="transparent")</text>
+    <text x="25" y="394" fill="black">[9] Text node (set tag content to letter, ie: A)</text>
+    <text x="126" y="134" fill="black">Fill</text>
+    <text x="124" y="153" fill="black">Order</text>
+    <text x="316" y="228" fill="black">Ship</text>
+    <text x="314" y="246" fill="black">Order</text>
+    <text x="283" y="146" fill="black">A</text>
+    <text x="206" y="237" fill="black">A</text>
+    <polyline points="65 139 114 139 104 129 114 139 104 149" stroke="black" fill="transparent" stroke-width="1"/>
+    <circle cx="50" cy="139" r="10" fill="black" stroke="black" stroke-width="1"/>
+    <rect rx="10" ry="10" x="118" y="115" width="100" height="50" stroke="black" fill="transparent" stroke-width="1"/>
+    <polyline points="226 141 267 141 257 131 267 141 257 151" stroke="black" fill="transparent" stroke-width="1"/>
+    <circle cx="288" cy="141" r="12" fill="transparent" stroke="black" stroke-width="1"/>
+    <circle cx="211" cy="232" r="12" fill="transparent" stroke="black" stroke-width="1"/>
+    <polyline points="230 231 296 231 286 221 296 231 286 241" stroke="black" fill="transparent" stroke-width="1"/>
+    <rect rx="10" ry="10" x="303" y="207" width="104" height="50" stroke="black" fill="transparent" stroke-width="1"/>
+    <polyline points="417 231 486 231 476 221 486 231 476 241" stroke="black" fill="transparent" stroke-width="1"/>
+    <circle cx="503" cy="231" r="6" fill="black" stroke="black" stroke-width="1"/>
+    <circle cx="503" cy="231" r="10" fill="transparent" stroke="black" stroke-width="1"/>
+
 `
+
 };
 addEventListener('DOMContentLoaded', (e) => {
     var template = new URL(location.href).searchParams.get("template");
     if (template == null) {
         return;
     }
-    if ("swim3|pins".indexOf(template) > -1) {
+    if ("swim3|pins|connectors".indexOf(template) > -1) {
         setTimeout(function() {
             document.getElementById("svgFullTextarea").value = 
                 svgHead + templateXml[template] + svgTrail;
