@@ -1,0 +1,146 @@
+SMB CLIENT
+sudo apt install smbclient -y
+sudo emacs /etc/samba/smb.conf
+    # under [global]
+    client max protocol = NT1 # https://askubuntu.com/a/1150547
+
+# now go to the share and it should prompt for user/password
+# but it says:
+#     Unable to access location
+#     Failed to mount Windows share: Invalid argument
+
+sudo apt install samba -y
+sudo service smbd restart
+sudo service nmbd restart
+
+# same error!!
+sudo emacs /etc/samba/smb.conf
+    # under [global]
+    server min protocol = NT1
+sudo service smbd restart
+sudo service nmbd restart  # https://discuss.getsol.us/d/4399-network-no-permissions-for-my-external-hard-drives
+
+# still doesn't work, same error!
+
+
+GIT - GLOBALLY ASSIGN EMACS (GUI) AS GIT EDITOR
+git config --global core.editor emacs
+
+GIT - GPG SIGNING KEY
+gpg --version
+    gpg (GnuPG) 2.2.27
+git --version
+    git version 2.34.1
+gpg-agent --version
+    gpg-agent (GnuPG) 2.2.27
+
+# https://gist.github.com/nitrocode/bc62b6e86d1bd8c3acf9cb83caab3883
+cat <<EOF >~/.gnupg/gpg-agent.conf
+default-cache-ttl 34560000
+max-cache-ttl 34560000
+EOF
+# restart gpg-agent
+gpgconf --kill gpg-agent
+gpg-agent --daemon
+
+(A) set-up passphrase in password manager and COPY (git-scm.com)
+
+# https://www.freecodecamp.org/news/what-is-commit-signing-in-git/#:~:text=For%20what%20kind%20of%20key,last%2C%20use%20whatever%20suits%20you.
+# section= How to Generate GPG Keys
+gpg --full-generate-key
+    (1) RSA and RSA (default)
+    4096 # key size
+    0 # never expire
+    y # info correct
+
+    Korey Hinton # real name (same as value given in git config --global user.name)
+    2801399+koreyhinton@users.noreply.github.com # email address
+# https://docs.github.com/en/authentication/managing-commit-signature-verification/associating-an-email-with-your-gpg-key
+    GITHUB-KEY  # type in this literal text, don't enter in an actual key
+    O  # Okay to save
+Paste from (A) for passphrase
+
+GPG_KEY=$(gpg --list-secret-keys --keyid-format=long 2>>/dev/null | grep users.noreply.github.com -B3 | grep sec | cut -d'/' -f2 | cut -d' ' -f1)
+
+gpg --armor --export $GPG_KEY
+
+# copy from: -----BEGIN
+# to: -----END PGP PUBLIC KEY BLOCK-----
+(B) copy whole key output
+# paste in Github using New GPG key, instructions: https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account
+# For title field? possibly machine name (ssh key: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+    Korey Hinton devbox1 Gpg Key # Title
+    <paste from (B)># Key
+
+git config --global user.signingkey $GPG_KEY  # use signing key
+git config --global gpg.program gpg  # use gpg
+git config --global commit.gpgsign true   # always sign commits
+
+# Add this line to ~/.bashrc (see /k/adm/.profile)
+    export GPG_TTY="$(tty)"
+
+Copy (A) again to paste to this prompt in a new shell (and see if it works):
+    echo "test" | gpg --clearsign  # forces passphrase prompt
+
+In new shell run a commit for a git repo, push and see if it is verified on GH
+
+Also can check locally:
+    git log --show-signature -1
+
+# UPDATE SNAP NODE VERSION
+node --version
+    v14.19.3
+sudo snap refresh node
+    snap "node" has no updates available
+# initial install command line:
+grep -r "snap" /k/adm/term
+#    /k/adm/term/221008.wik:sudo snap install node --classic --channel=14
+sudo snap refresh node --classic --channel=18
+    node (18/stable) 18.12.1 from OpenJS Foundation (iojs✓) refreshed
+node --version
+    v18.12.1
+
+GIT SSH KEY SET-UP FOR GITHUB
+(https://docs.github.com/en/authentication/connecting-to-github-with-ssh/checking-for-existing-ssh-keys)
+(https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+GIT SSH KEY SET-UP FOR GITHUB - GENERATING A NEW SSH KEY
+git config user.email
+    2801399+koreyhinton@users.noreply.github.com
+ssh-keygen -t ed25519 -C "2801399+koreyhinton@users.noreply.github.com"
+    Generating public/private ed25519 key pair.
+(Just type enter to use the default filename)
+    Enter file in which to save the key (/home/korey/.ssh/id_ed25519): 
+(store passphrase in password manager, labelling with github.com URL)
+Enter same passphrase again: 
+Your identification has been saved in /home/korey/.ssh/id_ed25519
+Your public key has been saved in /home/korey/.ssh/id_ed25519.pub
+
+GIT SSH KEY SET-UP FOR GITHUB - ADDING YOUR SSH KEY TO THE SSH-AGENT
+
+(start the ssh-agent in the background)
+eval "$(ssh-agent -s)"
+    Agent pid 36531
+
+(use same passphrase from previous step/password manager)
+ssh-add ~/.ssh/id_ed25519
+Enter passphrase for /home/korey/.ssh/id_ed25519:
+    Identity added: /home/korey/.ssh/id_ed25519 (2801399+koreyhinton@users.noreply.github.com)
+
+(Now add to GitHub acct following instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account)
+
+GIT SSH KEY SET-UP FOR GITHUB - ADDING A NEW SSH KEY TO YOUR ACCOUNT
+(copy public key to Clipboard)
+cat ~/.ssh/id_ed25519.pub
+(add to GitHub website)
+
+(profile icon > Settings > SSH and GPG keys > New SSH key button)
+(don't pick signing key option, since that step was configured already
+with a GPG key, see 'GIT - GPG SIGNING KEY' section above)
+(paste Key)
+Title: devbox1 SSH Key
+Key type: Authentication Key
+Key: 
+
+GIT SSH KEY SET-UP - CHANGE REPO TO USE SSH RATHER THAN HTTPS
+
+git remote set-url origin git@github.com:koreyhinton/devbox.git

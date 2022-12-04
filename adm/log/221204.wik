@@ -1,0 +1,5 @@
+MISSING PROFILE CHANGE FROM PREVIOUS COMMIT
+/k/adm/.profile change required for poetry (see /k/adm/log/221108.wik).
+
+GPG PROFILE CHANGE CHANGE
+set GPG_TTY var in /k/adm/.profile
