@@ -66,6 +66,24 @@ M-* (wik-all-heading-collapse)
 M-S-a (wik-all-heading-expand)
     Expands all headings.
 
+FALLBACK FOLDER REFERENCES
+
+To keep a path more brief in a wik file, you can create a file in the same
+directory as the document that is named the same as the first path component.
+The file's contents would then just have the folder path to substitute,
+replacing the first component reference's value.
+
+FALLBACK FOLDER REFERENCES * EXAMPLE
+
+Here is a a fallback folder reference you can test with cursor on path and
+typing M-S-DOWN:    test-folder-ref/project.json
+
+Because a file at ./test-folder-ref/project.json does not exist, it will
+fallback to then substitute the first component with the value in the file
+./test-folder-ref which is: ../../vpl/scratch/l2pwscr/PongTwoPaddles_sb3
+and once substituted in-memory, the wik open command will navigate to the full-
+substituted path: ../../vpl/scratch/l2pwscr/PongTwoPaddles_sb3/project.json.
+
 ORG-MODE COMPARISON
 
 This project is aimed at enabling an editing experience similar to org-mode

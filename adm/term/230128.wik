@@ -1,0 +1,45 @@
+INSTALL RUST
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# the install line above also added the following line at the end of ~/.bashrc:
+#    . "$HOME/.cargo/env"
+# which sets up necessary ~/.cargo to PATH, it can be invoked immediately
+# in the current shell, rather than shell restart
+source "$HOME/.cargo/env"
+
+rustc --version
+# rustc 1.66.1 (90743e729 2023-01-10)
+
+INSTALL GO
+if [[ -e /usr/local/go ]]; then echo installed; else echo not installed; fi
+# not installed
+
+cwd="$PWD"
+cd ~/Downloads
+wget https://go.dev/dl/go1.19.5.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.19.5.linux-amd64.tar.gz
+cd $cwd
+
+if [[ -e /usr/local/go ]]; then echo installed; else echo not installed; fi
+# installed
+
+# added :/usr/local/go/bin to PATH, see /k/adm/.profile
+
+# run once just for current shell session:
+export PATH=$PATH:/usr/local/go/bin
+
+go version
+#    go version go1.19.5 linux/amd64
+
+FEED READER PROGRAM
+# thunderbird requires launching Firefox
+sudo apt-get install evolution -y
+# no option given for news & blogs
+sudo apt-get purge evolution
+snap install evolution
+# evolution not found
+sudo apt-get install liferea -y
+# right-click item row > Open in Tab
+
+MORE GITHUB SSH STEPS
+eval $(ssh-agent)
+ssh-add  # copy passphrase github.com entry

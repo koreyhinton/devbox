@@ -151,7 +151,34 @@
     (forward-char)
     (setq begin-pt (point)) ;
     (setq file-name (buffer-substring begin-pt end-pt))
+
+    (if (string-match-p "^\\./" file-name)
+        ;; remove preceding ./ to make fallback folder ref substitution easier
+        (setq file-name (substring file-name 2 nil))
+    )
+    (if (not (file-exists-p file-name))
+        ;; fallback folder reference substitution
+        (setq
+            file-name
+            (concat
+                (with-temp-buffer
+                    (insert-file-contents (nth 0 (split-string file-name "/")))
+                    (buffer-substring-no-properties
+                        (point-min)
+                        (- (point-max) 1) ;; emacs (default) saves w/ newline
+                    )
+                )
+                (substring
+                    file-name
+                    (length (nth 0 (split-string file-name "/")))
+                    nil
+                )
+            )
+        )
+    )
+
     (find-file-other-window file-name)
+    
     (message test)
     )
     (wik-mode)
