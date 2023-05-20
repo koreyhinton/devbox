@@ -1,3 +1,4 @@
+adm/.secprofile
 repos/
 *.pdf
 *~
@@ -12,3 +13,5 @@ pub/res/email.tex
 *.wav
 *.png
 .temp
+ph/
+

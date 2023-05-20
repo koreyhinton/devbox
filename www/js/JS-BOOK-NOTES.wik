@@ -93,6 +93,18 @@ I like to think of it more in terms of whether type coercion is used:
 [1] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
 /Expressions_and_Operators#comparison_operators
 
-JS BOOKS - JSVQSG - CH2 START ME UP
+JS BOOKS - JSVQSG - CH2 START ME UP - WHERE TO PUT YOUR SCRIPTS SECTION
 
+While scripts can be directly placed within the body tag (via script tags),
+it usually makes more sense to keep all of your javascript
+in separate files (or as organized web components according to the recommended
+approach of the web framework you could be using, ie: react components are
+reusable and are written as a unique syntax that combines both html and js).
+
+JS BOOKS - JSVQSG - CH2 START ME UP - WHERE TO PUT YOUR SCRIPTS SECTION -
+TO WRITE YOUR FIRST SCRIPT SUBSECTION - A REFERENCE - 2.1 LISTING
+
+Be careful when using document.write, run the code found in the custom
+jsvqsg/Listing-2.1.html version to see how the overwrite behavior depends
+on where the document.write script was placed.
 

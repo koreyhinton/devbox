@@ -1,0 +1,246 @@
+# PRINTER DRIVER
+## https://support.brother.com/g/b/downloadhowto.aspx?c=us&lang=en&prod=hll2350dw_us_eu_as&os=128&dlid=dlf006893_000&flang=4&type3=625
+## https://help.brother-usa.com/app/answers/detail/a_id/52188/~/install-drivers-%28deb-or-rpm%29-using-the-driver-install-tool---linux
+cd ~/Downloads
+gunzip linux-brprinter-installer-2.2.3-1.gz
+sudo bash
+bash linux-brprinter-installer-2.2.3-1
+# Input model name -> HL-L2350DW
+##  You are going to install following packages.
+##     hll2350dwpdrv-4.0.0-1.i386.deb
+# Ok? y
+# Agree? Y
+# Specify Device URI? Y
+# 
+# 14 (specify IP address)
+#      $PRINT_IP  # /k/adm/.secprofile
+# Test print? y
+# Enter
+exit
+
+# IPHONE PHOTOS
+
+sudo apt-get install gthumb -y # didn't work
+sudo apt-get install ifuse -y # didn't work
+sudo apt install libimobiledevice-utils # https://askubuntu.com/questions/970636/cant-veiw-files-photos-from-iphone-on-16-04-unmounting-doesnt-help
+idevicepair pair
+idevicepair validate
+mkdir ~/pics
+cd ~/
+ifuse pics # browse with file manager now
+# how to unmount ~/pics :
+# mv ~/pics/DCIM/101APPLE/..
+# fusermount -u ~/pics && rmdir ~/pics
+
+
+# AWS S3 COMMAND LINE
+linode incorrectly reports it uploade, trying this instead
+sudo apt-get install s3cmd -y
+s3cmd --configure
+# Access key: $LINODE_CLI_OBJ_ACCESS_KEY
+# Secret key: LINODE_CLI_OBJ_SECRET_KEY
+# Default region [US]: <ENTER>
+# S3 Endpoint: us-${LND_REG}-1.linodeobjects.com *
+# dns-style bucket+host..: %(bucket)s.us-${LND_REG}-1.linodeobjects.com
+# Encryption password: (optional)<Enter>
+# Path to gpg: (optional)<Enter>
+# Use HTTPS: Yes
+# http proxy name: (leave blank)
+# Test access supplied: n
+# Save settings: y
+# config saved to ~/.s3cfg
+
+# * https://www.linode.com/docs/products/storage/object-storage/guides/s3cmd/
+
+# GET ICLOUD TIMESTAMPS
+sudo apt-get install exiftool -y
+
+# SAMBA ACCESS 
+
+# in /k/adm/.secprofile, add SMB_SRV, SMB_USR, SMB_PTH, and SMB_PIC
+
+smbclient -L 'smb://${SMB_SRV}' -U ${SMB_USR} # error
+# lp_load_ex: Max protocol NT1 is less than min protocol SMB2_02.
+# do_connect: Connection to smb: failed (Error NT_STATUS_NOT_FOUND)
+
+sudo emacs /etc/samba/smb.conf -nw
+
+# Comment:
+#    ; client max protocol = NT1
+# Add:
+#    client min protocol = NT1
+#    client max protocol = SMB3
+sudo service smbd restart
+
+
+sudo useradd ${SMB_USR}
+sudo smbpasswd -a ${SMB_USR}
+sudo service smbd restart
+
+smbclient -L 'smb://{server}' -U {user} # error
+# do_connect: Connection to smb: failed (Error NT_STATUS_NOT_FOUND)
+
+# but finally in the Files it worked! (but not command line)
+# Right-click > Select Mount and Sign In
+# drag a folder onto the terminal to see the path
+
+# restart shell session before running the /k/phot/ph script
+
+# PHOT DIR
+mkdir /k/ph
+mkdir /k/phot
+echo '*.png' >/k/ph/.gitignore
+echo '*.PNG' >>/k/ph/.gitignore
+echo '*.jpg' >>/k/ph/.gitignore
+echo '*.JPG' >>/k/ph/.gitignore
+
+# LINODE CLI
+# https://www.linode.com/docs/products/tools/cli/guides/install/
+
+pip3 install linode-cli --upgrade
+pip3 install boto
+linode-cli --help # test..it works
+
+#  in /k/adm/.secprofile, save region LND_REG
+
+# LINODE CLI - NON-INTERACTIVE CONFIGURATION
+# linode.com/docs/products/tools/cli/guides/install/#configure-the-linode-cli
+#   in /k/adm/.secprofile
+#     export LINODE_CLI_TOKEN="[token]"
+
+# LINODE CLI - MANAGE PERSONAL ACCESS TOKENS
+# https://www.linode.com/docs/products/tools/api/guides/manage-api-tokens/
+# pmanag.login web: "linode_scratch_code",
+#  access token: "linode personal access token"
+
+# LINODE CLI - TEST
+# new shell session
+linode-cli regions list
+# https://www.linode.com/docs/products/tools/cli/guides/object-storage/
+linode-cli object-storage clusters-list
+# https://www.linode.com/docs/products/storage/object-storage/guides/linode-cli/
+linode-cli obj ls # error:
+#    ModuleNotFoundError: No module named 'boto3'
+pip3 install boto3
+linode-cli obj ls # error:
+#    You are running the Linode CLI without a configuration file, \
+#    but object storage keys were not configured.  \
+#    Please set the following variables in your environment: \
+#    'LINODE_CLI_OBJ_ACCESS_KEY' and 'LINODE_CLI_OBJ_SECRET_KEY'.  \
+#    If you'd rather configure the CLI, unset the 'LINODE_CLI_TOKEN' \
+#    environment variable and then run `linode-cli configure`.
+# More config:
+#   in /k/adm/.secprofile, add same way & values as LINODE_CLI_TOKEN for these 2
+# again, new shell session
+linode-cli obj ls # error:
+#    Error: No default cluster is configured.  
+#    Either configure the CLI or invoke with --cluster to specify a cluster.
+#    Could not contact https://api.linode.com/v4/object-storage/clusters - \
+#    Error: 401
+linode-cli obj ls --cluster us-${LND_REG}-1 # error:
+#    Error: An error occurred (InvalidAccessKeyId) when calling the ListBuckets\
+#    operation: Unknown
+
+linode-cli configure --token
+# region num
+# default linode type <None>
+# default image <None>
+# default engine 2x <None>
+# user 1
+#     Active user is now DEFAULT
+
+cat ~/.config/linode-cli
+
+# still not working
+linode-cli obj ls # same erro
+
+# In Web UI go to:
+#   https://cloud.linode.com/object-storage/access-keys?page=1
+#   Create Access Key Button
+#   Name it a name that refers to your machine
+# edit these two values accordingly in /k/adm/.secprofile:
+#    export LINODE_CLI_OBJ_ACCESS_KEY
+#    export LINODE_CLI_OBJ_SECRET_KEY
+
+# 1 more time, new shell session:
+linode-cli obj ls --cluster us-${LND_REG}-1
+
+
+# AUDACITY
+sudo apt-get install audacity -y
+sudo apt-get install pavucontrol
+pavucontrol
+# still didn't work
+
+sudo add-apt-repository ppa:audio-recorder/ppa
+sudo apt-get update && sudo apt-get install audio-recorder
+# ~/Audio
+audio-recorder
+
+
+# MUSIC
+mkdir /k/pub/mus
+mkdir /k/pub/mus/el_jarabe_tapatio
+
+# PARROT OS VM
+# https://parrotsec.org/docs/virtualization/install-parrot-on-virtualbox/
+sudo apt install virtualbox -y
+virtualbox
+# New
+# Name: Parrot
+# Machine Folder: ${HOME}/Virtualbox VMs
+# Type: Linux
+# Version: Debian (64-bit)
+# Memory: 2048
+# Create a virtual hard disk now
+# Type: VDI
+# Dynamically allocated
+# 20GB
+# --
+# Settings > General > Advanced
+# Snapshot folder: ${HOME}/VirtualBox VMs/Snapshots
+# Shared clipboard: bidirectional
+# Drag'n'Drop: bidirectional
+
+
+# ADD REMOTE BACKUP LOCATION
+ssh $WB
+# on server:
+#     mkdir ~/umba
+. /k/repos/kh/umba/src/umba.bash
+umba_var_set remote $WB:/home/$WEB_BOX_USER/umba
+umba_var_set
+
+# FIX - FIX SSH CONNECTION
+# Error output from ssh attempt
+#     Received disconnect    port 22:2: Too many authentication failures
+#     Disconnected     port 22
+# see https://serverfault.com/questions/36291/how-to-recover-from-too-many-authentication-failures-for-user-root
+ssh -i ~/.ssh/id_rsa $WB
+# on remote server:
+#     exit
+{
+    echo "Host $WB"
+    echo "  IdentityFile /home/$USER/.ssh/id_rsa"
+    echo "  IdentitiesOnly=yes"
+} | cat >>~/.ssh/config
+pid=`eval "$(ssh-agent -s)" | cut -d ' ' -f 3`
+kill -9 $pid
+ssh $WB
+
+# ASC - ADD SSH CONNECTION
+ls ~/.ssh
+#     id_ed25519  id_ed25519.pub  known_hosts  known_hosts.old
+ssh-keygen
+Enter file in which to save the key (/home/korey/.ssh/id_rsa):
+# Enter (blank) 2x
+ssh-add
+scp ~/.ssh/id_rsa.pub $OLD_LINUX_BOX_USER@$OLD_LINUX_BOX_IP:~/$HOSTNAME/
+# ASC - THEN ON OLD LINUX BOX
+# scp ~/$NEW_HOSTNAME/id_rsa.pub \
+#     $WEB_BOX_USER@$WEB_BOX_HOSTNAME:~/.ssh/uploaded.pub
+# ssh $WEB_BOX_USER@$WEB_BOX_HOSTNAME
+# ASC - ON WEB BOX
+#    # create a backup
+#    cp ~/.ssh/authorized_keys ~/.ssh/backup_2023_02_24
+#    cat ~/.ssh/uploaded.pub >> ~/.ssh/authorized_keys

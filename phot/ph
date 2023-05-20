@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# first check if local netw. file share is available
+if [[ -d "${SMB_PIC}" ]]; then
+    :
+else
+    echo "Error: Unable to access ${SMB_PIC}. Nothing has been backed up."
+    exit 1
+fi
+
+mkdir -p /k/ph/.temp
+
+function find_bucket {
+    year="$1"
+    if [[ $year -le 2007 ]]; then
+        echo "2007lte";
+        return;
+    fi
+    buckstart=2008
+    buckend=2012
+    while [[ $year -gt $buckend ]]
+    do
+        ((buckstart+=5));
+        ((buckend+=5));
+    done
+    echo "${buckstart}-${buckend}"
+}
+
+createmethod="$1" # or file source, where was it originally discovered
+originalfilename="$2"
+bname=`basename "${originalfilename}"`
+# createdate=$(stat -c '%y' "$originalfilename" | cut -d ' ' -f 1) # samba share and back to linux does not show the original %w date, so instead using %y (last data changed date)
+# stat did not work for icloud downloads, gets the most current date, instead
+# use the exiftool
+createdate=$(exiftool -T -createdate "$originalfilename" | sed 's/:/-/g'  | cut -d ' ' -f 1)
+year=$(echo "$createdate" | cut -d "-" -f 1)
+bucket=$(find_bucket $year)
+
+managedfilename="ZPH~${createmethod}~${createdate}~${bname}" # ZPH so PHoto files go to end(Z)
+# managedfilename="DSCN0962.JPG" # todo: remove
+
+# linode-cli obj ls --cluster us-${LND_REG}-1
+# linode-cli obj ls 2018-2022 --cluster us-${LND_REG}-1
+
+# listed=$(linode-cli obj ls ${bucket} --cluster us-${LND_REG}-1)
+listed=$(s3cmd ls "s3://${bucket}" | grep ZPH)
+filtered=$(echo "$listed" | awk '{ print $4 }' | grep "$managedfilename")
+exists=$(echo -n "$filtered" | wc -c) # must be wc -c, because wc -l won't work:
+#                                       > echo -n | wc -l
+#                                       0
+#                                       > echo "test" | wc -l
+#                                       0
+
+# testing:
+#  echo "linode-cli obj ls ${bucket} --cluster us-${LND_REG}-1"
+#  echo grep "$managedfilename" # todo: remove
+#  echo "filtered: ${filtered}" # todo: remove
+#  echo "exists: ${exists}" # todo: remove
+#  exit 1
+cp -p "$originalfilename" "/k/ph/.temp/${managedfilename}" # p to preserve timestamps
+
+if [[ $exists -eq 0 ]]; then
+    echo "attempting new file upload:" 
+    echo "    ${managedfilename}"
+    echo "bucket: ${bucket}"
+    # linode-cli obj --cluster us-${LND_REG}-1 put "/k/ph/.temp/${managedfilename}" "${bucket}"
+    s3cmd put --disable-multipart "/k/ph/.temp/${managedfilename}" "s3://${bucket}/"
+    echo "s3cmd (linode) put exit code: $?"
+    # echo "linode exit code: $?"
+else
+    found=$(echo "$listed" | grep "$managedfilename")
+    echo "${filtered} already exists on linode:"
+    echo "    ${found}"
+fi
+
+if [[ -f "${SMB_PIC}/${bucket}/${managedfilename}" ]]; then
+    echo "Local netw. share file already exists:"
+    ls -l "${SMB_PIC}/${bucket}/${managedfilename}"
+else
+    echo
+    echo "attempting backup to local netw. share:"
+    # mv "/k/ph/.temp/${managedfilename}" "${SMB_PIC}/${bucket}/${managedfilename}"
+    # Instead of mv, use cp+rm since mv tries to reproduce the same permissions
+    # but can't and will give an unnecessary error.
+    # cp --preserve=timestamps "/k/ph/.temp/${managedfilename}" "${SMB_PIC}/${bucket}/${managedfilename}"
+    
+    # since if saying to preserve timestamps still it loses create date,
+    # so using rsync instead
+    rsync --times "/k/ph/.temp/${managedfilename}" "${SMB_PIC}/${bucket}/${managedfilename}"  # --crtimes
+    rm "/k/ph/.temp/${managedfilename}"
+    ls -l "${SMB_PIC}/${bucket}/${managedfilename}"
+fi

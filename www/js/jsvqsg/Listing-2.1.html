@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>hello world</title>
+  </head>
+  <body>
+    <h1>
+      <script>
+	document.write('Hello, world!');
+      </script>
+    </h1>
+    <h2>
+      <script>
+	// regular body script won't clear page
+	document.write('Hello, world again!');
+      </script>
+    </h2>
+    <script>
+      // be careful: a delayed script will clear page
+      setTimeout(()=>{document.write("oops");}, 2000);
+      // any document.write that happens after the body has loaded will
+      // overwrite the document
+    </script>
+  </body>
+</html>
