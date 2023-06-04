@@ -14,4 +14,7 @@ pub/res/email.tex
 *.png
 .temp
 ph/
+*.JPG
+phot/www/diff/venv
+phot/www/diff/static/*.txt
 

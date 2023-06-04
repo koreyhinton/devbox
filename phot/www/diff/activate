@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# invoke: . activate
+# then: ./install
+
+if [[ -d /k/phot/www/diff/venv ]]; then
+    :
+else
+    python3 -m venv /k/phot/www/diff/venv
+    source /k/phot/www/diff/venv/bin/activate
+fi
+
+
+echo "Attempting to activate.."
+echo "  * To quit:"
+echo "    (venv)    deactivate"
+echo "  * To install dependencies:"
+echo "    (venv)  /k/phot/www/diff/install"
+echo "  * To run:"
+echo "    (venv)  . /k/phot/www/diff/run"
+
+source /k/phot/www/diff/venv/bin/activate

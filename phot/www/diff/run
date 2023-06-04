@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# invoke: . run
+
+export FLASK_APP=diff
+export FLASK_ENV=development
+
+ip a | grep 192 | cut -d '.' -f1-4 | awk '{print $2}' | cut -d '/' -f1
+flask run --host=0.0.0.0

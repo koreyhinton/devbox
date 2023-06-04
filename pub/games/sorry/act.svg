@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="750" height="750" viewBox="0,0,750,750">
+    <circle cx="50" cy="99" r="10" fill="black" stroke="black" stroke-width="1" id="circle1"/>
+    <polyline points="65 99 104 99 94 89 104 99 94 109" stroke="black" fill="transparent" stroke-width="1" id="polyline1"/>
+    <rect rx="10" ry="10" x="112" y="69" width="128" height="54" stroke="black" fill="transparent" stroke-width="1" id="rect1"/>
+    <circle cx="50" cy="53" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle2"/>
+    <text x="45" y="58" fill="black" id="text1">S</text>
+    <polyline points="70 56 105 68 100.35329829505983 58.50456608120922 105 68 95.50456608120922 72.64670170494017" stroke="black" fill="transparent" stroke-width="1" id="polyline2"/>
+    <text x="129" y="101" fill="black" id="text2">Start Turn</text>
+    <polyline points="246 96 280 96 270 86 280 96 270 106" stroke="black" fill="transparent" stroke-width="1" id="polyline3"/>
+    <rect rx="10" ry="10" x="288" y="66" width="122" height="59" stroke="black" fill="transparent" stroke-width="1" id="rect2"/>
+    <text x="303" y="101" fill="black" id="text3">Draw Card</text>
+    <polyline points="459 95 466 88 473 95 466 102 459 95" stroke="black" fill="transparent" stroke-width="1" id="polyline5"/>
+    <line x1="465" y1="629" x2="465" y2="110" stroke="black" stroke-width="1" id="line1"/>
+    <text x="476" y="127" fill="black" id="text4">Card = ?</text>
+    <text x="695" y="186" fill="black" id="text5">M</text>
+    <circle cx="700" cy="181" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle3"/>
+    <polyline points="472 183 675 183 665 173 675 183 665 193" stroke="black" fill="transparent" stroke-width="1" id="polyline6"/>
+    <text x="476" y="173" fill="black" id="text6">[3, 5, 8, or 12]</text>
+    <polyline points="472 285 586 285 576 275 586 285 576 295" stroke="black" fill="transparent" stroke-width="1" id="polyline7"/>
+    <polyline points="474 341 537 341 527 331 537 341 527 351" stroke="black" fill="transparent" stroke-width="1" id="polyline8"/>
+    <line x1="547" y1="299" x2="547" y2="377" stroke="black" stroke-width="3" id="line2"/>
+    <polyline points="555 310 589 310 579 300 589 310 579 320" stroke="black" fill="transparent" stroke-width="1" id="polyline9"/>
+    <text x="477" y="331" fill="black" id="text7">[2]</text>
+    <text x="479" y="263" fill="black" id="text8">[1]</text>
+    <polyline points="597 296 604 289 611 296 604 303 597 296" stroke="black" fill="transparent" stroke-width="1" id="polyline10"/>
+    <text x="609" y="361" fill="black" id="text9">S</text>
+    <circle cx="614" cy="356" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle4"/>
+    <polyline points="553 354 590 354 580 344 590 354 580 364" stroke="black" fill="transparent" stroke-width="1" id="polyline11"/>
+    <line x1="604" y1="288" x2="604" y2="201" stroke="black" stroke-width="1" id="line3"/>
+    <polyline points="604 201 676 201 666 191 676 201 666 211" stroke="black" fill="transparent" stroke-width="1" id="polyline12"/>
+    <rect rx="10" ry="10" x="661" y="234" width="81" height="99" stroke="black" fill="transparent" stroke-width="1" id="rect3"/>
+    <text x="672" y="263" fill="black" id="text10">Move</text>
+    <text x="671" y="291" fill="black" id="text11">Out of</text>
+    <text x="670" y="320" fill="black" id="text12">Start</text>
+    <polyline points="612 299 655 299 645 289 655 299 645 309" stroke="black" fill="transparent" stroke-width="1" id="polyline13"/>
+    <text x="608" y="270" fill="black" id="text13">P.C.</text>
+    <text x="552" y="391" fill="black" id="text14">(take another turn</text>
+    <text x="557" y="416" fill="black" id="text15">after moving pawn)</text>
+    <text x="20" y="715" fill="black" id="text16">P.C. - player choice</text>
+    <polyline points="472 447 540 447 530 437 540 447 530 457" stroke="black" fill="transparent" stroke-width="1" id="polyline14"/>
+    <text x="474" y="431" fill="black" id="text17">[7]</text>
+    <rect rx="10" ry="10" x="549" y="426" width="190" height="116" stroke="black" fill="transparent" stroke-width="1" id="rect4"/>
+    <text x="560" y="455" fill="black" id="text18">For 1+(P.C.)pawns</text>
+    <text x="560" y="479" fill="black" id="text19">go to</text>
+    <circle cx="633" cy="475" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle5"/>
+    <text x="628" y="480" fill="black" id="text20">M</text>
+    <text x="558" y="507" fill="black" id="text21">split # spaces</text>
+    <text x="557" y="531" fill="black" id="text22">between pawns(P.C.)</text>
+    <polyline points="472 584 544 584 534 574 544 584 534 594" stroke="black" fill="transparent" stroke-width="1" id="polyline15"/>
+    <text x="473" y="578" fill="black" id="text23">[11]</text>
+    <polyline points="546 584 553 577 560 584 553 591 546 584" stroke="black" fill="transparent" stroke-width="1" id="polyline16"/>
+    <polyline points="562 584 642 584 632 574 642 584 632 594" stroke="black" fill="transparent" stroke-width="1" id="polyline17"/>
+    <circle cx="664" cy="581" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle6"/>
+    <text x="659" y="586" fill="black" id="text24">M</text>
+    <line x1="553" y1="594" x2="553" y2="623" stroke="black" stroke-width="1" id="line4"/>
+    <polyline points="553 623 594 623 584 613 594 623 584 633" stroke="black" fill="transparent" stroke-width="1" id="polyline18"/>
+    <rect rx="10" ry="10" x="598" y="603" width="134" height="114" stroke="black" fill="transparent" stroke-width="1" id="rect5"/>
+    <text x="606" y="632" fill="black" id="text25">switch 1 out</text>
+    <text x="605" y="650" fill="black" id="text26">of start pawn</text>
+    <text x="603" y="671" fill="black" id="text27">with another</text>
+    <text x="602" y="690" fill="black" id="text28">player's pawn</text>
+    <text x="558" y="609" fill="black" id="text29">P.C.</text>
+    <circle cx="292" cy="371" r="18" fill="transparent" stroke="black" stroke-width="1" id="circle7"/>
+    <text x="287" y="376" fill="black" id="text31">M</text>
+    <polyline points="459 378 315 378 325 368 315 378 325 388" stroke="black" fill="transparent" stroke-width="1" id="polyline19"/>
+    <text x="332" y="361" fill="black" id="text32">-4 spaces [4]</text>
+    <line x1="285" y1="472" x2="464" y2="472" stroke="black" stroke-width="1" id="line5"/>
+    <polyline points="285 471 285 392 275 402 285 392 295 402" stroke="black" fill="transparent" stroke-width="1" id="polyline20"/>
+    <text x="419" y="459" fill="black" id="text33">[10]</text>
+    <text x="293" y="426" fill="black" id="text34">10,-1 spaces P.C.</text>
+    <text x="516" y="198" fill="black" id="text35">spaces = card #</text>
+    <text x="561" y="571" fill="black" id="text36">11 spaces</text>
+    <polyline points="466 627 384 627 394 617 384 627 394 637" stroke="black" fill="transparent" stroke-width="1" id="polyline21"/>
+    <rect rx="10" ry="10" x="211" y="588" width="167" height="93" stroke="black" fill="transparent" stroke-width="1" id="rect6"/>
+    <text x="385" y="605" fill="black" id="text37">[Sorry!]</text>
+    <text x="230" y="607" fill="black" id="text38">P.C. take 1 in-</text>
+    <text x="227" y="628" fill="black" id="text39">start pawn</text>
+    <text x="226" y="650" fill="black" id="text40">overtakes other</text>
+    <text x="226" y="671" fill="black" id="text41">player pawn</text>
+    <circle cx="39" cy="217" r="18" fill="transparent" stroke="black" stroke-width="1"/>
+    <text x="34" y="222" fill="black">M</text>
+    <polyline points="60 216 97 216 87 206 97 216 87 226" stroke="black" fill="transparent" stroke-width="1" id="polyline22"/>
+    <rect rx="10" ry="10" x="100" y="183" width="207" height="60" stroke="black" fill="transparent" stroke-width="1" id="rect7"/>
+    <text x="113" y="210" fill="black" id="text42">Move (P.C.) pawn(s)</text>
+    <text x="110" y="230" fill="black" id="text43">N spaces</text>
+    <line x1="118" y1="246" x2="118" y2="282" stroke="black" stroke-width="1" id="line6"/>
+    <polyline points="111 289 118 282 125 289 118 296 111 289" stroke="black" fill="transparent" stroke-width="1" id="polyline23"/>
+    <line x1="117" y1="354" x2="117" y2="314" stroke="black" stroke-width="1" id="line7"/>
+    <polyline points="123 320 214 320 204 310 214 320 204 330" stroke="black" fill="transparent" stroke-width="1" id="polyline24"/>
+    <rect rx="10" ry="10" x="215" y="269" width="190" height="66" stroke="black" fill="transparent" stroke-width="1" id="rect8"/>
+    <text x="222" y="295" fill="black" id="text44">(overtake/slide-on)</text>
+    <text x="225" y="317" fill="black" id="text45">to N spaces</text>
+    <text x="9" y="314" fill="black" id="text46">Pawn+N &lt; safety</text>
+    <text x="8" y="333" fill="black" id="text47">zone spaces</text>
+    <polyline points="417 101 453 101 443 91 453 101 443 111" stroke="black" fill="transparent" stroke-width="1" id="polyline25"/>
+    <rect rx="10" ry="10" x="51" y="420" width="202" height="104" stroke="black" fill="transparent" stroke-width="1" id="rect9"/>
+    <polyline points="117 354 117 413 107 403 117 413 127 403" stroke="black" fill="transparent" stroke-width="1" id="polyline26"/>
+    <text x="129" y="384" fill="black" id="text48">&lt;= home space</text>
+    <text x="68" y="444" fill="black" id="text49">Move Pawn+N spaces</text>
+    <text x="67" y="463" fill="black" id="text50">to safety space</text>
+    <text x="67" y="488" fill="black" id="text51">or home (follow up</text>
+    <text x="68" y="510" fill="black" id="text52">arrow)</text>
+    <text x="18" y="737" fill="black" id="text53">Can only enter safety zone matching your player's color</text>
+    <line x1="61" y1="526" x2="61" y2="555" stroke="black" stroke-width="1" id="line8"/>
+    <polyline points="54 561 61 554 68 561 61 568 54 561" stroke="black" fill="transparent" stroke-width="1" id="polyline27"/>
+    <polyline points="61 564 61 635 51 625 61 635 71 625" stroke="black" fill="transparent" stroke-width="1" id="polyline28"/>
+    <rect rx="10" ry="10" x="34" y="638" width="99" height="34" stroke="black" fill="transparent" stroke-width="1" id="rect10"/>
+    <text x="42" y="660" fill="black" id="text54">You win!</text>
+    <polyline points="141 654 162 654 152 644 162 654 152 664" stroke="black" fill="transparent" stroke-width="1" id="polyline29"/>
+    <circle cx="174" cy="653" r="6" fill="black" stroke="black" stroke-width="1"/>
+    <circle cx="174" cy="653" r="10" fill="transparent" stroke="black" stroke-width="1"/>
+    <text x="62" y="578" fill="black" id="text55">[all pawns in home]</text>
+</svg>

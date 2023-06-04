@@ -1,0 +1,41 @@
+function loadfile {
+    e="$1" # ce [c]loud (duplicate) [e]rror, ne [n]as (duplicate) [e]rror
+    b="$2" # bucket
+    f="$3" # file
+    echo "${b}/${f}" >"/k/phot/www/diff/static/${e}.txt"
+    s3cmd get --force "s3://${b}/${f}" "/k/phot/www/diff/static/${e}cloud.JPG"
+    cp "${SMB_PIC}/${b}/${f}" "/k/phot/www/diff/static/${e}nas.JPG"
+    cp "/k/ph/.temp/${f}" "/k/phot/www/diff/static/${e}local.JPG"
+}
+
+# ce: [c]loud (duplicate) [e]rror
+ce_delim=$(cat /k/ph/iphone104.log | grep 'already exists on' | grep JPG | head -1 | cut -d ' ' -f1) # cut -d '/' -f4
+ce_buck=$(echo "$ce_delim" | cut -d '/' -f3)
+ce_file=$(echo "$ce_delim" | cut -d '/' -f4)
+
+loadfile ce "${ce_buck}" "${ce_file}"
+
+i=1
+while [[ $i -lt 900 ]];
+do
+    # ne: [n]as (duplicate) [e]rror
+    nasN=$(grep -n 'Local netw. share file already exists' /k/ph/iphone104.log | head -$i | tail -1 | cut -d ':' -f1)
+    ((nasN=nasN+1))
+    attempt=$(sed "${nasN}q;d" /k/ph/iphone104.log | grep -v HEIC | grep -v MOV | grep -v AAE | grep JPG)
+    shortname=$(echo "$attempt" | cut -d '~' -f2-4)
+    if [[ -n "$attempt" ]]; then
+        relpath=$(echo "$attempt" | cut -d '=' -f3 | cut -d '/' -f4-5)
+        ne_buck=$(echo "$relpath" | cut -d '/' -f1)
+        ne_file=$(echo "$relpath" | cut -d '/' -f2)
+        if [[ "$ne_file" = "$ce_file" ]]; then
+            ((i=i+1))
+            continue;
+        fi
+        #echo "${ne_buck}/${ne_file}"
+        loadfile ne "${ne_buck}" "${ne_file}"
+        # echo "$relpath"
+        # ls "${SMB_PIC}/${relpath}"
+        break;
+    fi
+    ((i=i+1))
+done

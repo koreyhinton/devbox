@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pip install -r /k/phot/www/diff/requirements.txt
+
+/k/phot/www/diff/download
+/k/phot/www/diff/copy

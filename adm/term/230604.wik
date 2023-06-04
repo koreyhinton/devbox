@@ -1,0 +1,13 @@
+PHOTO DIFF VIEWER APP
+
+mkdir -p /k/phot/www/diff
+sudo apt install python3.10-venv -y
+pip install -r /k/phot/www/diff/requirements.txt # this should have been done in
+                                                 # venv, but now its installed
+                                                 # flask globally
+mkdir /k/phot/www/diff/static
+mkdir /k/phot/www/diff/static/browse
+
+BOARD GAME ACTIVITY DIAGRAMS
+
+mkdir -p /k/pub/games/sorry

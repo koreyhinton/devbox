@@ -1,0 +1,33 @@
+#!/bin/bash
+
+imgs=$(ls /k/ph/.temp/*.JPG | head -50)
+i=0
+
+for img in `echo "$imgs"`
+do
+    echo "${i} ${img}"
+    cp "${img}" "/k/phot/www/diff/static/browse/"
+    ((i++))
+done
+
+i=0
+imgs=""
+imgs=$(ls /k/ph/.temp_capture/*.JPG | head -50)
+for img in `echo "$imgs"`
+do
+    echo "${i} ${img}"
+    cp "${img}" "/k/phot/www/diff/static/browse/"
+    ((i++))
+done
+
+
+i=0
+imgs=""
+imgs=$(ls /k/phot/www/diff/static/browse/ZPH*.JPG | head -50)
+for img in `echo "$imgs"`
+do
+    echo "${i} ${img}"
+    cp "${img}" "/k/phot/www/diff/static/browse/${i}.JPG"
+    ((i++))
+done
+

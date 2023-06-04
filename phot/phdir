@@ -1,0 +1,11 @@
+#!/bin/bash
+
+createmethod="$1" # or file source, where was it originally discovered
+directory="${2%/}"
+
+for i in `ls "$directory"`
+do
+    # echo "${directory}/$i"
+    ph "$createmethod" "${directory}/${i}"
+done
+

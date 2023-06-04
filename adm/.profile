@@ -8,6 +8,7 @@ PATH=$({
     echo -n :/k/svg/bin
     echo -n :/home/$USER/.local/bin/
     echo -n :/usr/local/go/bin
+    echo -n :/k/phot
 } | cat)
 
 export GPG_TTY="$(tty)"
