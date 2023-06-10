@@ -1,0 +1,145 @@
+GUESS WHO ACT SVG
+mkdir /k/pub/games/guess-who
+
+ARDUINO SET-UP
+
+# https://www.arduino.cc/en/software
+chmod a+x ~/Downloads/arduino-ide_nightly-20230605_Linux_64bit.AppImage
+~/Downloads/arduino-ide_nightly-20230605_Linux_64bit.AppImage # run portable
+#                                                               executable
+
+# Configuration: (see http://digistump.com/wiki/digispark/tutorials/connecting)
+# File > Preferences > Settings > Additional boards manager URLS:
+#     http://digistump.com/package_digistump_index.json
+
+# Tools > Board > Boards Manager > (search) digi > Digistump AVR Boards
+# > Install
+
+# Tools > Board > Digistump AVR Boards > Digispark (default - 16.5mhz)
+
+# replace IDE with example blink code
+
+# click upload button
+
+# plug in device (and see if it blinks)
+
+
+
+# Error says:
+# micronucleus: library/micronucleus_lib.c:66: micronucleus_connect: Assertion `res >= 4' failed.
+Aborted (core dumped)
+
+# https://digistump.com/board/index.php/topic,106.msg1565.html#msg1565
+# sudo bash
+# echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="16d0", ATTR{idProduct}=="0753", MODE=# "0660", GROUP="dialout"' >/etc/udev/rules.d/digispark.rules
+# exit
+# rm to undo ^ this above, now trying this way:
+
+# http://digistump.com/wiki/digispark/tutorials/linuxtroubleshooting
+sudo bash
+echo 'SUBSYSTEMS=="usb", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", MODE:="0666"' >/etc/udev/rules.d/49-micronucleus.rules
+echo 'KERNEL=="ttyACM*", ATTRS{idVendor}=="16d0", ATTRS{idProduct}=="0753", MODE:="0666", ENV{ID_MM_DEVICE_IGNORE}="1"' >>/etc/udev/rules.d/49-micronucleus.rules
+udevadm control --reload-rules
+exit
+
+
+> Device is found!
+connecting: 16% complete
+connecting: 22% complete
+connecting: 28% complete
+connecting: 33% complete
+> Device has firmware version 1.6
+> Available space for user applications: 6012 bytes
+> Suggested sleep time between sending pages: 8ms
+> Whole page count: 94  page size: 64
+> Erase function sleep duration: 752ms
+parsing: 50% complete
+> Erasing the memory ...
+erasing: 55% complete
+erasing: 60% complete
+erasing: 65% complete
+>> Flash erase error -71 has occured ...
+>> Please unplug the device and restart the program.
+
+
+
+Digispark Pro (16 Mhz) (32 by)
+Sketch uses 936 bytes (6%) of program storage space. Maximum is 14844 bytes.
+Global variables use 9 bytes of dynamic memory.
+Running Digispark Uploader...
+Plug in device now... (will timeout in 60 seconds)
+> Please plug in the device ... 
+> Press CTRL+C to terminate the program.
+> Device is found!
+connecting: 16% complete
+connecting: 22% complete
+connecting: 28% complete
+connecting: 33% complete
+> Device has firmware version 1.6
+> Available space for user applications: 6012 bytes
+> Suggested sleep time between sending pages: 8ms
+> Whole page count: 94  page size: 64
+> Erase function sleep duration: 752ms
+parsing: 50% complete
+> Erasing the memory ...
+erasing: 55% complete
+erasing: 60% complete
+erasing: 65% complete
+> Starting to upload ...
+writing: 70% complete
+writing: 75% complete
+writing: 80% complete
+> Starting the user app ...
+running: 100% complete
+>> Micronucleus done. Thank you!
+
+# but still didn't light up even though appeared to work above
+
+# notice this log!:
+#     Device has firmware version 1.6
+# In Board Manager:
+#     Remove 1.8.6
+#     Install 1.6.2
+
+
+```
+#include "DigiKeyboard.h"
+// the setup routine runs once when you press reset:
+void setup() {                
+  // initialize the digital pin as an output.
+  //pinMode(0, OUTPUT); //LED on Model B
+  pinMode(1, OUTPUT); //LED on Model A   
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  //digitalWrite(0, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(1, HIGH);
+  delay(1000);               // wait for a second
+  //digitalWrite(0, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(1, LOW); 
+  delay(1000);               // wait for a second
+}
+```
+# it works!!
+
+
+# for some reason when error reoccurs, have to exit and restart program
+```
+#include "DigiMouse.h"
+// the setup routine runs once when you press reset:
+void setup(){
+  pinMode(1, OUTPUT); //LED on Model A
+  DigiMouse.begin();
+}
+ 
+void loop() {
+  digitalWrite(1, HIGH);
+  DigiMouse.move(20,0,0); // 20px right
+  DigiMouse.delay(1000);
+
+  digitalWrite(1, LOW);
+  DigiMouse.move(-20,0,0); // 20px left
+  DigiMouse.delay(1000);
+}
+```
