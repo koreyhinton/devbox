@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="750" height="750" viewBox="0,0,750,750">
+    <circle cx="22" cy="60" r="10" fill="black" stroke="black" stroke-width="1" id="circle1"/>
+    <polyline points="40 59 79 59 69 49 79 59 69 69" stroke="black" fill="transparent" stroke-width="1" id="polyline1"/>
+    <rect rx="10" ry="10" x="87" y="39" width="136" height="41" stroke="black" fill="transparent" stroke-width="1" id="rect1"/>
+    <text x="99" y="63" fill="black" id="text1">Start Turn</text>
+    <polyline points="228 57 298 57 288 47 298 57 288 67" stroke="black" fill="transparent" stroke-width="1" id="polyline2"/>
+    <polyline points="305 56 312 49 319 56 312 63 305 56" stroke="black" fill="transparent" stroke-width="1" id="polyline3"/>
+    <line x1="313" y1="34" x2="313" y2="49" stroke="black" stroke-width="1" id="line1"/>
+    <polyline points="313 35 429 35 419 25 429 35 419 45" stroke="black" fill="transparent" stroke-width="1" id="polyline4"/>
+    <line x1="312" y1="64" x2="312" y2="81" stroke="black" stroke-width="1" id="line2"/>
+    <polyline points="311 82 427 82 417 72 427 82 417 92" stroke="black" fill="transparent" stroke-width="1" id="polyline5"/>
+    <rect rx="10" ry="10" x="436" y="8" width="266" height="48" stroke="black" fill="transparent" stroke-width="1" id="rect2"/>
+    <text x="450" y="38" fill="black" id="text2">Guess* Player Name</text>
+    <rect rx="10" ry="10" x="435" y="69" width="108" height="126" stroke="black" fill="transparent" stroke-width="1" id="rect3"/>
+    <text x="447" y="103" fill="black" id="text3">Guess*</text>
+    <text x="447" y="131" fill="black" id="text4">Character</text>
+    <text x="448" y="162" fill="black" id="text5">Attribute</text>
+    <rect rx="10" ry="10" x="478" y="231" width="120" height="57" stroke="black" fill="transparent" stroke-width="1" id="rect4"/>
+    <rect rx="10" ry="10" x="597" y="332" width="145" height="60" stroke="black" fill="transparent" stroke-width="1" id="rect5"/>
+    <text x="494" y="267" fill="black" id="text6">You win!</text>
+    <text x="623" y="366" fill="black" id="text7">You lose</text>
+    <circle cx="591" cy="500" r="6" fill="black" stroke="black" stroke-width="1"/>
+    <circle cx="591" cy="500" r="10" fill="transparent" stroke="black" stroke-width="1"/>
+    <polyline points="603 404 603 480 593 470 603 480 613 470" stroke="black" fill="transparent" stroke-width="1" id="polyline6"/>
+    <polyline points="573 300 573 482 563 472 573 482 583 472" stroke="black" fill="transparent" stroke-width="1" id="polyline7"/>
+    <polyline points="649 63 649 149 639 139 649 149 659 139" stroke="black" fill="transparent" stroke-width="1" id="polyline8"/>
+    <polyline points="642 165 649 158 656 165 649 172 642 165" stroke="black" fill="transparent" stroke-width="1" id="polyline9"/>
+    <polyline points="639 168 592 222 602.6366913680614 221.26280356855023 592 222 591.2628035685502 211.36330863193854" stroke="black" fill="transparent" stroke-width="1" id="polyline10"/>
+    <polyline points="657 176 694 323 700.3066280484207 312.45073126446 694 323 683.4507312644599 316.69337195157925" stroke="black" fill="transparent" stroke-width="1" id="polyline11"/>
+    <text x="666" y="167" fill="black" id="text8">[else]</text>
+    <text x="549" y="167" fill="black" id="text9">[correct]</text>
+    <polyline points="430 171 246 252 256.18387483774103 255.9582607859899 246 252 249.95826078598992 241.81612516225897" stroke="black" fill="transparent" stroke-width="1" id="polyline12"/>
+    <polyline points="233 266 240 259 247 266 240 273 233 266" stroke="black" fill="transparent" stroke-width="1" id="polyline13"/>
+    <line x1="232" y1="267" x2="189" y2="267" stroke="black" stroke-width="1" id="line3"/>
+    <line x1="247" y1="267" x2="286" y2="267" stroke="black" stroke-width="1" id="line4"/>
+    <polyline points="189 268 189 351 179 341 189 351 199 341" stroke="black" fill="transparent" stroke-width="1" id="polyline14"/>
+    <polyline points="286 268 286 350 276 340 286 350 296 340" stroke="black" fill="transparent" stroke-width="1" id="polyline15"/>
+    <rect rx="10" ry="10" x="54" y="357" width="189" height="95" stroke="black" fill="transparent" stroke-width="1" id="rect6"/>
+    <rect rx="10" ry="10" x="262" y="357" width="177" height="74" stroke="black" fill="transparent" stroke-width="1" id="rect7"/>
+    <text x="272" y="385" fill="black" id="text10">Eliminate images</text>
+    <text x="272" y="413" fill="black" id="text11">having attribute</text>
+    <text x="90" y="264" fill="black" id="text12">[correct]</text>
+    <text x="294" y="266" fill="black" id="text13">[else]</text>
+    <text x="69" y="413" fill="black" id="text14">NOT having</text>
+    <text x="69" y="385" fill="black" id="text15">Eliminate images</text>
+    <text x="68" y="440" fill="black" id="text16">attribute</text>
+    <polyline points="246 542 253 535 260 542 253 549 246 542" stroke="black" fill="transparent" stroke-width="1" id="polyline16"/>
+    <polyline points="244 461 244 531 234 521 244 531 254 521" stroke="black" fill="transparent" stroke-width="1" id="polyline17"/>
+    <polyline points="267 433 267 531 257 521 267 531 277 521" stroke="black" fill="transparent" stroke-width="1" id="polyline18"/>
+    <polyline points="253 555 253 606 243 596 253 606 263 596" stroke="black" fill="transparent" stroke-width="1" id="polyline19"/>
+    <rect rx="10" ry="10" x="195" y="621" width="124" height="54" stroke="black" fill="transparent" stroke-width="1" id="rect8"/>
+    <text x="207" y="653" fill="black" id="text17">End Turn</text>
+</svg>

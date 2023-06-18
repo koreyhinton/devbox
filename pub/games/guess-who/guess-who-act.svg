@@ -52,9 +52,9 @@
     <text x="543" y="384" fill="black" id="text64">End Turn</text>
     <rect rx="10" ry="10" x="193" y="258" width="210" height="65" stroke="black" fill="transparent" stroke-width="1" id="rect13"/>
     <text x="207" y="282" fill="black" id="text65">Eliminate images</text>
-    <text x="204" y="306" fill="black" id="text66">having the attribute</text>
+    <text x="204" y="306" fill="black" id="text66">NOT having attribute</text>
     <text x="210" y="366" fill="black">Eliminate images</text>
-    <text x="207" y="390" fill="black" id="text67">NOT having attribute</text>
+    <text x="207" y="390" fill="black" id="text67">having the attribute</text>
     <rect rx="10" ry="10" x="196" y="342" width="210" height="65" stroke="black" fill="transparent" stroke-width="1"/>
     <polyline points="411 380 459 380 449 370 459 380 449 390" stroke="black" fill="transparent" stroke-width="1" id="polyline42"/>
     <line x1="403" y1="291" x2="468" y2="291" stroke="black" stroke-width="1" id="line21"/>
