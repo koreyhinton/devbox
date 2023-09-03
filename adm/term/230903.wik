@@ -1,0 +1,111 @@
+TKINTER
+
+sudo apt-get install python3-tk -y
+
+TAURI
+# https://tauri.app/v1/guides/getting-started/prerequisites#setting-up-linux
+# install dependencies (C compiler, webkit2gtk)
+sudo apt update -y
+sudo apt install libwebkit2gtk-4.0-dev \
+    build-essential \
+    curl \
+    wget \
+    file \
+    libssl-dev \
+    libgtk-3-dev \
+    libayatana-appindicator3-dev \
+    librsvg2-dev -y
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+# 1 proceed with installation
+#    To configure your current shell, run:
+#    source "$HOME/.cargo/env"
+rustup update
+rustc --version
+# rustc 1.72.0 (5680fa18f 2023-08-23)
+sh <(curl https://create.tauri.app/sh)  # create-tauri-app
+# app name
+# language Rust (down arrow)
+# template (Vanilla)
+
+# missing dependencies (or they do not exist in $PATH)
+cargo install tauri-cli  # allows using 'cargo tauri <cmd>'
+                         # rather than 'npm run tauri <cmd>'
+cd sqerli
+cargo tauri dev # run boilerplated app
+
+# re-do it with a minimal way:
+# https://tauri.app/v1/guides/getting-started/setup/html-css-js
+cd ..
+mkdir sqerli2
+cd sqerli2
+mkdir ui
+cat <<EOF >ui/index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome from Tauri!</h1>
+  </body>
+</html>
+EOF
+cargo tauri init
+# app name
+# window title
+# ../ui    # where are web assets
+# ../ui    # URL of dev server (can be URL or file path)
+# <blank>  # frontend dev command left blank since nothing needs to be compiled
+# <blank>  # frontend build command blank since nothing needs to be compiled
+cargo tauri dev # run minimal app
+
+# to update tauri version, edit src-tauri/Cargo.toml version numbers manually (see https://tauri.app/v1/guides/development/updating-dependencies#update-cargo-packages)
+cd src-tauri
+cargo update  # update cargo packages
+
+# run w/ extra debug
+RUST_BACKTRACE=1 cargo tauri dev
+
+# also can do right-click > inspect element like in the browser dev tools
+
+
+# Do a dev build to pass in command line args
+cargo tauri build
+# Error You must change the bundle identifier in `tauri.conf.json > tauri > bundle > identifier`. The default value `com.tauri.dev` is not allowed as it must be unique across applications.
+# https://scqr.net/en/blog/2023/05/07/rust-tauri-13-getting-started-to-build-apps/index.html
+# "identifier": "localhost"  # (tauri.conf.json)
+
+target/release/bundle/appimage/sqerli_0.1.0_amd64.AppImage ~/test/test.txt
+
+
+# now build with debug flag (for dev tools)
+
+cargo tauri build --debug
+
+src-tauri/target/debug/bundle/appimage/sqerli_0.1.0_amd64.AppImage ~/test/test.txt
+
+SQLITE
+
+sudo apt update
+sudo apt install sqlite3 -y
+
+PHOTO BACKUP
+# How to backup:
+# Step 1 - connect SMB
+#     Open server (Other Locations) 
+#     Right-click Folder
+#     Mount
+#     Registered (User and pass)
+# Step 2 - backup
+#     place files in /k/ph/dir_name
+#     cd /k/ph
+#     d=dir_name
+#     phdir CIPH $d 1>$d.log 2>$d.err
+
+GRAPHVIZ
+
+sudo apt install graphviz -y  # didn't work
+# https://github.com/mmaltsev/Xml2Tree
+
