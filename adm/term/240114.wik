@@ -1,0 +1,316 @@
+# SERVER GIT
+
+# on server (${WB}), 
+#   cd ~/git/apps
+#   ../newgit apps/myappname.git
+# on local
+#   git clone ${WB}:~/git/apps/appname.git
+# or local existing (within ~/AndroidStudioProjects/projname):
+#   git init
+#   git remote add origin $WB:~/git/apps/appname.git
+#   git push origin main
+
+# IPHONE 3 MOVE FILES OFF
+
+
+idevicepair pair
+idevicepair validate
+mkdir ~/pics
+cd ~/
+ifuse pics
+
+# ~/pics/DCIM/101APPLE etc were all empty
+fusermount -u ~/pics && rmdir ~/pics
+
+
+
+${the_path}/
+
+
+# IPHONE 2 MOVE FILES OFF
+
+cd "${the_path}/DCIM/
+mkdir /k/ph/kiph
+mv 202301__ /k/ph/kiph
+mv 202301__/*.* /k/ph/kiph/202301__/ # still didn't work
+mv 202302__ /k/ph/kiph
+mv 202303__ /k/ph/kiph
+mv 202303_a /k/ph/kiph
+mv 202304__ /k/ph/kiph
+mv 202304_a /k/ph/kiph
+mv 202305__ /k/ph/kiph
+mv 202306__ /k/ph/kiph
+mv 202306_a /k/ph/kiph
+mv 202307__ /k/ph/kiph
+mv 202308__ /k/ph/kiph
+mv 202309__ /k/ph/kiph
+mv 202310__ /k/ph/kiph
+mv 202311__ /k/ph/kiph
+mv 202312__ /k/ph/kiph
+
+
+# most didn't work
+
+# https://askubuntu.com/a/1380091
+# If DCIM goes missing, then open iPhone Documents and type CTRL-L and then remove the trailing :3/ of the path
+
+cd "${the_afc_path}/DCIM/"
+mv 100APPLE /k/ph/kiph
+mv 101APPLE /k/ph/kiph
+mv 102APPLE /k/ph/kiph
+mv 103APPLE /k/ph/kiph
+mv 104APPLE /k/ph/kiph
+mv 105APPLE /k/ph/kiph
+
+# todo: need to backup to local/offsite servers
+
+# ANDROID STUDIO
+
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 -y
+
+# android-studio-2023.1.1.26-linux.tar.gz
+mkdir ~/bin  # ~/bin/android-studio
+~/bin/android-studio/bin/studio.sh
+# Ok (do not import settings)
+# Standard
+
+sudo apt install android-tools-adb -y
+
+
+# fotoa
+# com.koreyhinton.fotoa
+# /home/korey/AndroidStudioProjects/fotoa
+# kotlin
+# minimum SDK
+# api 27 Oreo Android 8.1 (device is 8.3.2.1)
+
+# A fatal error has been detected by the Java Runtime Environment:
+
+# redo in a better place 
+
+sudo mv ~/Downloads/android-studio /usr/local/
+rm -rf ~/bin/android-studio
+cd /usr/local/android-studio/bin
+./studio.sh
+
+# Exit
+
+sudo apt-get install android-sdk-platform-tools-common -y
+
+# /k/ph/psht_2023_08_19/102___12
+
+# IPHONE MOVE FILES OFF
+cd "${the_path}/DCIM/202312__'
+mv *.* /k/ph/iphone_dcim_202312/ 2>/dev/null
+cd /k/ph
+d=iphone_dcim_202312
+phdir CIPH $d 1>$d.log 2>$d.err # backup to cloud
+
+
+# EXPO
+
+# permission issue:
+#     npm install expo-cli --global
+
+# locally to avoid permission issue:
+npm install expo-cli
+
+# following attempts had warnings:
+#    node_modules/expo-cli/bin/expo.js init fotoa
+#    npx expo init fotoa
+#    npx create-expo-app fotoa
+
+# ignorning the warnings and using the first one:
+node_modules/expo-cli/bin/expo.js init fotoa
+# but still had error when selecting the app install option
+
+# sudo snap install node --channel=20/stable --classic
+sudo snap refresh node --channel=20/stable --classic
+npx create-expo-app fotoa
+npx expo start
+
+npm install eas-cl
+# npx eas build --profile development --platform all
+npx eas build --profile development --platform ios
+
+
+# You want to build a development client build for platforms: iOS
+# However, we detected that you don't have expo-dev-client installed for your project.
+# ? Do you want EAS CLI to install expo-dev-client for you?
+y
+
+# Would you like to automatically create an EAS project for @${user}/fotoa?
+y
+
+What would you like your iOS bundle identifier to be?
+# default (com.koreyhinton.fotoa)
+
+# Do you want to log in to your Apple account?
+y
+
+# Authentication with Apple Developer Portal failed!
+# You have no team associated with your Apple account, cannot proceed.
+# (Do you have a paid Apple Developer account?)
+
+npx expo start
+
+s # switch to Expo Go
+
+# control-c
+
+npx expo run:ios
+# iOS apps can only be built on macOS devices. Use eas build -p ios to build in the cloud.
+
+npx eas build -p ios
+# Authentication with Apple Developer Portal failed!
+# You have no team associated with your Apple account, cannot proceed.
+# (Do you have a paid Apple Developer account?)
+
+
+npm install react-native-tableview --save
+npm i react-native-tableview-simple --S
+npm i react-native-elements --S
+npm i react --S
+# Have to use Expo Go app
+npx expo start
+s # switch to Expo Go
+
+
+
+# MINECRAFT
+
+
+sudo apt-get install default-jre-headless openjdk-11-jre default-jre libgdk-pixbuf2.0-0 -y
+
+sudo apt --fix-broken install -y
+
+sudo apt-get install default-jre-headless openjdk-11-jre default-jre libgdk-pixbuf2.0-0 -y
+
+sudo dpkg -i ~/Downloads/Minecraft.deb
+
+minecraft-launcher
+# cp ~/Downloads/*.jar ~/.minecraft/mods
+
+chmod +x ~/Downloads/forge-1.20.1-47.2.0-installer.jar
+java -jar ~/Downloads/forge-1.20.1-47.2.0-installer.jar
+# 1# Install client
+# 2# ~/.minecraft
+
+minecraft-launcher #> Installations [Tab] #> forge #> Play (button)
+
+chmod +x ~/Downloads/forge-1.12.2-14.23.5.2860-installer.jar
+java -jar ~/Downloads/forge-1.12.2-14.23.5.2860-installer.jar
+
+# same steps as before
+
+
+# INKSCAPE
+
+sudo apt-get update -y
+sudo apt --fix-broken install -y
+sudo apt-get install inkscape -y
+
+# ZOOM UPDATE
+
+dpkg -i ~/Downloads/zoom_amd64.deb
+
+# TYPESCRIPT
+
+# requires sudo permission
+# npm install -g typescript
+# tsc
+
+# in proj dir:
+npm install typescript
+# package.json:
+#    { ,"scripts": { "tsc": "tsc" },}
+# tsconfig.json
+#    {
+#      "compilerOptions": {
+#        "module": "system",
+#        "noImplicitAny": true,
+#        "removeComments": true,
+#        "preserveConstEnums": true,
+#        "outFile": "../../built/local/tsc.js",
+#        "sourceMap": true
+#      },
+#      "include": ["src/**/*"],
+#      "exclude": ["**/*.spec.ts"]
+#    }
+
+# change outFile, the concatenate of all files, to the desired path
+# or use outDir instead, e.g., "outDir": "dist"
+npm run tsc
+
+# PROFILE
+
+/k/adm/bin/hyperspace add hyperspace wiki and sync
+
+# VALA
+
+sudo apt-get install -y valac
+
+# MONO AND DEPS
+sudo apt-get install mono-complete -y
+# mcs -out:run.exe TcTranspiler/Program.cs
+# mono run.exe
+
+sudo apt-get install libsdl2-dev -y
+sudo apt-get install nuget -y
+
+mcs -out:run.exe -r:libsdl2-dev Program.cs
+
+sudo apt-get install libsdl2-2.0-0 -y
+
+mcs -out:run.exe -lib:/usr/lib/x86_64-linux-gnu/cmake/SDL2 Program.cs 
+
+nuget install SDL2
+
+# SPEED UP RUST (TAURI) BUILDS
+
+# lld install fixes this error:
+#       = note: collect2: fatal error: cannot find 'ld'
+#                compilation terminated.
+#      error: linking with `cc` failed: exit status: 1
+
+sudo apt-get install lld -y
+# RUSTFLAGS="-C link-arg=-fuse-ld=lld" cargo build etc
+
+# VS CODE RUST EXTENSION - 1ST ATTEMPT SNAP - DID NOT WORK
+code .  # open current folder
+# left-pane click Extension button
+# search for rust-analyzer
+# Did not work!!
+
+# VS CODE RUST EXTENSTION - 2ND ATTEMPT DEB - WORKS
+# uninstall:
+sudo snap remove code
+
+# new way to install it from download page:
+# browser: https://code.visualstudio.com/
+# Click '.deb' download button
+# code_1.83.0-1696350811_amd64.deb
+# Open with Files (~/Downloads)
+#   > Right-click
+#   > Choose "Open With Other Application"
+#   > Choose "Software Install"
+#   > Click Install button
+
+code .  # new shell session, in rust project folder
+# left-pane click Extension button
+# under Recommended it shoiws rust-analyzer
+
+# UPDATE BRAVE
+sudo apt-get install --only-upgrade brave-browser
+
+# Unpacking brave-browser (1.58.131) over (1.48.164) ...
+# Setting up grub-efi-amd64-signed (1.187.3~22.04.1+2.06-2ubuntu14.1) ...
+# Installing grub to /boot/efi.
+# Installing for x86_64-efi platform.
+# Installation finished. No error reported.
+
+
+# INSTALL GIMP
+
+sudo apt-get install gimp -y
+
