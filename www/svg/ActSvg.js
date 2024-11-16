@@ -12,6 +12,9 @@ cacheNd = {attrs:[]};
 selColor = "#C0D6FC";
 editColor = "#CAFFB5";
 
+lastX=750;
+lastY=88;
+
 numMode = 0;
 clickCnt = 0;
 drawClick = { x:-1, y: -1 };
@@ -900,7 +903,48 @@ function issueClick(x, y) {
     }
     clickCnt = 0; drawClick = {x:-1,y:-1};
     var clickedNd = xy2nd(x, y);
-    if (clickedNd == null) { return; }
+    if (clickedNd == null) { // FTR ?
+        var selX=/*drawClick.*/x; var selY=/*drawClick.*/y;
+        setTimeout(function() {
+            //var x1=selX; var y1=selY;
+            //var x2=lastX; var y2=lastY;
+            var minX = Math.min(selX, lastX);
+            var minY = Math.min(selY, lastY);
+            var maxX = Math.max(selX, lastX);
+            var maxY = Math.max(selY, lastY);
+            console.log(minX,minY,maxX,maxY);
+            var l = (curIds.length > 0) ? 0 : svgNodes.length;
+            var lastNd = null;
+            var selLst = [];
+            for (var i=0; i<l; i++) {
+                var nd = svgNodes[i];
+                setMouseRects(nd);
+                var isLastNd = false;
+                var inBounds = nd.xmin>minX && nd.xmax <maxX && nd.ymin>minY && nd.ymax <maxY;
+                if (inBounds && lastNd==null && (nd.attrs.filter(o=>o.name=='x').length > 0 || nd.attrs.filter(o=>o.name=='cx').length > 0)) {
+                    lastNd = nd;
+                    isLastNd = true;
+                }
+                if (inBounds) {
+                    if (!isLastNd) {
+                        selLst.push(nd);
+                    }
+                    console.log(svgNodes[i]);
+                }
+            }/*end svgNodes loop*/
+
+            if (lastNd != null) {
+                selLst.push(lastNd);
+                console.log('last node', lastNd);
+            }
+            for (var i=0; i<selLst.length; i++) {
+                console.log('click');
+                issueClick(selLst[i].xmin, selLst[i].ymin);
+                updateFrames();
+            }/*end selLst loop*/
+        }, 600);
+        return;
+    }
     setMouseRects(clickedNd);
     var selType = issueSelection(clickedNd);
 // for (var i=0; i<curIds.length; i++) { setMouseRects(xy2nd(curIds[i].x, curIds[i].y)); }
@@ -1030,6 +1074,12 @@ function mousedown(e) {
     updateFrames( /*selNd=*/ issueClick(x, y) );
 }
 
+function mousemove(e) {
+    e = e || window.event;
+    lastX = e.clientX - 750;
+    lastY = e.clientY - 88;
+}
+
 addEventListener('DOMContentLoaded', (e) => {
     document.getElementById("svgFullTextarea").value =
         svgHead
@@ -1082,7 +1132,7 @@ function onStart(test) {
     document.getElementById("svgFullTextarea").disabled="disabled";
 
     document.onkeydown = keydown;
-    setTimeout(function(){document.onclick = mousedown;}, 800);// skip first click
+    setTimeout(function(){document.onclick = mousedown; document.onmousemove = mousemove;}, 800);// skip first click
 
     var parser = new DOMParser();
     var xmlDocument = parser.parseFromString(document.getElementById("svgFullTextarea").value, "text/xml");

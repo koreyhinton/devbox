@@ -22,3 +22,21 @@
 (setq inhibit-startup-screen t)
 (switch-to-buffer "*scratch*")
 (wik-mode)
+(set-fill-column 79)
+
+(fset 'wikhead
+   (kmacro-lambda-form [?\C-a ?\C-  ?\C-e ?\M-x ?u ?p ?c ?a ?s ?e ?- ?r ?e ?g tab return ? ] 0 "%d"))
+
+(fset 'unwikhead
+   (kmacro-lambda-form [?\C-a ?\C-  ?\C-e ?\M-x ?d ?o ?w ?n ?c ?a ?s ?e ?- ?r ?e ?g ?i ?o ?n return ? ] 0 "%d"))
+
+(fset 'unwiktitle
+   (kmacro-lambda-form [?\C-a ?\C-  ?\C-e ?\M-x ?u ?n ?w ?i tab return ?\C-a ?\C-  ?\C-e ?\M-x ?c ?a ?p ?i ?t ?a ?l ?i ?z ?e ?- ?r ?e ?g ?i ?o ?n return] 0 "%d"))
+
+
+(load-file "/k/emacs/speed-type.el")
+
+(load-file "/k/repos/koreyhinton.com/apps/hashscript/author/author.el")
+
+(setq visible-bell t)
+(setq ring-bell-function 'ignore)

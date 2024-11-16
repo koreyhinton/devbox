@@ -1,0 +1,24 @@
+DONE
+phdir "CLPX" ~/k/ph/clpx_2024_04_23/100NIKON/ 1>~/k/ph/clpx_2024_04_23.log5 2>~/k/ph/clpx_2024_04_23.err5
+
+phdir "CLPX" ~/k/ph/clpx_2024_04_23/101NIKON/ 1>~/k/ph/clpx_2024_04_23.101.log 2>~/k/ph/clpx_2024_04_23.101.err
+
+phdir "CLPX" ~/k/ph/clpx_2024_04_23/102NIKON/ 1>~/k/ph/clpx_2024_04_23.102.log 2>~/k/ph/clpx_2024_04_23.102.err
+
+phdir "CLPX" ~/k/ph/clpx_2024_04_23/103NIKON/ 1>~/k/ph/clpx_2024_04_23.103.log 2>~/k/ph/clpx_2024_04_23.103.err
+
+phdir "CLPX" ~/k/ph/clpx_2024_04_23/104NIKON/ 1>~/k/ph/clpx_2024_04_23.104.log 2>~/k/ph/clpx_2024_04_23.104.err
+
+phdir "AKSO" ~/k/ph/akso_2024_04_23/100HSCAM/ 1>~/k/ph/akso_2024_04_23.log 2>~/k/ph/akso_2024_04_23.err
+
+IN PROGRESS
+
+
+
+TODO
+
+
+
+
+
+

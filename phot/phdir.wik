@@ -1,0 +1,31 @@
+
+# USAGE - STEP 1 - CONNECT
+
+# myditto
+
+# Files > + Other Locations > MYDITTO > DISKs-Public
+#     right-click > Mount > Registered User > User+Pass
+
+# USAGE - STEP 2 - CHECK CONNECTIONS WORK
+
+linode-cli obj ls --cluster us-${LND_REG}-1
+ls -l "${SMB_PIC}/2007lte/" | grep CIPH | head -1
+
+# get all names
+ls "${SMB_PIC}"/*/ | grep ZPH | cut -d '~' -f2 | sort | uniq
+
+# USAGE - STEP 5 - FIND THE DROP DIRECTORY
+
+/k/ph/clpx_YYYY_MM_DD # (current date)
+
+# USAGE - STEP 4 - RUN PHOTO BACKUPS
+
+# Takes in a camera identifier as arg1
+# Takes in a path to a directory of photos as arg2
+#     Note: This does not traverse subdirectories.
+#           You must call it for each directory one at a time.
+
+phdir "CIPH" ~/ph/iphone104 1>~/ph/iphone104.log 2>~/ph/iphone104.err
+
+# check .err file to see if any failed
+

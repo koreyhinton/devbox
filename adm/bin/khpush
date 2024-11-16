@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# usage: khpush main
+# operation: git push to web server
+
+branch="$1"
+
+if [[ -z "$branch" ]]; then
+    echo "Error. usage: khpush main" 1>&2
+    exit 1;
+fi
+
+GIT_SSH_COMMAND="${GIT_SSH}" git push origin "$branch"
+

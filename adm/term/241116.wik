@@ -1,0 +1,297 @@
+# GIMP TINYSCHEME 
+
+gimp -b -
+
+
+# UNIFONT
+
+sudo apt-get install unifont
+
+# PRETTIER
+# only files that changed to commit to git
+npm install -g prettier
+prettier --write $(git diff --name-only --diff-filter d | grep '\.js$' | xargs)
+
+# only js files:
+prettier --write "**/*.js"
+
+# only certain files;
+prettier --write assets/scripts/game-sync.js
+prettier --write tests/game-sync-tests.js
+
+# CREATING A NEW NODE PROJECT FOLDER
+
+# how-to notes:
+#  (based on https://www.moonshot.partners/blog/creating-our-first-node-js-package-with-typescript#:~:text=and%20scale%2Dups.-,Node.,and%20structure%20to%20the%20language.)
+
+npm init -yes
+npm install typescript --save-dev
+# package.json updates:
+##    scripts.(add) "typescript": "tsc"
+##    scripts.(add) "build": "npm run typescript",
+##    scripts.(add) "index": "node dist/index.js",
+##    root.(replace) "main": "dist/index.js",
+mkdir dist
+npm install bash-parser --save-dev
+npx tsc -init
+## uncomment lines and fill in values (in tsconfig.json):
+##    compilerOptions.outDir              "outDir": "./dist",
+##    compilerOptions.allowJs             "allowJs": true,
+##    compilerOptions.declaration         "declaration": true,
+##    compilerOptions.emitDeclarationOnly "emitDeclarationOnly": false,
+##    compilerOptions.declarationMap      "declarationMap": true,
+## add lines (in tsconfig.json):
+##    root.(add) "include": ["src/**/*"],
+##    root.(add) "exclude": ["node_modules", "dist"],
+mkdir src
+touch src/index.ts
+npm run typescript
+
+# workflow:
+# failed!!: npm i --save-dev @types/bash-parser
+npm i --save-dev git+https://github.com/vorpaljs/bash-parser.git
+npm install
+npm run build
+npm run index
+
+npm i --save-dev babel-polyfill
+
+npx jsr add @ein/bash-parser
+
+'moduleResolution' setting. Consider updating to 'node16', 'nodenext', or 'bundler'.
+
+"moduleResolution": "node16"
+
+"module": "commonjs",                                /* Specify what module code is generated. */
+
+"module": "Node16", 
+
+
+  "type": "module",
+
+# PHOTO BACKUPS 2
+(quick summary)
+attach smb mount via File
+
+mkdir psht_2024_08_18
+cd psht_2024_08_18 # move in image files
+
+d=110___07
+phdir PSHT $d 1>$d.log 2>$d.err
+
+d=111___08
+phdir PSHT $d 1>$d.log 2>$d.err
+
+# next cam
+cd ..
+mkdir clpx_2024_08_18
+cd clpx_2024_08_18  # move files here
+i=0
+while [[ $i -lt 8 ]]
+do
+    d="10${i}NIKON"
+    phdir CLPX $d 1>$d.log 2>$d.err
+    ((i++));
+done
+
+cd ..
+mkdir everglades_2024_08_21
+cd everglades_2024_08_21 # after copying over and mounting smb server
+d=.
+phdir EVRG $d 1>$d.log 2>$d.err
+
+# next cam
+cd ..
+mkdir akso_2024_08_18
+cd akso_2024_08_18  # move files here
+d=100HSCAM
+phdir AKSO $d 1>$d.log 2>$d.err
+
+# PHOTO BACKUPS
+
+# Files - Other Locations - SMB drive - Mount
+mkdir /k/ph/psht_2024_07_26
+# manually move files to /k/ph/dir_name
+cd psht_2024_07_26/
+
+d=107___09
+phdir PSHT $d 1>$d.log 2>$d.err
+
+d=108___11
+phdir PSHT $d 1>$d.log 2>$d.err
+
+d=109___12
+phdir PSHT $d 1>$d.log 2>$d.err
+
+d=110___03
+phdir PSHT $d 1>$d.log 2>$d.err
+
+(old documentation:
+    phot/phdir.wik
+    phot/phdir.wik.2024_04_23.wik
+)
+
+# NS PATH
+add ns repo to /k/adm/.profile
+
+# GITHUB KEY EXPORT
+#    https://stackoverflow.com/a/51284026
+gpg --list-keys
+gpg --export-secret-key 'a b (c) <d>' > ~/.ssh/github_gpg_private.key  # passphrase is taken from password manager entry name = 'git-scm.com passphrase gpg github sign key'
+# also copy out ~/.ssh/id_ed25519
+
+# on other laptop:
+gpg --import github_gpg_private.key  # passphrase is taken from password manager entry name = 'git-scm.com passphrase gpg github sign key'
+eval `ssh-agent -s`
+ssh-add id_ed25519  # passphrase is taken from 'github.com ssh passphrase' password manager entry
+git clone #git@github.com:x/y.git # did not work
+ssh -vT git@github.com # realized it wasn't finding file in .ssh
+cp id_e25519 ~/.ssh/
+git clone #git@github.com:x/y.git # now it worked after copy, but needs to provide 'github.com ssh passphrase' entry from password manager once prompted
+
+
+# EMACS
+
+# turn off error beep sounds
+
+/k/emacs/init.el
+
+# WORK
+
+# discord seemed to update automatically upon running the 'discord' command
+
+sudo snap install slack
+
+code
+# help > check for updates
+# help > download available update
+# .deb file
+sudo dpkg -i ~/Downloads/code_1.90.0-1717531825_amd64.deb
+
+
+# google chrome
+# > google.com/chrome
+#     > install
+#     > 64 bit .deb
+sudo dpkg -i ~/Downloads/google-chrome-stable_current_amd64.deb
+google-chrome
+# uncheck 'make google chrome default browser'
+# uncheck 'automatically send etc'
+
+
+# keepass
+sudo apt-get update -y
+sudo apt-get install keepass2 -y
+keepass2 # pin (add to favorites)
+mkdir /k/adm/pass
+# location of .kdbx is: /k/adm/pass/work.kdbx
+
+# github
+#     > https://github.com/settings/keys
+#         > ssh keys
+#             > configure SSO
+#                 > select the organization
+
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# then close terminal and open it new
+nvm install 16
+# Now using node v16.20.2
+npm install -g eslint
+
+# PDF
+
+pdfseparate res.pdf res-%d.pdf
+
+# WEB
+web server, old instructions:
+ * ~/add_domain.txt
+ * ~/certbot_info.txt
+
+web server, new instructions:
+ * ~/add_domain2.txt
+ * ~/certbot_info2.output.txt
+
+src_domain=${fill_in1}
+tgt_domain=${fill_in2}
+
+mkdir -p ~/public/$tgt_domain.com/{backup,log,public}
+cd /etc/apache2/sites-available/
+
+sudo bash
+src_domain=koreyhinton.net
+tgt_domain=chandlerhinton.com
+cp "${src_domain}-le-ssl.conf" temp.conf
+cat temp.conf | sed "s/${src_domain}/${tgt_domain}/g" >"${tgt_domain}-le-ssl.conf"
+exit
+
+sudo a2ensite "${tgt_domain}-le-ssl.conf"
+service apache2 reload
+sudo service apache2 restart
+
+echo "Hello" >>~/public/${tgt_domain}/public/index.html
+
+sudo certbot --apache
+# put in all the ones separated by commas (it has to do them all!)
+# (${src_domain} www.${src_domain} ${tgt_domain} www.${tgt_domain} etc)
+# (currently not using blog.* or www.blog.* subdomains, only www.*)
+# 5,6,13,14,15,18,19,20
+# E -- to expand and replace
+# 2 -- redirect (to https)
+
+# SCREEN BRIGHTNESS
+sudo emacs /etc/default/grub
+# https://askubuntu.com/questions/1481435/ubuntu-22-04-after-update-screen-brightness-control-disappeared-from-the-bar-and
+# set content (commented out the 2nd line and added third line):
+	# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+	# GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor"
+	GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=native"
+sudo update-grub
+# reboot laptop
+
+# GIT HELPERS
+chmod +x /k/adm/bin/khpush
+# usage
+khpush main  # send up to web server
+
+# HASHSCRIPT AUTHOR EXTENSION
+
+mkdir /k/repos/koreyhinton.com/apps/hashscript/author
+
+/k/emacs/init.el
+#     load-file /k/repos/koreyhinton.com/apps/hashscript/author/author.el
+
+# TOUCH TYPING
+
+init.el: melpa
+
+emacs: 
+M-x package-install RET speed-type
+
+# KEYBOARD
+
+hhkb DIP switch setting: 011010
+
+# SOFTWARE ERGO MX
+
+sudo apt-get install solaar -y
+
+# had to disconnect bluetooth connection and plug in wireless receiver
+# to get battery level to show    
+solaar
+
+# default settings:
+#     Sensitivity 256
+# updated settings:
+#     Sensitivity 210  # trying to go a slower (more precise) speed similar
+                       # to the magic mouse pointer sensitivity
+sudo apt-get purge solar -y
+# bluetooth was way too buggy with this installed
+
+# INSTALL venv
+
+sudo apt install python2 virtualenv -y
+virtualenv --python=/usr/bin/python2 virtualenv/ # not working
+python2 myfile.py # working
+
+

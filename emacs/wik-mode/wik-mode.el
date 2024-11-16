@@ -52,6 +52,8 @@
   ;;(define-key wik-mode-map (kbd "M-S-n") 'outline-next-heading)
   (define-key wik-mode-map [(meta shift n)] 'wik-next-heading) ; 'outline-next-heading)
   (define-key wik-mode-map [(meta shift p)] 'wik-previous-heading) ;'outline-previous-heading)
+  (define-key wik-mode-map (kbd "M-#") 'wik-previous-heading) ;'outline-previous-heading)
+
   (define-key wik-mode-map [(meta *)] 'wik-all-heading-collapse) ;;if same point then toggle all?
   ;;(define-key wik-mode-map (kbd "M-S-*") 'wik-all-heading-collapse) ;;if same point then toggle all?
   ;;(define-key wik-mode-map (kbd "M-*") 'wik-all-heading-expand)

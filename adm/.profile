@@ -9,6 +9,8 @@ PATH=$({
     echo -n :/home/$USER/.local/bin/
     echo -n :/usr/local/go/bin
     echo -n :/k/phot
+    echo -n :/k/repos/koreyhinton.com/ns
+    echo -n :/k/repos/kh/sv
 } | cat)
 
 export GPG_TTY="$(tty)"
